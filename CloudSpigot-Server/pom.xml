@@ -1,10 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>eu.minewars.cloudspigot</groupId>
     <artifactId>cloudspigot</artifactId>
     <packaging>jar</packaging>
-    <version>1.12.2-R0.1-SNAPSHOT</version>
     <name>CloudSpigot</name>
     <url>https://github.com/Server24-7/CloudSpigot-1.12</url>
 

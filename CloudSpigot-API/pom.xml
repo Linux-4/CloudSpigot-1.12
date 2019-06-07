@@ -9,9 +9,7 @@
         <version>1.12.2-R0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>eu.minewars.cloudspigot</groupId>
     <artifactId>cloudspigot-api</artifactId>
-    <version>1.12.2-R0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>CloudSpigot-API</name>
