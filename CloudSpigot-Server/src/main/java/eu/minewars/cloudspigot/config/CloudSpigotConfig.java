@@ -40,6 +40,12 @@ public class CloudSpigotConfig {
 		config.options().copyDefaults(true);
 
 		readConfig(CloudSpigotConfig.class, null);
+		
+		try {
+			config.save(CONFIG_FILE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings("deprecation")
