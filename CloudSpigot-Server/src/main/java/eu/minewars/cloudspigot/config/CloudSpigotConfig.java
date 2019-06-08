@@ -32,13 +32,16 @@ public class CloudSpigotConfig {
 			config.load(CONFIG_FILE);
 		} catch (IOException ex) {
 		} catch (InvalidConfigurationException ex) {
-			Bukkit.getLogger().log(Level.SEVERE, "Could not load cloudspigot.yml, please correct your syntax errors", ex);
+			Bukkit.getLogger().log(Level.SEVERE, "Could not load cloudspigot.yml, please correct your syntax errors",
+					ex);
 			throw Throwables.propagate(ex);
 		}
 		config.options().header(HEADER);
 		config.options().copyDefaults(true);
+
+		readConfig(CloudSpigotConfig.class, null);
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	static void readConfig(Class<?> clazz, Object instance) {
 		for (Method method : clazz.getDeclaredMethods()) {
@@ -62,9 +65,9 @@ public class CloudSpigotConfig {
 			Bukkit.getLogger().log(Level.SEVERE, "Could not save " + CONFIG_FILE, ex);
 		}
 	}
-	
+
 	public static boolean animateExplosions;
-	
+
 	@SuppressWarnings("unused")
 	private static void animateExplosions() {
 		animateExplosions = config.getBoolean("settings.animate-explosions", false);
