@@ -137,7 +137,8 @@ public class CraftPlayerProfile implements PlayerProfile {
         return completeFromCache(false);
     }
 
-    public boolean completeFromCache(boolean lookupName) {
+    @SuppressWarnings("deprecation")
+	public boolean completeFromCache(boolean lookupName) {
         if (profile.isComplete()) {
             return true;
         }
@@ -168,7 +169,8 @@ public class CraftPlayerProfile implements PlayerProfile {
         return this.profile.isComplete();
     }
 
-    public boolean complete(boolean textures) {
+    @SuppressWarnings("deprecation")
+	public boolean complete(boolean textures) {
         MinecraftServer server = MinecraftServer.getServer();
 
         boolean isOnlineMode = server.getOnlineMode() || (SpigotConfig.bungee && PaperConfig.bungeeOnlineMode);
@@ -242,7 +244,8 @@ public class CraftPlayerProfile implements PlayerProfile {
             return true;
         }
 
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
         public boolean addAll(Collection<? extends ProfileProperty> c) {
             //noinspection unchecked
             setProperties((Collection<ProfileProperty>) c);

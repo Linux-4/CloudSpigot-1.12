@@ -113,10 +113,10 @@ public class DispenserRegistry {
         });
         BlockDispenser.REGISTRY.a(Items.SPAWN_EGG, new DispenseBehaviorItem() {
             public ItemStack b(ISourceBlock isourceblock, ItemStack itemstack) {
-                EnumDirection enumdirection = (EnumDirection) isourceblock.e().get(BlockDispenser.FACING);
-                double d0 = isourceblock.getX() + (double) enumdirection.getAdjacentX();
-                double d1 = (double) ((float) (isourceblock.getBlockPosition().getY() + enumdirection.getAdjacentY()) + 0.2F);
-                double d2 = isourceblock.getZ() + (double) enumdirection.getAdjacentZ();
+                EnumDirection enumdirection = isourceblock.e().get(BlockDispenser.FACING);
+                double d0 = isourceblock.getX() + enumdirection.getAdjacentX();
+                double d1 = isourceblock.getBlockPosition().getY() + enumdirection.getAdjacentY() + 0.2F;
+                double d2 = isourceblock.getZ() + enumdirection.getAdjacentZ();
                 // Entity entity = ItemMonsterEgg.a(isourceblock.getWorld(), ItemMonsterEgg.h(itemstack), d0, d1, d2);
 
                 // CraftBukkit start
@@ -139,7 +139,7 @@ public class DispenserRegistry {
                     itemstack.add(1);
                     // Chain to handler for new item
                     ItemStack eventStack = CraftItemStack.asNMSCopy(event.getItem());
-                    IDispenseBehavior idispensebehavior = (IDispenseBehavior) BlockDispenser.REGISTRY.get(eventStack.getItem());
+                    IDispenseBehavior idispensebehavior = BlockDispenser.REGISTRY.get(eventStack.getItem());
                     if (idispensebehavior != IDispenseBehavior.NONE && idispensebehavior != this) {
                         idispensebehavior.a(isourceblock, eventStack);
                         return itemstack;

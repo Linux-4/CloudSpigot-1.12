@@ -74,7 +74,6 @@ public final class StandardPaperServerListPingEventImpl extends PaperServerListP
         return profiles;
     }
 
-    @SuppressWarnings("deprecation")
     public static void processRequest(MinecraftServer server, NetworkManager networkManager) {
         StandardPaperServerListPingEventImpl event = new StandardPaperServerListPingEventImpl(server, networkManager, server.getServerPing());
         server.server.getPluginManager().callEvent(event);

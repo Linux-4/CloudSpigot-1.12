@@ -17,7 +17,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
     @Override
     protected LineReader buildReader(LineReaderBuilder builder) {
         return super.buildReader(builder
-                .appName("Paper")
+                .appName("CloudSpigot") // CloudSpigot
                 .completer(new ConsoleCommandCompleter(this.server))
         );
     }

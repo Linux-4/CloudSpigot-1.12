@@ -15,6 +15,7 @@ public class Updater {
 	private static final String URL = BASE_URL + "CloudSpigot-Server/cloudspigot-1.12.2.jar";
 
 	public static String update() {
+		System.out.println(Versioning.getDistance(Versioning.getCurrentVersion()));
 		if (Versioning.getDistance(Versioning.getCurrentVersion()) > 0) {
 			try {
 				URL url = new URL(URL);

@@ -1,34 +1,27 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Lists;
-import com.mojang.authlib.GameProfileRepository;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
-import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Proxy;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
+
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-// CraftBukkit start
-import java.io.PrintStream;
-import org.apache.logging.log4j.Level;
-
-import org.bukkit.craftbukkit.LoggerOutputStream;
-import co.aikar.timings.MinecraftTimings; // Paper
-import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.craftbukkit.util.Waitable;
 import org.bukkit.event.server.RemoteServerCommandEvent;
 // CraftBukkit end
+import org.bukkit.event.server.ServerCommandEvent;
+
+import com.mojang.authlib.GameProfileRepository;
+import com.mojang.authlib.minecraft.MinecraftSessionService;
+import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
+
+import co.aikar.timings.MinecraftTimings; // Paper
+import eu.minewars.cloudspigot.config.CloudSpigotConfig;
 
 public class DedicatedServer extends MinecraftServer implements IMinecraftServer {
 
@@ -47,23 +40,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     // CraftBukkit start - Signature changed
     public DedicatedServer(joptsimple.OptionSet options, DataConverterManager dataconvertermanager, YggdrasilAuthenticationService yggdrasilauthenticationservice, MinecraftSessionService minecraftsessionservice, GameProfileRepository gameprofilerepository, UserCache usercache) {
         super(options, Proxy.NO_PROXY, dataconvertermanager, yggdrasilauthenticationservice, minecraftsessionservice, gameprofilerepository, usercache);
-        // CraftBukkit end
-        Thread thread = new Thread("Server Infinisleeper") {
-            {
-                this.setDaemon(true);
-                this.start();
-            }
-
-            public void run() {
-                while (true) {
-                    try {
-                        Thread.sleep(2147483647L);
-                    } catch (InterruptedException interruptedexception) {
-                        ;
-                    }
-                }
-            }
-        };
     }
 
     public boolean init() throws IOException { // CraftBukkit - decompile error
@@ -192,15 +168,17 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 this.setPort(this.propertyManager.getInt("server-port", 25565));
             }
             // Spigot start
-            this.a((PlayerList) (new DedicatedPlayerList(this)));
+            this.a((new DedicatedPlayerList(this)));
             org.spigotmc.SpigotConfig.init((File) options.valueOf("spigot-settings"));
             org.spigotmc.SpigotConfig.registerCommands();
             // Spigot end
             // Paper start
             com.destroystokyo.paper.PaperConfig.init((File) options.valueOf("paper-settings"));
             com.destroystokyo.paper.PaperConfig.registerCommands();
-            com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // load version history now
+            //com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // load version history now // CloudSpigot
             // Paper end
+            
+            CloudSpigotConfig.init((File) options.valueOf("cloudspigot-settings")); // CloudSpigot
 
             DedicatedServer.LOGGER.info("Generating keypair");
             this.a(MinecraftEncryption.b());
@@ -264,7 +242,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                             k = l;
                         }
                     } catch (NumberFormatException numberformatexception) {
-                        k = (long) s.hashCode();
+                        k = s.hashCode();
                     }
                 }
 
@@ -288,7 +266,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 DedicatedServer.LOGGER.info("Preparing level \"{}\"", this.S());
                 this.a(this.S(), this.S(), k, worldtype, s2);
                 long i1 = System.nanoTime() - j;
-                String s3 = String.format("%.3fs", new Object[] { Double.valueOf((double) i1 / 1.0E9D)});
+                String s3 = String.format("%.3fs", new Object[] { Double.valueOf(i1 / 1.0E9D)});
 
                 DedicatedServer.LOGGER.info("Done ({})! For help, type \"help\" or \"?\"", s3);
                 if (this.propertyManager.a("announce-player-achievements")) {
@@ -330,14 +308,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 return false;
             }
         }
-
-                if (false && this.aT() > 0L) {  // Spigot - disable
-                    Thread thread1 = new Thread(new ThreadWatchdog(this));
-
-                    thread1.setName("Server Watchdog");
-                    thread1.setDaemon(true);
-                    thread1.start();
-                }
 
                 Items.a.a(CreativeModeTab.g, NonNullList.a());
                 return true;
@@ -390,7 +360,8 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
         return this.propertyManager.getBoolean("hardcore", false);
     }
 
-    public CrashReport b(CrashReport crashreport) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public CrashReport b(CrashReport crashreport) {
         crashreport = super.b(crashreport);
         crashreport.g().a("Is Modded", new CrashReportCallable() {
             public String a() throws Exception {
@@ -433,13 +404,13 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
     }
 
     public void a(MojangStatisticsGenerator mojangstatisticsgenerator) {
-        mojangstatisticsgenerator.a("whitelist_enabled", Boolean.valueOf(this.aQ().getHasWhitelist()));
+        /*mojangstatisticsgenerator.a("whitelist_enabled", Boolean.valueOf(this.aQ().getHasWhitelist()));
         mojangstatisticsgenerator.a("whitelist_count", Integer.valueOf(this.aQ().getWhitelisted().length));
-        super.a(mojangstatisticsgenerator);
+        super.a(mojangstatisticsgenerator);*/ // CloudSpigot
     }
 
     public boolean getSnooperEnabled() {
-        return this.propertyManager.getBoolean("snooper-enabled", true);
+        return false;
     }
 
     public void issueCommand(String s, ICommandListener icommandlistener) {
@@ -603,7 +574,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 this.aV();
             }
 
-            flag = NameReferencingFileConverter.a((MinecraftServer) this);
+            flag = NameReferencingFileConverter.a(this);
         }
 
         boolean flag1 = false;
@@ -614,7 +585,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 this.aV();
             }
 
-            flag1 = NameReferencingFileConverter.b((MinecraftServer) this);
+            flag1 = NameReferencingFileConverter.b(this);
         }
 
         boolean flag2 = false;
@@ -625,7 +596,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 this.aV();
             }
 
-            flag2 = NameReferencingFileConverter.c((MinecraftServer) this);
+            flag2 = NameReferencingFileConverter.c(this);
         }
 
         boolean flag3 = false;
@@ -636,7 +607,7 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
                 this.aV();
             }
 
-            flag3 = NameReferencingFileConverter.d((MinecraftServer) this);
+            flag3 = NameReferencingFileConverter.d(this);
         }
 
         boolean flag4 = false;

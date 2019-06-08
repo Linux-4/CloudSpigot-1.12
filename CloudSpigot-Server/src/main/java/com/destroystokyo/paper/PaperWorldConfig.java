@@ -13,6 +13,7 @@ import org.spigotmc.SpigotWorldConfig;
 import static com.destroystokyo.paper.PaperConfig.log;
 import static com.destroystokyo.paper.PaperConfig.logError;
 
+@SuppressWarnings("unused")
 public class PaperWorldConfig {
 
     private final String worldName;
@@ -56,12 +57,13 @@ public class PaperWorldConfig {
 
     private float getFloat(String path, float def) {
         // TODO: Figure out why getFloat() always returns the default value.
-        return (float) getDouble(path, (double) def);
+        return (float) getDouble(path, def);
     }
 
-    private <T> List getList(String path, T def) {
+    @SuppressWarnings("rawtypes")
+	private <T> List getList(String path, T def) {
         config.addDefault("world-settings.default." + path, def);
-        return (List<T>) config.getList("world-settings." + worldName + "." + path, config.getList("world-settings.default." + path));
+        return config.getList("world-settings." + worldName + "." + path, config.getList("world-settings.default." + path));
     }
 
     private String getString(String path, String def) {
@@ -376,7 +378,8 @@ public class PaperWorldConfig {
     }
 
     public int autoSavePeriod = -1;
-    private void autoSavePeriod() {
+    @SuppressWarnings("deprecation")
+	private void autoSavePeriod() {
         autoSavePeriod = getInt("auto-save-interval", -1);
         if (autoSavePeriod > 0) {
             log("Auto Save Interval: " +autoSavePeriod + " (" + (autoSavePeriod / 20) + "s)");
@@ -449,7 +452,8 @@ public class PaperWorldConfig {
     public int updateRadius;
     public List<Object> hiddenBlocks;
     public List<Object> replacementBlocks;
-    private void antiXray() {
+    @SuppressWarnings("unchecked")
+	private void antiXray() {
         antiXray = getBoolean("anti-xray.enabled", false);
         asynchronous = true;
         engineMode = EngineMode.getById(getInt("anti-xray.engine-mode", EngineMode.HIDE.getId()));

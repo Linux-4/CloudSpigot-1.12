@@ -178,7 +178,8 @@ public class PaperCommand extends Command {
         }
     }
 
-    private void doReload(CommandSender sender) {
+    @SuppressWarnings("deprecation")
+	private void doReload(CommandSender sender) {
         Command.broadcastCommandMessage(sender, ChatColor.RED + "Please note that this command is not supported and may cause issues.");
         Command.broadcastCommandMessage(sender, ChatColor.RED + "If you encounter any issues please use the /stop command to restart your server.");
 

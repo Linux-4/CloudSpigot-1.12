@@ -140,7 +140,7 @@ public class Advancement {
             if (this.a == null) {
                 return true;
             } else {
-                this.b = (Advancement) function.apply(this.a);
+                this.b = function.apply(this.a);
                 return this.b != null;
             }
         }
@@ -189,10 +189,11 @@ public class Advancement {
             return "Task Advancement{parentId=" + this.a + ", display=" + this.c + ", rewards=" + this.d + ", criteria=" + this.e + ", requirements=" + Arrays.deepToString(this.f) + '}';
         }
 
-        public static Advancement.SerializedAdvancement a(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext) {
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+		public static Advancement.SerializedAdvancement a(JsonObject jsonobject, JsonDeserializationContext jsondeserializationcontext) {
             MinecraftKey minecraftkey = jsonobject.has("parent") ? new MinecraftKey(ChatDeserializer.h(jsonobject, "parent")) : null;
             AdvancementDisplay advancementdisplay = jsonobject.has("display") ? AdvancementDisplay.a(ChatDeserializer.t(jsonobject, "display"), jsondeserializationcontext) : null;
-            AdvancementRewards advancementrewards = (AdvancementRewards) ChatDeserializer.a(jsonobject, "rewards", AdvancementRewards.a, jsondeserializationcontext, AdvancementRewards.class);
+            AdvancementRewards advancementrewards = ChatDeserializer.a(jsonobject, "rewards", AdvancementRewards.a, jsondeserializationcontext, AdvancementRewards.class);
             Map map = Criterion.b(ChatDeserializer.t(jsonobject, "criteria"), jsondeserializationcontext);
 
             if (map.isEmpty()) {
@@ -286,7 +287,7 @@ public class Advancement {
         public static Advancement.SerializedAdvancement b(PacketDataSerializer packetdataserializer) {
             MinecraftKey minecraftkey = packetdataserializer.readBoolean() ? packetdataserializer.l() : null;
             AdvancementDisplay advancementdisplay = packetdataserializer.readBoolean() ? AdvancementDisplay.b(packetdataserializer) : null;
-            Map map = Criterion.c(packetdataserializer);
+            Map<String, Criterion> map = Criterion.c(packetdataserializer);
             String[][] astring = new String[packetdataserializer.g()][];
 
             for (int i = 0; i < astring.length; ++i) {

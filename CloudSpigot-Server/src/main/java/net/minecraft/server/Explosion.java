@@ -3,6 +3,9 @@ package net.minecraft.server;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+
+import eu.minewars.cloudspigot.animatedexplosion.AnimatedExplosion;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -222,6 +225,11 @@ public class Explosion {
                 return;
             }
             // CraftBukkit end
+            
+			if (eu.minewars.cloudspigot.config.CloudSpigotConfig.animateExplosions) { // CloudSpigot
+				new AnimatedExplosion(bukkitBlocks);
+			}
+
             iterator = this.blocks.iterator();
 
             while (iterator.hasNext()) {

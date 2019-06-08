@@ -1,24 +1,22 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Maps;
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import javax.annotation.Nullable;
 import java.util.concurrent.ConcurrentLinkedQueue; // Paper
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 // Spigot start
 import java.util.function.Supplier;
+
+import javax.annotation.Nullable;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spigotmc.SupplierUtils;
 // Spigot end
+
+import com.google.common.collect.Maps;
 
 public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
 
@@ -76,7 +74,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
                 return null;
             }
 
-            nbttagcompound = this.e.a((DataConverterType) DataConverterTypes.CHUNK, nbttagcompound);
+            nbttagcompound = this.e.a(DataConverterTypes.CHUNK, nbttagcompound);
             // CraftBukkit end
         }
 
@@ -127,7 +125,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
                     NBTTagList tileEntities = nbttagcompound.getCompound("Level").getList("TileEntities", 10);
                     if (tileEntities != null) {
                         for (int te = 0; te < tileEntities.size(); te++) {
-                            NBTTagCompound tileEntity = (NBTTagCompound) tileEntities.get(te);
+                            NBTTagCompound tileEntity = tileEntities.get(te);
                             int x = tileEntity.getInt("x") - chunk.locX * 16;
                             int z = tileEntity.getInt("z") - chunk.locZ * 16;
                             tileEntity.setInt("x", i * 16 + x);
@@ -251,7 +249,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
         // CraftBukkit end
     }
 
-    public void b(World world, Chunk chunk) throws IOException {}
+    public void b(World world, Chunk chunk) {}
 
     public void b() {}
 
@@ -350,7 +348,8 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
         // Spigot start - End this method here and split off entity saving to another method
     }
 
-    private static void saveEntities(NBTTagCompound nbttagcompound, Chunk chunk, World world) {
+    @SuppressWarnings("rawtypes")
+	private static void saveEntities(NBTTagCompound nbttagcompound, Chunk chunk, World world) {
         int i;
         NBTTagCompound nbttagcompound1;
         // Spigot end
@@ -413,7 +412,7 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
             while (iterator1.hasNext()) {
                 NextTickListEntry nextticklistentry = (NextTickListEntry) iterator1.next();
                 NBTTagCompound nbttagcompound2 = new NBTTagCompound();
-                MinecraftKey minecraftkey = (MinecraftKey) Block.REGISTRY.b(nextticklistentry.a());
+                MinecraftKey minecraftkey = Block.REGISTRY.b(nextticklistentry.a());
 
                 nbttagcompound2.setString("i", minecraftkey == null ? "" : minecraftkey.toString());
                 nbttagcompound2.setInt("x", nextticklistentry.a.getX());
@@ -439,7 +438,6 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
         chunk.e(nbttagcompound.getBoolean("LightPopulated"));
         chunk.c(nbttagcompound.getLong("InhabitedTime"));
         NBTTagList nbttaglist = nbttagcompound.getList("Sections", 10);
-        boolean flag = true;
         ChunkSection[] achunksection = new ChunkSection[16];
         boolean flag1 = world.worldProvider.m();
 
@@ -585,7 +583,8 @@ public class ChunkRegionLoader implements IChunkLoader, IAsyncChunkSaver {
         a(entity, world, org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.DEFAULT);
     }
 
-    public static void a(Entity entity, World world, org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason reason) {
+    @SuppressWarnings("rawtypes")
+	public static void a(Entity entity, World world, org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason reason) {
         if (!entity.valid && world.addEntity(entity, reason) && entity.isVehicle()) { // Paper
             // CraftBukkit end
             Iterator iterator = entity.bF().iterator();

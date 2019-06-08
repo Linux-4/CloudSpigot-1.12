@@ -43,7 +43,8 @@ public class ChunkPacketBlockControllerAntiXray extends ChunkPacketBlockControll
     private final boolean[] obfuscateGlobal = new boolean[Block.REGISTRY_ID.size()];
     private final ChunkSection[] emptyNearbyChunkSections = {Chunk.EMPTY_CHUNK_SECTION, Chunk.EMPTY_CHUNK_SECTION, Chunk.EMPTY_CHUNK_SECTION, Chunk.EMPTY_CHUNK_SECTION};
 
-    public ChunkPacketBlockControllerAntiXray(PaperWorldConfig paperWorldConfig) {
+    @SuppressWarnings("deprecation")
+	public ChunkPacketBlockControllerAntiXray(PaperWorldConfig paperWorldConfig) {
         asynchronous = paperWorldConfig.asynchronous;
         engineMode = paperWorldConfig.engineMode;
         chunkEdgeMode = paperWorldConfig.chunkEdgeMode;

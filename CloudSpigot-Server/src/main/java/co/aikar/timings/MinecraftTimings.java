@@ -122,7 +122,7 @@ public final class MinecraftTimings {
         return Timings.ofSafe("Structure Generator - " + structureGenerator.getName(), structureGenerationTimer);
     }
 
-    public static Timing getPacketTiming(Packet packet) {
+    public static Timing getPacketTiming(Packet<?> packet) {
         return Timings.ofSafe("## Packet - " + packet.getClass().getSimpleName(), packetProcessTimer);
     }
 }

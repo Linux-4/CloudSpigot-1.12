@@ -64,7 +64,7 @@ public class ChunkProviderGenerate implements ChunkGenerator {
 
         for (int j = -2; j <= 2; ++j) {
             for (int k = -2; k <= 2; ++k) {
-                float f = 10.0F / MathHelper.c((float) (j * j + k * k) + 0.2F);
+                float f = 10.0F / MathHelper.c(j * j + k * k + 0.2F);
 
                 this.r[j + 2 + (k + 2) * 5] = f;
             }
@@ -93,7 +93,6 @@ public class ChunkProviderGenerate implements ChunkGenerator {
                 int j2 = (i1 + j1 + 1) * 33;
 
                 for (int k2 = 0; k2 < 32; ++k2) {
-                    double d0 = 0.125D;
                     double d1 = this.q[k1 + k2];
                     double d2 = this.q[l1 + k2];
                     double d3 = this.q[i2 + k2];
@@ -104,14 +103,12 @@ public class ChunkProviderGenerate implements ChunkGenerator {
                     double d8 = (this.q[j2 + k2 + 1] - d4) * 0.125D;
 
                     for (int l2 = 0; l2 < 8; ++l2) {
-                        double d9 = 0.25D;
                         double d10 = d1;
                         double d11 = d2;
                         double d12 = (d3 - d1) * 0.25D;
                         double d13 = (d4 - d2) * 0.25D;
 
                         for (int i3 = 0; i3 < 4; ++i3) {
-                            double d14 = 0.25D;
                             double d15 = (d11 - d10) * 0.25D;
                             double d16 = d10 - d15;
 
@@ -139,9 +136,7 @@ public class ChunkProviderGenerate implements ChunkGenerator {
     }
 
     public void a(int i, int j, ChunkSnapshot chunksnapshot, BiomeBase[] abiomebase) {
-        double d0 = 0.03125D;
-
-        this.u = this.m.a(this.u, (double) (i * 16), (double) (j * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
+        this.u = this.m.a(this.u, i * 16, j * 16, 16, 16, 0.0625D, 0.0625D, 1.0D);
 
         for (int k = 0; k < 16; ++k) {
             for (int l = 0; l < 16; ++l) {
@@ -154,7 +149,7 @@ public class ChunkProviderGenerate implements ChunkGenerator {
     }
 
     public Chunk getOrCreateChunk(int i, int j) {
-        this.i.setSeed((long) i * 341873128712L + (long) j * 132897987541L);
+        this.i.setSeed(i * 341873128712L + j * 132897987541L);
         ChunkSnapshot chunksnapshot = new ChunkSnapshot();
 
         this.a(i, j, chunksnapshot);
@@ -206,13 +201,13 @@ public class ChunkProviderGenerate implements ChunkGenerator {
     }
 
     private void a(int i, int j, int k) {
-        this.h = this.c.a(this.h, i, k, 5, 5, (double) this.s.e, (double) this.s.f, (double) this.s.g);
+        this.h = this.c.a(this.h, i, k, 5, 5, this.s.e, this.s.f, this.s.g);
         float f = this.s.a;
         float f1 = this.s.b;
 
-        this.e = this.l.a(this.e, i, j, k, 5, 33, 5, (double) (f / this.s.h), (double) (f1 / this.s.i), (double) (f / this.s.j));
-        this.f = this.j.a(this.f, i, j, k, 5, 33, 5, (double) f, (double) f1, (double) f);
-        this.g = this.k.a(this.g, i, j, k, 5, 33, 5, (double) f, (double) f1, (double) f);
+        this.e = this.l.a(this.e, i, j, k, 5, 33, 5, f / this.s.h, f1 / this.s.i, f / this.s.j);
+        this.f = this.j.a(this.f, i, j, k, 5, 33, 5, f, f1, f);
+        this.g = this.k.a(this.g, i, j, k, 5, 33, 5, f, f1, f);
         int l = 0;
         int i1 = 0;
 
@@ -221,7 +216,6 @@ public class ChunkProviderGenerate implements ChunkGenerator {
                 float f2 = 0.0F;
                 float f3 = 0.0F;
                 float f4 = 0.0F;
-                boolean flag = true;
                 BiomeBase biomebase = this.D[j1 + 2 + (k1 + 2) * 10];
 
                 for (int l1 = -2; l1 <= 2; ++l1) {
@@ -280,27 +274,27 @@ public class ChunkProviderGenerate implements ChunkGenerator {
                 }
 
                 ++i1;
-                double d1 = (double) f3;
-                double d2 = (double) f2;
+                double d1 = f3;
+                double d2 = f2;
 
                 d1 += d0 * 0.2D;
-                d1 = d1 * (double) this.s.k / 8.0D;
-                double d3 = (double) this.s.k + d1 * 4.0D;
+                d1 = d1 * this.s.k / 8.0D;
+                double d3 = this.s.k + d1 * 4.0D;
 
                 for (int j2 = 0; j2 < 33; ++j2) {
-                    double d4 = ((double) j2 - d3) * (double) this.s.l * 128.0D / 256.0D / d2;
+                    double d4 = (j2 - d3) * this.s.l * 128.0D / 256.0D / d2;
 
                     if (d4 < 0.0D) {
                         d4 *= 4.0D;
                     }
 
-                    double d5 = this.f[l] / (double) this.s.d;
-                    double d6 = this.g[l] / (double) this.s.c;
+                    double d5 = this.f[l] / this.s.d;
+                    double d6 = this.g[l] / this.s.c;
                     double d7 = (this.e[l] / 10.0D + 1.0D) / 2.0D;
                     double d8 = MathHelper.b(d5, d6, d7) - d4;
 
                     if (j2 > 29) {
-                        double d9 = (double) ((float) (j2 - 29) / 3.0F);
+                        double d9 = (j2 - 29) / 3.0F;
 
                         d8 = d8 * (1.0D - d9) + -10.0D * d9;
                     }
@@ -324,7 +318,7 @@ public class ChunkProviderGenerate implements ChunkGenerator {
         long i1 = this.i.nextLong() / 2L * 2L + 1L;
         long j1 = this.i.nextLong() / 2L * 2L + 1L;
 
-        this.i.setSeed((long) i * i1 + (long) j * j1 ^ this.n.getSeed());
+        this.i.setSeed(i * i1 + j * j1 ^ this.n.getSeed());
         boolean flag = false;
         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(i, j);
 
