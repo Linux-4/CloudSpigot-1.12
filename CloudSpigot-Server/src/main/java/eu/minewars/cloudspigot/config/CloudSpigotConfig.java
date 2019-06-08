@@ -39,7 +39,7 @@ public class CloudSpigotConfig {
 		config.options().header(HEADER);
 		config.options().copyDefaults(true);
 
-		readConfig(CloudSpigotConfig.class, null);
+		animateExplosions();
 		
 		try {
 			config.save(CONFIG_FILE);
@@ -48,34 +48,10 @@ public class CloudSpigotConfig {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	static void readConfig(Class<?> clazz, Object instance) {
-		for (Method method : clazz.getDeclaredMethods()) {
-			if (Modifier.isPrivate(method.getModifiers())) {
-				if (method.getParameterTypes().length == 0 && method.getReturnType() == Void.TYPE) {
-					try {
-						method.setAccessible(true);
-						method.invoke(instance);
-					} catch (InvocationTargetException ex) {
-						throw Throwables.propagate(ex.getCause());
-					} catch (Exception ex) {
-						Bukkit.getLogger().log(Level.SEVERE, "Error invoking " + method, ex);
-					}
-				}
-			}
-		}
-
-		try {
-			config.save(CONFIG_FILE);
-		} catch (IOException ex) {
-			Bukkit.getLogger().log(Level.SEVERE, "Could not save " + CONFIG_FILE, ex);
-		}
-	}
-
 	public static boolean animateExplosions;
 
-	@SuppressWarnings("unused")
 	private static void animateExplosions() {
+		config.addDefault("settings.animate-explosions", false);
 		animateExplosions = config.getBoolean("settings.animate-explosions", false);
 	}
 
