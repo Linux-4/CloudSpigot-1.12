@@ -1,7 +1,10 @@
-package com.destroystokyo.paper.loottable;
+package com.destroystokyo.paper.lootable;
 
 import net.minecraft.server.World;
 import org.bukkit.entity.Entity;
+
+import com.destroystokyo.paper.loottable.LootableEntityInventory;
+import com.destroystokyo.paper.loottable.LootableInventory;
 
 public interface CraftLootableEntityInventory extends LootableEntityInventory, CraftLootableInventory {
 

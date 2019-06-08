@@ -1,6 +1,5 @@
 package org.bukkit.craftbukkit.entity;
 
-import com.destroystokyo.paper.loottable.CraftLootableEntityInventory; // Paper
 import net.minecraft.server.EntityMinecartHopper;
 
 import org.bukkit.craftbukkit.CraftServer;
@@ -8,6 +7,8 @@ import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.inventory.Inventory;
+
+import com.destroystokyo.paper.lootable.CraftLootableEntityInventory;
 
 final class CraftMinecartHopper extends CraftMinecart implements HopperMinecart, CraftLootableEntityInventory { // Paper
     private final CraftInventory inventory;

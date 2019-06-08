@@ -8,8 +8,8 @@ import java.util.List;
 import org.bukkit.Location;
 
 import com.destroystokyo.paper.HopperPusher; // Paper
-import com.destroystokyo.paper.loottable.CraftLootableInventoryData; // Paper
-import com.destroystokyo.paper.loottable.CraftLootableInventory; // Paper
+import com.destroystokyo.paper.lootable.CraftLootableInventory;
+import com.destroystokyo.paper.lootable.CraftLootableInventoryData;
 import com.destroystokyo.paper.loottable.LootableInventory; // Paper
 import org.bukkit.craftbukkit.entity.CraftHumanEntity;
 import org.bukkit.entity.HumanEntity;

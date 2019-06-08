@@ -1,4 +1,6 @@
-package com.destroystokyo.paper.loottable;
+package com.destroystokyo.paper.lootable;
+
+import com.destroystokyo.paper.loottable.Lootable;
 
 import net.minecraft.server.World;
 

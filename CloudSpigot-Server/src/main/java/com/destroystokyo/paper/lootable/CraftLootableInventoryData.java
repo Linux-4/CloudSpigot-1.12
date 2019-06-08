@@ -1,6 +1,8 @@
-package com.destroystokyo.paper.loottable;
+package com.destroystokyo.paper.lootable;
 
 import com.destroystokyo.paper.PaperWorldConfig;
+import com.destroystokyo.paper.loottable.LootableInventoryReplenishEvent;
+
 import net.minecraft.server.*;
 import org.bukkit.entity.Player;
 

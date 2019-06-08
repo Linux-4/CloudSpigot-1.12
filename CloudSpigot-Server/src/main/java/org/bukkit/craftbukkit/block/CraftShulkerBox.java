@@ -1,6 +1,5 @@
 package org.bukkit.craftbukkit.block;
 
-import com.destroystokyo.paper.loottable.CraftLootableBlockInventory;
 import net.minecraft.server.BlockShulkerBox;
 import net.minecraft.server.TileEntityShulkerBox;
 import org.bukkit.DyeColor;
@@ -10,6 +9,8 @@ import org.bukkit.block.ShulkerBox;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.inventory.Inventory;
+
+import com.destroystokyo.paper.lootable.CraftLootableBlockInventory;
 
 public class CraftShulkerBox extends CraftLootable<TileEntityShulkerBox> implements ShulkerBox, CraftLootableBlockInventory {
 

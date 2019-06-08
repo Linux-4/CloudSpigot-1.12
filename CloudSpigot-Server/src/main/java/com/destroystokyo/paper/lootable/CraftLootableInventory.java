@@ -1,6 +1,8 @@
-package com.destroystokyo.paper.loottable;
+package com.destroystokyo.paper.lootable;
 
 import org.apache.commons.lang.Validate;
+
+import com.destroystokyo.paper.loottable.LootableInventory;
 
 import java.util.UUID;
 
