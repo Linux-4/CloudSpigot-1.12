@@ -45,8 +45,8 @@ public class Versioning {
 				switch (status) {
 				case "identical":
 					return 0;
-				case "behind":
-					return ((Number) obj.get("behind_by")).intValue();
+				case "ahead":
+					return ((Number) obj.get("ahead_by")).intValue();
 				default:
 					return -1;
 				}
