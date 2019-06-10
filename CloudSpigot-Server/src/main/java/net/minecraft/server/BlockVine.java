@@ -142,7 +142,6 @@ public class BlockVine extends Block {
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
         if (!world.isClientSide) {
             if (world.random.nextInt(Math.max(1, (int) (100.0F / world.spigotConfig.vineModifier) * 4)) == 0) { // Spigot
-                boolean flag = true;
                 int i = 5;
                 boolean flag1 = false;
 

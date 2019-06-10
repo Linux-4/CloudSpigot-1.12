@@ -34,7 +34,6 @@ public class BlockSnow extends Block {
     @Nullable
     public AxisAlignedBB a(IBlockData iblockdata, IBlockAccess iblockaccess, BlockPosition blockposition) {
         int i = ((Integer) iblockdata.get(BlockSnow.LAYERS)).intValue() - 1;
-        float f = 0.125F;
         AxisAlignedBB axisalignedbb = iblockdata.e(iblockaccess, blockposition);
 
         return new AxisAlignedBB(axisalignedbb.a, axisalignedbb.b, axisalignedbb.c, axisalignedbb.d, (double) ((float) i * 0.125F), axisalignedbb.f);

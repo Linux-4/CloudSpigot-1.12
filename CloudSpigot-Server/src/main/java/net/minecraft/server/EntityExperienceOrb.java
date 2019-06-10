@@ -105,8 +105,6 @@ public class EntityExperienceOrb extends Entity {
         }
 
         this.i(this.locX, (this.getBoundingBox().b + this.getBoundingBox().e) / 2.0D, this.locZ);
-        double d0 = 8.0D;
-
         if (this.targetTime < this.a - 20 + this.getId() % 100) {
             if (this.targetPlayer == null || this.targetPlayer.h(this) > 64.0D) {
                 this.targetPlayer = this.world.findNearbyPlayer(this, 8.0D);

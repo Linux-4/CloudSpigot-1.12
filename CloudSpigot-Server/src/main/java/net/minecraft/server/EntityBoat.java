@@ -536,7 +536,6 @@ public class EntityBoat extends Entity {
     }
 
     private void x() {
-        double d0 = -0.03999999910593033D;
         double d1 = this.isNoGravity() ? 0.0D : -0.03999999910593033D;
         double d2 = 0.0D;
 
@@ -571,11 +570,7 @@ public class EntityBoat extends Entity {
             this.at *= this.g;
             this.motY += d1;
             if (d2 > 0.0D) {
-                double d3 = 0.65D;
-
                 this.motY += d2 * 0.06153846016296973D;
-                double d4 = 0.75D;
-
                 this.motY *= 0.75D;
             }
         }

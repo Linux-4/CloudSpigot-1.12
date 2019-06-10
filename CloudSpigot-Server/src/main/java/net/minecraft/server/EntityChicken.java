@@ -136,8 +136,6 @@ public class EntityChicken extends EntityAnimal {
         super.k(entity);
         float f = MathHelper.sin(this.aN * 0.017453292F);
         float f1 = MathHelper.cos(this.aN * 0.017453292F);
-        float f2 = 0.1F;
-        float f3 = 0.0F;
 
         entity.setPosition(this.locX + (double) (0.1F * f), this.locY + (double) (this.length * 0.5F) + entity.aF() + 0.0D, this.locZ - (double) (0.1F * f1));
         if (entity instanceof EntityLiving) {

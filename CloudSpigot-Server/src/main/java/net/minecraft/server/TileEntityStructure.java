@@ -215,7 +215,6 @@ public class TileEntityStructure extends TileEntity {
             return false;
         } else {
             BlockPosition blockposition = this.getPosition();
-            boolean flag = true;
             BlockPosition blockposition1 = new BlockPosition(blockposition.getX() - 80, 0, blockposition.getZ() - 80);
             BlockPosition blockposition2 = new BlockPosition(blockposition.getX() + 80, 255, blockposition.getZ() + 80);
             List list = this.a(blockposition1, blockposition2);

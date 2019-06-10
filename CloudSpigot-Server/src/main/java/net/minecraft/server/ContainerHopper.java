@@ -29,8 +29,6 @@ public class ContainerHopper extends Container {
         this.hopper = iinventory;
         this.player = playerinventory; // CraftBukkit - save player
         iinventory.startOpen(entityhuman);
-        boolean flag = true;
-
         int i;
 
         for (i = 0; i < iinventory.getSize(); ++i) {

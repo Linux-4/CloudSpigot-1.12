@@ -46,7 +46,6 @@ public class BlockJukeBox extends BlockTileEntity {
                     world.triggerEffect(1010, blockposition, 0);
                     world.a(blockposition, (SoundEffect) null);
                     blockjukebox_tileentityrecordplayer.setRecord(ItemStack.a);
-                    float f = 0.7F;
                     double d0 = (double) (world.random.nextFloat() * 0.7F) + 0.15000000596046448D;
                     double d1 = (double) (world.random.nextFloat() * 0.7F) + 0.06000000238418579D + 0.6D;
                     double d2 = (double) (world.random.nextFloat() * 0.7F) + 0.15000000596046448D;

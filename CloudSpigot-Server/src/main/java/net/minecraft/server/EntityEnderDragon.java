@@ -196,8 +196,6 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
                         this.bh = (float) ((double) this.bh + d5 * (double) idragoncontroller.h());
                         this.yaw += this.bh * 0.1F;
                         float f5 = (float) (2.0D / (d4 + 1.0D));
-                        float f6 = 0.06F;
-
                         this.b(0.0F, 0.0F, -1.0F, 0.06F * (f4 * f5 + (1.0F - f5)));
                         if (this.bG) {
                             this.move(EnumMoveType.SELF, this.motX * 0.800000011920929D, this.motY * 0.800000011920929D, this.motZ * 0.800000011920929D);
@@ -289,8 +287,6 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
                     float f15 = this.yaw * 0.017453292F + this.c(adouble1[0] - adouble[0]) * 0.017453292F;
                     float f16 = MathHelper.sin(f15);
                     float f17 = MathHelper.cos(f15);
-                    float f18 = 1.5F;
-
                     f4 = (float) (k + 1) * 2.0F;
                     entitycomplexpart.B_();
                     entitycomplexpart.setPositionRotation(this.locX - (double) ((f11 * 1.5F + f16 * f4) * f8), this.locY + (adouble1[1] - adouble[1]) - (double) ((f4 + 1.5F) * f9) + 1.5D, this.locZ + (double) ((f12 * 1.5F + f17 * f4) * f8), 0.0F, 0.0F);
@@ -908,8 +904,6 @@ public class EntityEnderDragon extends EntityInsentient implements IComplex, IMo
             f1 = Math.max(MathHelper.sqrt(this.d(blockposition)) / 4.0F, 1.0F);
             float f3 = 6.0F / f1;
             float f4 = this.pitch;
-            float f5 = 1.5F;
-
             this.pitch = -f3 * 1.5F * 5.0F;
             vec3d = this.e(f);
             this.pitch = f4;

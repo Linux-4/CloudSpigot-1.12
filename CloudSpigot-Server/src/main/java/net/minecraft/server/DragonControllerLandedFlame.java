@@ -45,7 +45,6 @@ public class DragonControllerLandedFlame extends AbstractDragonControllerLanded 
             }
         } else if (this.b == 10) {
             Vec3D vec3d = (new Vec3D(this.a.bw.locX - this.a.locX, 0.0D, this.a.bw.locZ - this.a.locZ)).a();
-            float f = 5.0F;
             double d0 = this.a.bw.locX + vec3d.x * 5.0D / 2.0D;
             double d1 = this.a.bw.locZ + vec3d.z * 5.0D / 2.0D;
             double d2 = this.a.bw.locY + (double) (this.a.bw.length / 2.0F);

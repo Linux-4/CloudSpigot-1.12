@@ -26,8 +26,6 @@ public abstract class WorldProvider {
     }
 
     protected void a() {
-        float f = 0.0F;
-
         for (int i = 0; i <= 15; ++i) {
             float f1 = 1.0F - (float) i / 15.0F;
 

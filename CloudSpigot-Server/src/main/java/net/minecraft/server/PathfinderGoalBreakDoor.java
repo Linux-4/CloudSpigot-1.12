@@ -15,8 +15,6 @@ public class PathfinderGoalBreakDoor extends PathfinderGoalDoorInteract {
         } else if (!this.a.world.getGameRules().getBoolean("mobGriefing")) {
             return false;
         } else {
-            BlockDoor blockdoor = this.c;
-
             return !BlockDoor.d(this.a.world, this.b);
         }
     }
@@ -31,8 +29,6 @@ public class PathfinderGoalBreakDoor extends PathfinderGoalDoorInteract {
         boolean flag;
 
         if (this.g <= 240) {
-            BlockDoor blockdoor = this.c;
-
             if (!BlockDoor.d(this.a.world, this.b) && d0 < 4.0D) {
                 flag = true;
                 return flag;

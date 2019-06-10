@@ -98,8 +98,6 @@ public class EntityLlama extends EntityHorseChestedAbstract implements IRangedEn
         if (this.w(entity)) {
             float f = MathHelper.cos(this.aN * 0.017453292F);
             float f1 = MathHelper.sin(this.aN * 0.017453292F);
-            float f2 = 0.3F;
-
             entity.setPosition(this.locX + (double) (0.3F * f1), this.locY + this.aG() + entity.aF(), this.locZ - (double) (0.3F * f));
         }
     }

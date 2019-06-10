@@ -30,8 +30,6 @@ public class BlockDragonEgg extends Block {
 
     private void b(World world, BlockPosition blockposition) {
         if (BlockFalling.x(world.getType(blockposition.down())) && blockposition.getY() >= 0) {
-            boolean flag = true;
-
             if (!BlockFalling.instaFall && world.areChunksLoadedBetween(blockposition.a(-32, -32, -32), blockposition.a(32, 32, 32))) {
                 world.addEntity(new EntityFallingBlock(world, (double) ((float) blockposition.getX() + 0.5F), (double) blockposition.getY(), (double) ((float) blockposition.getZ() + 0.5F), this.getBlockData()));
             } else {

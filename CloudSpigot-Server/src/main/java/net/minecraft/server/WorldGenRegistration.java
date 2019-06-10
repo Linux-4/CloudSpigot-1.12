@@ -438,8 +438,6 @@ public class WorldGenRegistration {
 
             for (i = 0; i < this.a; ++i) {
                 for (int j = 0; j < this.c; ++j) {
-                    boolean flag = true;
-
                     this.b(world, Blocks.SANDSTONE.getBlockData(), i, -5, j, structureboundingbox);
                 }
             }

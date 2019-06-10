@@ -66,18 +66,13 @@ public class ChunkProviderHell implements ChunkGenerator {
     }
 
     public void a(int i, int j, ChunkSnapshot chunksnapshot) {
-        boolean flag = true;
         int k = this.n.getSeaLevel() / 2 + 1;
-        boolean flag1 = true;
-        boolean flag2 = true;
-        boolean flag3 = true;
 
         this.t = this.a(this.t, i * 4, 0, j * 4, 5, 17, 5);
 
         for (int l = 0; l < 4; ++l) {
             for (int i1 = 0; i1 < 4; ++i1) {
                 for (int j1 = 0; j1 < 16; ++j1) {
-                    double d0 = 0.125D;
                     double d1 = this.t[((l + 0) * 5 + i1 + 0) * 17 + j1 + 0];
                     double d2 = this.t[((l + 0) * 5 + i1 + 1) * 17 + j1 + 0];
                     double d3 = this.t[((l + 1) * 5 + i1 + 0) * 17 + j1 + 0];
@@ -88,14 +83,12 @@ public class ChunkProviderHell implements ChunkGenerator {
                     double d8 = (this.t[((l + 1) * 5 + i1 + 1) * 17 + j1 + 1] - d4) * 0.125D;
 
                     for (int k1 = 0; k1 < 8; ++k1) {
-                        double d9 = 0.25D;
                         double d10 = d1;
                         double d11 = d2;
                         double d12 = (d3 - d1) * 0.25D;
                         double d13 = (d4 - d2) * 0.25D;
 
                         for (int l1 = 0; l1 < 4; ++l1) {
-                            double d14 = 0.25D;
                             double d15 = d10;
                             double d16 = (d11 - d10) * 0.25D;
 
@@ -135,8 +128,6 @@ public class ChunkProviderHell implements ChunkGenerator {
 
     public void b(int i, int j, ChunkSnapshot chunksnapshot) {
         int k = this.n.getSeaLevel() + 1;
-        double d0 = 0.03125D;
-
         this.q = this.x.a(this.q, i * 16, j * 16, 0, 16, 16, 1, 0.03125D, 0.03125D, 1.0D);
         this.r = this.x.a(this.r, i * 16, 109, j * 16, 16, 1, 16, 0.03125D, 1.0D, 0.03125D);
         this.s = this.y.a(this.s, i * 16, j * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
@@ -232,9 +223,6 @@ public class ChunkProviderHell implements ChunkGenerator {
             adouble = new double[l * i1 * j1];
         }
 
-        double d0 = 684.412D;
-        double d1 = 2053.236D;
-
         this.l = this.g.a(this.l, i, j, k, l, 1, j1, 1.0D, 0.0D, 1.0D);
         this.m = this.h.a(this.m, i, j, k, l, 1, j1, 100.0D, 0.0D, 100.0D);
         this.i = this.w.a(this.i, i, j, k, l, i1, j1, 8.555150000000001D, 34.2206D, 8.555150000000001D);
@@ -261,8 +249,6 @@ public class ChunkProviderHell implements ChunkGenerator {
 
         for (l1 = 0; l1 < l; ++l1) {
             for (int i2 = 0; i2 < j1; ++i2) {
-                double d3 = 0.0D;
-
                 for (int j2 = 0; j2 < i1; ++j2) {
                     double d4 = adouble1[j2];
                     double d5 = this.j[k1] / 512.0D;

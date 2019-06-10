@@ -68,7 +68,6 @@ public abstract class PathfinderGoalGotoTarget extends PathfinderGoal {
 
     private boolean i() {
         int i = this.h;
-        boolean flag = true;
         BlockPosition blockposition = new BlockPosition(this.c);
 
         for (int j = 0; j <= 1; j = j > 0 ? -j : 1 - j) {

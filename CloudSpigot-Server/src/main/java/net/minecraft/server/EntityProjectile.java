@@ -212,8 +212,6 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
 
         if (this.isInWater()) {
             for (int j = 0; j < 4; ++j) {
-                float f3 = 0.25F;
-
                 this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX - this.motX * 0.25D, this.locY - this.motY * 0.25D, this.locZ - this.motZ * 0.25D, this.motX, this.motY, this.motZ, new int[0]);
             }
 

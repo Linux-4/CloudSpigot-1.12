@@ -8,6 +8,7 @@ import org.bukkit.entity.Fish;
 import org.bukkit.event.player.PlayerFishEvent;
 // CraftBukkit end
 
+@SuppressWarnings("deprecation")
 public class EntityFishingHook extends Entity {
 
     private static final DataWatcherObject<Integer> b = DataWatcher.a(EntityFishingHook.class, DataWatcherRegistry.b);
@@ -255,9 +256,9 @@ public class EntityFishingHook extends Entity {
         }
 
         Entity entity = null;
-        List list = this.world.getEntities(this, this.getBoundingBox().b(this.motX, this.motY, this.motZ).g(1.0D));
+        List<Entity> list = this.world.getEntities(this, this.getBoundingBox().b(this.motX, this.motY, this.motZ).g(1.0D));
         double d0 = 0.0D;
-        Iterator iterator = list.iterator();
+        Iterator<Entity> iterator = list.iterator();
 
         while (iterator.hasNext()) {
             Entity entity1 = (Entity) iterator.next();
@@ -432,7 +433,7 @@ public class EntityFishingHook extends Entity {
                 LootTableInfo.a loottableinfo_a = new LootTableInfo.a((WorldServer) this.world);
 
                 loottableinfo_a.a((float) this.aw + this.owner.du());
-                Iterator iterator = this.world.getLootTableRegistry().a(LootTables.aA).a(this.random, loottableinfo_a.a()).iterator();
+                Iterator<ItemStack> iterator = this.world.getLootTableRegistry().a(LootTables.aA).a(this.random, loottableinfo_a.a()).iterator();
 
                 while (iterator.hasNext()) {
                     ItemStack itemstack = (ItemStack) iterator.next();
@@ -450,8 +451,6 @@ public class EntityFishingHook extends Entity {
                     double d1 = this.owner.locY - this.locY;
                     double d2 = this.owner.locZ - this.locZ;
                     double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-                    double d4 = 0.1D;
-
                     entityitem.motX = d0 * 0.1D;
                     entityitem.motY = d1 * 0.1D + (double) MathHelper.sqrt(d3) * 0.08D;
                     entityitem.motZ = d2 * 0.1D;
@@ -504,8 +503,6 @@ public class EntityFishingHook extends Entity {
             double d0 = this.owner.locX - this.locX;
             double d1 = this.owner.locY - this.locY;
             double d2 = this.owner.locZ - this.locZ;
-            double d3 = 0.1D;
-
             this.hooked.motX += d0 * 0.1D;
             this.hooked.motY += d1 * 0.1D;
             this.hooked.motZ += d2 * 0.1D;

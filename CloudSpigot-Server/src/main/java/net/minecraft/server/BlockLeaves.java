@@ -21,8 +21,6 @@ public abstract class BlockLeaves extends Block {
     }
 
     public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        boolean flag = true;
-        boolean flag1 = true;
         int i = blockposition.getX();
         int j = blockposition.getY();
         int k = blockposition.getZ();
@@ -47,14 +45,9 @@ public abstract class BlockLeaves extends Block {
     public void b(World world, BlockPosition blockposition, IBlockData iblockdata, Random random) {
         if (!world.isClientSide) {
             if (((Boolean) iblockdata.get(BlockLeaves.CHECK_DECAY)).booleanValue() && ((Boolean) iblockdata.get(BlockLeaves.DECAYABLE)).booleanValue()) {
-                boolean flag = true;
-                boolean flag1 = true;
                 int i = blockposition.getX();
                 int j = blockposition.getY();
                 int k = blockposition.getZ();
-                boolean flag2 = true;
-                boolean flag3 = true;
-                boolean flag4 = true;
 
                 if (this.d == null) {
                     this.d = new int['\u8000'];

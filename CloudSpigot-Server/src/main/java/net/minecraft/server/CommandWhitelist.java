@@ -37,8 +37,6 @@ public class CommandWhitelist extends CommandAbstract {
 
                 icommandlistener.sendMessage(new ChatComponentText(a((Object[]) astring1)));
             } else {
-                GameProfile gameprofile;
-
                 if ("add".equals(astring[0])) {
                     if (astring.length < 2) {
                         throw new ExceptionUsage("commands.whitelist.add.usage", new Object[0]);

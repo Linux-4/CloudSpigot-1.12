@@ -77,8 +77,6 @@ public class EntityFireworks extends Entity {
             if (this.e != null) {
                 if (this.e.cP()) {
                     Vec3D vec3d = this.e.aJ();
-                    double d0 = 1.5D;
-                    double d1 = 0.1D;
 
                     this.e.motX += vec3d.x * 0.1D + (vec3d.x * 1.5D - this.e.motX) * 0.5D;
                     this.e.motY += vec3d.y * 0.1D + (vec3d.y * 1.5D - this.e.motY) * 0.5D;
@@ -157,7 +155,6 @@ public class EntityFireworks extends Entity {
                 CraftEventFactory.entityDamage = null; // CraftBukkit
             }
 
-            double d0 = 5.0D;
             Vec3D vec3d = new Vec3D(this.locX, this.locY, this.locZ);
             List list = this.world.a(EntityLiving.class, this.getBoundingBox().g(5.0D));
             Iterator iterator = list.iterator();

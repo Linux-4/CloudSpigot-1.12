@@ -251,8 +251,6 @@ public class EntityWither extends EntityMonster implements IRangedEntity {
 
                         this.bE[k] = this.bE[i - 1] + 1;
                         if (l > 15) {
-                            float f = 10.0F;
-                            float f1 = 5.0F;
                             double d0 = MathHelper.a(this.random, this.locX - 10.0D, this.locX + 10.0D);
                             double d1 = MathHelper.a(this.random, this.locY - 5.0D, this.locY + 5.0D);
                             double d2 = MathHelper.a(this.random, this.locZ - 10.0D, this.locZ + 10.0D);

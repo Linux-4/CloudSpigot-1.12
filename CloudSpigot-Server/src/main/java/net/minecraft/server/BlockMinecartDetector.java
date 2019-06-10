@@ -156,8 +156,6 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
     }
 
     private AxisAlignedBB a(BlockPosition blockposition) {
-        float f = 0.2F;
-
         return new AxisAlignedBB((double) ((float) blockposition.getX() + 0.2F), (double) blockposition.getY(), (double) ((float) blockposition.getZ() + 0.2F), (double) ((float) (blockposition.getX() + 1) - 0.2F), (double) ((float) (blockposition.getY() + 1) - 0.2F), (double) ((float) (blockposition.getZ() + 1) - 0.2F));
     }
 

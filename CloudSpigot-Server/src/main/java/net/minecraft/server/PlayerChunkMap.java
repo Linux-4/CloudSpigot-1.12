@@ -405,7 +405,6 @@ public class PlayerChunkMap {
     public void a(int i) {
         i = MathHelper.clamp(i, 3, 32);
         if (i != this.j) {
-            int j = i - this.j;
             ArrayList arraylist = Lists.newArrayList(this.managedPlayers);
             Iterator iterator = arraylist.iterator();
 

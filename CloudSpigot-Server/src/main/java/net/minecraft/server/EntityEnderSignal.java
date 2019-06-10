@@ -95,8 +95,6 @@ public class EntityEnderSignal extends Entity {
             }
         }
 
-        float f3 = 0.25F;
-
         if (this.isInWater()) {
             for (int i = 0; i < 4; ++i) {
                 this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX - this.motX * 0.25D, this.locY - this.motY * 0.25D, this.locZ - this.motZ * 0.25D, this.motX, this.motY, this.motZ, new int[0]);

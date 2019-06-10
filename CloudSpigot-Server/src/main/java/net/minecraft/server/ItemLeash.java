@@ -28,7 +28,6 @@ public class ItemLeash extends Item {
     public static boolean a(EntityHuman entityhuman, World world, BlockPosition blockposition) {
         EntityLeash entityleash = EntityLeash.b(world, blockposition);
         boolean flag = false;
-        double d0 = 7.0D;
         int i = blockposition.getX();
         int j = blockposition.getY();
         int k = blockposition.getZ();

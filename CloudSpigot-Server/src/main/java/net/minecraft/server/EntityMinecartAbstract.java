@@ -435,7 +435,6 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
             flag1 = !flag;
         }
 
-        double d0 = 0.0078125D;
         BlockMinecartTrackAbstract.EnumTrackPosition blockminecarttrackabstract_enumtrackposition = (BlockMinecartTrackAbstract.EnumTrackPosition) iblockdata.get(blockminecarttrackabstract.g());
 
         switch (blockminecarttrackabstract_enumtrackposition) {
@@ -582,8 +581,6 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
             double d15 = Math.sqrt(this.motX * this.motX + this.motZ * this.motZ);
 
             if (d15 > 0.01D) {
-                double d16 = 0.06D;
-
                 this.motX += this.motX / d15 * 0.06D;
                 this.motZ += this.motZ / d15 * 0.06D;
             } else if (blockminecarttrackabstract_enumtrackposition == BlockMinecartTrackAbstract.EnumTrackPosition.EAST_WEST) {

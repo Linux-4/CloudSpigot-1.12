@@ -72,8 +72,6 @@ public class EntityLlamaSpit extends Entity implements IProjectile {
 
         this.pitch = this.lastPitch + (this.pitch - this.lastPitch) * 0.2F;
         this.yaw = this.lastYaw + (this.yaw - this.lastYaw) * 0.2F;
-        float f1 = 0.99F;
-        float f2 = 0.06F;
 
         if (!this.world.a(this.getBoundingBox(), Material.AIR)) {
             this.die();

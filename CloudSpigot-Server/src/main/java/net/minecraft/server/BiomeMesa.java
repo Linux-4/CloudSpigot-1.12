@@ -69,7 +69,6 @@ public class BiomeMesa extends BiomeBase {
             double d2 = Math.min(Math.abs(d0), this.F.a((double) k * 0.25D, (double) l * 0.25D));
 
             if (d2 > 0.0D) {
-                double d3 = 0.001953125D;
                 double d4 = Math.abs(this.G.a((double) k * 0.001953125D, (double) l * 0.001953125D));
 
                 d1 = d2 * d2 * 2.5D;
@@ -229,8 +228,6 @@ public class BiomeMesa extends BiomeBase {
         j1 = 0;
 
         for (k1 = 0; k1 < i1; ++k1) {
-            boolean flag = true;
-
             j1 += random.nextInt(16) + 4;
 
             for (int i2 = 0; j1 + i2 < 64 && i2 < 1; ++i2) {

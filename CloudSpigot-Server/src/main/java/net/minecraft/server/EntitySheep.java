@@ -32,8 +32,6 @@ public class EntitySheep extends EntityAnimal {
 
     private static float[] c(EnumColor enumcolor) {
         float[] afloat = enumcolor.f();
-        float f = 0.75F;
-
         return new float[] { afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
     }
 

@@ -27,8 +27,6 @@ public class ContainerShulkerBox extends Container {
         this.a = iinventory;
         this.player = playerinventory; // CraftBukkit - save player
         iinventory.startOpen(entityhuman);
-        boolean flag = true;
-        boolean flag1 = true;
 
         int i;
         int j;

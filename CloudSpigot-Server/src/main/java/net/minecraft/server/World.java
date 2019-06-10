@@ -388,8 +388,6 @@ public abstract class World implements IBlockAccess {
             return false;
         } else {
             Chunk chunk = this.getChunkAtWorldCoords(blockposition);
-            Block block = iblockdata.getBlock();
-
             // CraftBukkit start - capture blockstates
             BlockState blockstate = null;
             if (this.captureBlockStates) {

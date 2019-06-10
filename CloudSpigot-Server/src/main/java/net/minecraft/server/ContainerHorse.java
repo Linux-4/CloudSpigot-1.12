@@ -28,11 +28,7 @@ public class ContainerHorse extends Container {
         // CraftBukkit end
         this.a = iinventory1;
         this.f = entityhorseabstract;
-        boolean flag = true;
-
         iinventory1.startOpen(entityhuman);
-        boolean flag1 = true;
-
         this.a(new Slot(iinventory1, 0, 8, 18) {
             public boolean isAllowed(ItemStack itemstack) {
                 return itemstack.getItem() == Items.SADDLE && !this.hasItem() && entityhorseabstract.dF();

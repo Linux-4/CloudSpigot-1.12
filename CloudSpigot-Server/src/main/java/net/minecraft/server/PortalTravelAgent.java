@@ -35,9 +35,6 @@ public class PortalTravelAgent {
                 this.b(entity, f);
             }
         } else {
-            int i = MathHelper.floor(entity.locX);
-            int j = MathHelper.floor(entity.locY) - 1;
-            int k = MathHelper.floor(entity.locZ);
             // CraftBukkit start - Modularize end portal creation
             BlockPosition created = this.createEndPortal(entity.locX, entity.locY, entity.locZ);
             entity.setPositionRotation((double) created.getX(), (double) created.getY(), (double) created.getZ(), entity.yaw, 0.0F);
@@ -50,10 +47,6 @@ public class PortalTravelAgent {
             int i = MathHelper.floor(x);
             int j = MathHelper.floor(y) - 1;
             int k = MathHelper.floor(z);
-            // CraftBukkit end
-            byte b0 = 1;
-            byte b1 = 0;
-
             Collection<Block> bukkitBlocks = new HashSet<>(); // Paper
             Map<BlockPosition, IBlockData> nmsBlocks = new HashMap<>(); // Paper
 

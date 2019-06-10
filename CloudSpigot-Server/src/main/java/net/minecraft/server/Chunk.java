@@ -152,7 +152,6 @@ public class Chunk {
 
     public Chunk(World world, ChunkSnapshot chunksnapshot, int i, int j) {
         this(world, i, j);
-        boolean flag = true;
         boolean flag1 = world.worldProvider.m();
 
         for (int k = 0; k < 16; ++k) {

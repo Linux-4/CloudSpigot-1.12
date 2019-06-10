@@ -300,8 +300,6 @@ public class BlockPosition extends BaseBlockPosition {
         }
 
         public static BlockPosition.PooledBlockPosition e(int i, int j, int k) {
-            List list = BlockPosition.PooledBlockPosition.g;
-
             synchronized (BlockPosition.PooledBlockPosition.g) {
                 if (!BlockPosition.PooledBlockPosition.g.isEmpty()) {
                     BlockPosition.PooledBlockPosition blockposition_pooledblockposition = (BlockPosition.PooledBlockPosition) BlockPosition.PooledBlockPosition.g.remove(BlockPosition.PooledBlockPosition.g.size() - 1);
@@ -319,8 +317,6 @@ public class BlockPosition extends BaseBlockPosition {
 
         public void free() { t(); } // Paper - OBFHELPER
         public void t() {
-            List list = BlockPosition.PooledBlockPosition.g;
-
             synchronized (BlockPosition.PooledBlockPosition.g) {
                 if (BlockPosition.PooledBlockPosition.g.size() < 100) {
                     BlockPosition.PooledBlockPosition.g.add(this);

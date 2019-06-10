@@ -1433,7 +1433,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         for (EntityHuman entityhuman : receivers) { // Paper - Particle API Expansion
             EntityPlayer entityplayer = (EntityPlayer) entityhuman; // Paper - Particle API Expansion
             if (sender != null && !entityplayer.getBukkitEntity().canSee(sender.getBukkitEntity())) continue; // CraftBukkit
-            BlockPosition blockposition = entityplayer.getChunkCoordinates();
             this.a(entityplayer, flag, d0, d1, d2, packetplayoutworldparticles);
         }
 

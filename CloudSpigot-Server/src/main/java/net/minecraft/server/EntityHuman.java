@@ -1220,8 +1220,6 @@ public abstract class EntityHuman extends EntityLiving {
                 return EntityHuman.EnumBedResult.TOO_FAR_AWAY;
             }
 
-            double d0 = 8.0D;
-            double d1 = 5.0D;
             List list = this.world.a(EntityMonster.class, new AxisAlignedBB((double) blockposition.getX() - 8.0D, (double) blockposition.getY() - 5.0D, (double) blockposition.getZ() - 8.0D, (double) blockposition.getX() + 8.0D, (double) blockposition.getY() + 5.0D, (double) blockposition.getZ() + 8.0D), (Predicate) (new EntityHuman.c(this, null)));
 
             if (!list.isEmpty()) {

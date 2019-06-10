@@ -219,7 +219,6 @@ public class EntityEnderman extends EntityMonster {
         Vec3D vec3d = new Vec3D(this.locX - entity.locX, this.getBoundingBox().b + (double) (this.length / 2.0F) - entity.locY + (double) entity.getHeadHeight(), this.locZ - entity.locZ);
 
         vec3d = vec3d.a();
-        double d0 = 16.0D;
         double d1 = this.locX + (this.random.nextDouble() - 0.5D) * 8.0D - vec3d.x * 16.0D;
         double d2 = this.locY + (double) (this.random.nextInt(16) - 8) - vec3d.y * 16.0D;
         double d3 = this.locZ + (this.random.nextDouble() - 0.5D) * 8.0D - vec3d.z * 16.0D;

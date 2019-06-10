@@ -118,8 +118,6 @@ public class BlockRedstoneOre extends Block {
 
     private void playEffect(World world, BlockPosition blockposition) {
         Random random = world.random;
-        double d0 = 0.0625D;
-
         for (int i = 0; i < 6; ++i) {
             double d1 = (double) ((float) blockposition.getX() + random.nextFloat());
             double d2 = (double) ((float) blockposition.getY() + random.nextFloat());

@@ -39,7 +39,6 @@ public class CommandTp extends CommandAbstract {
                 if (astring.length < b0 + 3) {
                     throw new ExceptionUsage("commands.tp.usage", new Object[0]);
                 } else if (((Entity) object).world != null) {
-                    boolean flag = true;
                     int i = b0 + 1;
                     CommandAbstract.CommandNumber commandabstract_commandnumber = a(((Entity) object).locX, astring[b0], true);
                     CommandAbstract.CommandNumber commandabstract_commandnumber1 = a(((Entity) object).locY, astring[i++], -4096, 4096, false);

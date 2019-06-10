@@ -235,12 +235,8 @@ public abstract class EntityArrow extends Entity implements IProjectile {
             this.pitch = this.lastPitch + (this.pitch - this.lastPitch) * 0.2F;
             this.yaw = this.lastYaw + (this.yaw - this.lastYaw) * 0.2F;
             float f2 = 0.99F;
-            float f3 = 0.05F;
-
             if (this.isInWater()) {
                 for (int k = 0; k < 4; ++k) {
-                    float f4 = 0.25F;
-
                     this.world.addParticle(EnumParticle.WATER_BUBBLE, this.locX - this.motX * 0.25D, this.locY - this.motY * 0.25D, this.locZ - this.motZ * 0.25D, this.motX, this.motY, this.motZ, new int[0]);
                 }
 

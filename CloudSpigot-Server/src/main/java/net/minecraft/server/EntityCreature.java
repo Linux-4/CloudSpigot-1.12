@@ -95,7 +95,6 @@ public abstract class EntityCreature extends EntityInsentient {
                 this.motZ += d2 * Math.abs(d2) * 0.4D;
             } else {
                 this.goalSelector.d(1);
-                float f1 = 2.0F;
                 Vec3D vec3d = (new Vec3D(entity.locX - this.locX, entity.locY - this.locY, entity.locZ - this.locZ)).a().a((double) Math.max(f - 2.0F, 0.0F));
 
                 this.getNavigation().a(this.locX + vec3d.x, this.locY + vec3d.y, this.locZ + vec3d.z, this.dk());

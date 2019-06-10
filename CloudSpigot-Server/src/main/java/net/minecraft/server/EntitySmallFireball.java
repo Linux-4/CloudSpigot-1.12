@@ -30,8 +30,6 @@ public class EntitySmallFireball extends EntityFireball {
 
     protected void a(MovingObjectPosition movingobjectposition) {
         if (!this.world.isClientSide) {
-            boolean flag;
-
             if (movingobjectposition.entity != null) {
                 if (!movingobjectposition.entity.isFireProof()) {
                     // CraftBukkit start - Entity damage by entity event + combust event
@@ -48,9 +46,7 @@ public class EntitySmallFireball extends EntityFireball {
                     }
                 }
             } else {
-                flag = true;
                 if (this.shooter != null && this.shooter instanceof EntityInsentient) {
-                    flag = this.world.getGameRules().getBoolean("mobGriefing");
                 }
 
                 // CraftBukkit start

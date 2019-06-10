@@ -1496,9 +1496,6 @@ public abstract class PlayerList {
     public void a(int i) {
         this.s = i;
         if (this.server.worldServer != null) {
-            WorldServer[] aworldserver = this.server.worldServer;
-            int j = aworldserver.length;
-
             // CraftBukkit start
             for (int k = 0; k < server.worlds.size(); ++k) {
                 WorldServer worldserver = server.worlds.get(0);

@@ -15,7 +15,6 @@ public class ItemBoat extends Item {
 
     public InteractionResultWrapper<ItemStack> a(World world, EntityHuman entityhuman, EnumHand enumhand) {
         ItemStack itemstack = entityhuman.b(enumhand);
-        float f = 1.0F;
         float f1 = entityhuman.lastPitch + (entityhuman.pitch - entityhuman.lastPitch) * 1.0F;
         float f2 = entityhuman.lastYaw + (entityhuman.yaw - entityhuman.lastYaw) * 1.0F;
         double d0 = entityhuman.lastX + (entityhuman.locX - entityhuman.lastX) * 1.0D;
@@ -28,7 +27,6 @@ public class ItemBoat extends Item {
         float f6 = MathHelper.sin(-f1 * 0.017453292F);
         float f7 = f4 * f5;
         float f8 = f3 * f5;
-        double d3 = 5.0D;
         Vec3D vec3d1 = vec3d.add((double) f7 * 5.0D, (double) f6 * 5.0D, (double) f8 * 5.0D);
         MovingObjectPosition movingobjectposition = world.rayTrace(vec3d, vec3d1, true);
 

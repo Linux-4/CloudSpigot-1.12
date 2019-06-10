@@ -234,7 +234,6 @@ public class WorldMap extends PersistentBase {
         float f1 = (float) (d1 - (double) this.centerZ) / (float) i;
         byte b0 = (byte) ((int) ((double) (f * 2.0F) + 0.5D));
         byte b1 = (byte) ((int) ((double) (f1 * 2.0F) + 0.5D));
-        boolean flag = true;
         byte b2;
 
         if (f >= -63.0F && f1 >= -63.0F && f <= 63.0F && f1 <= 63.0F) {
@@ -250,8 +249,6 @@ public class WorldMap extends PersistentBase {
                 this.decorations.remove(s);
                 return;
             }
-
-            boolean flag1 = true;
 
             if (Math.abs(f) < 320.0F && Math.abs(f1) < 320.0F) {
                 mapicon_type = MapIcon.Type.PLAYER_OFF_MAP;

@@ -28,7 +28,6 @@ public class CommandTeleport extends CommandAbstract {
             Entity entity = c(minecraftserver, icommandlistener, astring[0]);
 
             if (entity.world != null) {
-                boolean flag = true;
                 Vec3D vec3d = icommandlistener.d();
                 byte b0 = 1;
                 int i = b0 + 1;

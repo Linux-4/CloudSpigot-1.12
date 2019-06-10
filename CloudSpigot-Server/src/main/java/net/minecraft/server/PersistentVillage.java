@@ -127,9 +127,6 @@ public class PersistentVillage extends PersistentBase {
     }
 
     private void b(BlockPosition blockposition) {
-        boolean flag = true;
-        boolean flag1 = true;
-        boolean flag2 = true;
 
         for (int i = -16; i < 16; ++i) {
             for (int j = -4; j < 4; ++j) {

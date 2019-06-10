@@ -52,7 +52,6 @@ public abstract class EntityHanging extends Entity {
         double d0 = (double) blockPosition.getX() + 0.5D;
         double d1 = (double) blockPosition.getY() + 0.5D;
         double d2 = (double) blockPosition.getZ() + 0.5D;
-        double d3 = 0.46875D;
         double d4 = a(width);
         double d5 = a(height);
 

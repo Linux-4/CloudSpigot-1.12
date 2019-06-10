@@ -195,7 +195,6 @@ public class EntityTrackerEntry {
                     double d0 = this.tracker.motX - this.n;
                     double d1 = this.tracker.motY - this.o;
                     double d2 = this.tracker.motZ - this.p;
-                    double d3 = 0.02D;
                     double d4 = d0 * d0 + d1 * d1 + d2 * d2;
 
                     if (d4 > 4.0E-4D || d4 > 0.0D && this.tracker.motX == 0.0D && this.tracker.motY == 0.0D && this.tracker.motZ == 0.0D) {

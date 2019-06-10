@@ -51,7 +51,6 @@ public class BiomeJungle extends BiomeBase {
 
         for (j = 0; j < 50; ++j) {
             k = random.nextInt(16) + 8;
-            boolean flag = true;
             int l = random.nextInt(16) + 8;
 
             worldgenvines.generate(world, random, blockposition.a(k, 128, l));

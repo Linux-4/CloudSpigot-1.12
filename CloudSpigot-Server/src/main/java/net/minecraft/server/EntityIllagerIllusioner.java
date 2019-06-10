@@ -75,8 +75,6 @@ public class EntityIllagerIllusioner extends EntityIllagerWizard implements IRan
                 }
             } else {
                 this.c = 3;
-                float f = -6.0F;
-                boolean flag = true;
 
                 int j;
 

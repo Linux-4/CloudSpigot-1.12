@@ -371,7 +371,6 @@ public class Block {
 
     public static void a(World world, BlockPosition blockposition, ItemStack itemstack) {
         if (!world.isClientSide && !itemstack.isEmpty() && world.getGameRules().getBoolean("doTileDrops")) {
-            float f = 0.5F;
             double d0 = (double) (world.random.nextFloat() * 0.5F) + 0.25D;
             double d1 = (double) (world.random.nextFloat() * 0.5F) + 0.25D;
             double d2 = (double) (world.random.nextFloat() * 0.5F) + 0.25D;
