@@ -72,7 +72,7 @@ public abstract class World implements IBlockAccess {
         }
     };
     // Spigot end
-    protected final Set<Entity> f = Sets.newHashSet(); public Set<Entity> getEntityUnloadQueue() { return f; };// Paper - OBFHELPER
+    protected final Set<Entity> f = Sets.newHashSet(); public Set<Entity> getEntityUnloadQueue() { return f; }// Paper - OBFHELPER
     //public final List<TileEntity> tileEntityList = Lists.newArrayList(); // Paper - remove unused list
     public final List<TileEntity> tileEntityListTick = Lists.newArrayList();
     private final List<TileEntity> b = Lists.newArrayList();
@@ -221,15 +221,14 @@ public abstract class World implements IBlockAccess {
         // CraftBukkit end
         timings = new co.aikar.timings.WorldTimingsHandler(this); // Paper - code below can generate new world and access timings
         this.keepSpawnInMemory = this.paperConfig.keepSpawnInMemory; // Paper
-                new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
-        new org.spigotmc.TickLimiter(spigotConfig.tileMaxTickTime);
     }
 
     public World b() {
         return this;
     }
 
-    public BiomeBase getBiome(final BlockPosition blockposition) {
+    @SuppressWarnings("unchecked")
+	public BiomeBase getBiome(final BlockPosition blockposition) {
         if (this.isLoaded(blockposition)) {
             Chunk chunk = this.getChunkAtWorldCoords(blockposition);
 
@@ -1499,11 +1498,7 @@ public abstract class World implements IBlockAccess {
                 CrashReport crashreport = CrashReport.a(throwable, "Ticking entity");
                 CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Entity being ticked");
 
-                if (entity == null) {
-                    crashreportsystemdetails.a("Entity", (Object) "~~NULL~~");
-                } else {
-                    entity.appendEntityCrashDetails(crashreportsystemdetails);
-                }
+                entity.appendEntityCrashDetails(crashreportsystemdetails);
 
                 throw new ReportedException(crashreport);
             }
@@ -1517,7 +1512,6 @@ public abstract class World implements IBlockAccess {
         timings.entityRemoval.startTiming(); // Paper
         this.entityList.removeAll(this.f);
 
-        int j;
         // Paper start - Set based removal lists
         for (Entity e : this.f) {
             /*
@@ -1541,15 +1535,11 @@ public abstract class World implements IBlockAccess {
         timings.entityRemoval.stopTiming(); // Paper
         //this.methodProfiler.c("regular");
 
-        CrashReportSystemDetails crashreportsystemdetails1;
-        CrashReport crashreport1;
-
         org.spigotmc.ActivationRange.activateEntities(this); // Spigot
         timings.entityTick.startTiming(); // Spigot
         guardEntityList = true; // Spigot
         // CraftBukkit start - Use field for loop variable
         co.aikar.timings.TimingHistory.entityTicks += this.entityList.size(); // Paper
-        int entitiesThisCycle = 0;
         // Paper start - Disable tick limiters
         //if (tickPosition < 0) tickPosition = 0;
         for (tickPosition = 0; tickPosition < entityList.size(); tickPosition++) {
@@ -1625,16 +1615,12 @@ public abstract class World implements IBlockAccess {
         }
 
         this.O = true;
-        // Spigot start
-        // Iterator iterator = this.tileEntityListTick.iterator();
-        int tilesThisCycle = 0;
         for (tileTickPosition = 0; tileTickPosition < tileEntityListTick.size(); tileTickPosition++) { // Paper - Disable tick limiters
             tileTickPosition = (tileTickPosition < tileEntityListTick.size()) ? tileTickPosition : 0;
             TileEntity tileentity = (TileEntity) this.tileEntityListTick.get(tileTickPosition);
             // Spigot start
             if (tileentity == null) {
                 getServer().getLogger().severe("Spigot has detected a null entity and has removed it, preventing a crash");
-                tilesThisCycle--;
                 this.tileEntityListTick.remove(tileTickPosition--);
                 continue;
             }
@@ -1663,7 +1649,6 @@ public abstract class World implements IBlockAccess {
                         System.err.println(msg);
                         throwable2.printStackTrace();
                         getServer().getPluginManager().callEvent(new ServerExceptionEvent(new ServerInternalException(msg, throwable2)));
-                        tilesThisCycle--;
                         this.tileEntityListTick.remove(tileTickPosition--);
                         continue;
                         // Paper end
@@ -1677,7 +1662,6 @@ public abstract class World implements IBlockAccess {
             }
 
             if (tileentity.y()) {
-                tilesThisCycle--;
                 this.tileEntityListTick.remove(tileTickPosition--);
                 //this.tileEntityList.remove(tileentity); // Paper - remove unused list
                 // Paper start
@@ -2022,8 +2006,6 @@ public abstract class World implements IBlockAccess {
             blockposition_pooledblockposition.t();
             if (vec3d.b() > 0.0D && entity.bo()) {
                 vec3d = vec3d.a();
-                double d1 = 0.014D;
-
                 entity.motX += vec3d.x * 0.014D;
                 entity.motY += vec3d.y * 0.014D;
                 entity.motZ += vec3d.z * 0.014D;
@@ -3289,7 +3271,6 @@ public abstract class World implements IBlockAccess {
         BlockPosition blockposition = this.getSpawn();
         int k = i * 16 + 8 - blockposition.getX();
         int l = j * 16 + 8 - blockposition.getZ();
-        boolean flag = true;
         short keepLoadedRange = paperConfig.keepLoadedRange; // Paper
 
         return k >= -keepLoadedRange && k <= keepLoadedRange && l >= -keepLoadedRange && l <= keepLoadedRange && this.keepSpawnInMemory; // CraftBukkit - Added 'this.keepSpawnInMemory' // Paper - Re-add range var

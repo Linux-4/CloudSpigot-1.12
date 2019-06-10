@@ -7,10 +7,7 @@ public class ItemRecord extends Item {
 
     private static final Map<SoundEffect, ItemRecord> a = Maps.newHashMap();
     private final SoundEffect b;
-    private final String c;
-
     protected ItemRecord(String s, SoundEffect soundeffect) {
-        this.c = "item.record." + s + ".desc";
         this.b = soundeffect;
         this.maxStackSize = 1;
         this.b(CreativeModeTab.f);
@@ -22,13 +19,7 @@ public class ItemRecord extends Item {
 
         if (iblockdata.getBlock() == Blocks.JUKEBOX && !((Boolean) iblockdata.get(BlockJukeBox.HAS_RECORD)).booleanValue()) {
             if (!world.isClientSide) {
-                if (true) return EnumInteractionResult.SUCCESS; // CraftBukkit - handled in ItemStack
-                ItemStack itemstack = entityhuman.b(enumhand);
-
-                ((BlockJukeBox) Blocks.JUKEBOX).a(world, blockposition, iblockdata, itemstack);
-                world.a((EntityHuman) null, 1010, blockposition, Item.getId(this));
-                itemstack.subtract(1);
-                entityhuman.b(StatisticList.X);
+                return EnumInteractionResult.SUCCESS; // CraftBukkit - handled in ItemStack
             }
 
             return EnumInteractionResult.SUCCESS;

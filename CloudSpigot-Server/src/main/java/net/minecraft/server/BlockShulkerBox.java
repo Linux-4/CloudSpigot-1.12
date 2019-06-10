@@ -132,27 +132,6 @@ public class BlockShulkerBox extends BlockTileEntity {
     }
 
     public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        TileEntity tileentity = world.getTileEntity(blockposition);
-
-        if (false && tileentity instanceof TileEntityShulkerBox) { // CraftBukkit - moved up
-            TileEntityShulkerBox tileentityshulkerbox = (TileEntityShulkerBox) tileentity;
-
-            if (!tileentityshulkerbox.r() && tileentityshulkerbox.F()) {
-                ItemStack itemstack = new ItemStack(Item.getItemOf(this));
-                NBTTagCompound nbttagcompound = new NBTTagCompound();
-                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-
-                nbttagcompound.set("BlockEntityTag", ((TileEntityShulkerBox) tileentity).f(nbttagcompound1));
-                itemstack.setTag(nbttagcompound);
-                if (tileentityshulkerbox.hasCustomName()) {
-                    itemstack.g(tileentityshulkerbox.getName());
-                    tileentityshulkerbox.setCustomName("");
-                }
-
-                a(world, blockposition, itemstack);
-            }
-
-        }
         world.updateAdjacentComparators(blockposition, iblockdata.getBlock()); // CraftBukkit - moved down
 
         super.remove(world, blockposition, iblockdata);

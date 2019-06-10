@@ -573,7 +573,7 @@ public abstract class EntityLiving extends Entity {
                 }
             }
         } catch (ConcurrentModificationException concurrentmodificationexception) {
-            ;
+            
         }
         // CraftBukkit start
         isTickingEffects = false;
@@ -844,28 +844,7 @@ public abstract class EntityLiving extends Entity {
             } else {
                 float f1 = f;
 
-                // CraftBukkit - Moved into damageEntity0(DamageSource, float)
-                if (false && (damagesource == DamageSource.ANVIL || damagesource == DamageSource.FALLING_BLOCK) && !this.getEquipment(EnumItemSlot.HEAD).isEmpty()) {
-                    this.getEquipment(EnumItemSlot.HEAD).damage((int) (f * 4.0F + this.random.nextFloat() * f * 2.0F), this);
-                    f *= 0.75F;
-                }
-
                 boolean flag = f > 0.0F && this.applyBlockingModifier(damagesource); // Copied from below
-
-                // CraftBukkit - Moved into damageEntity0(DamageSource, float)
-                if (false && f > 0.0F && this.applyBlockingModifier(damagesource)) {
-                    this.damageShield(f);
-                    f = 0.0F;
-                    if (!damagesource.a()) {
-                        Entity entity = damagesource.i();
-
-                        if (entity instanceof EntityLiving) {
-                            this.c((EntityLiving) entity);
-                        }
-                    }
-
-                    flag = true;
-                }
 
                 this.aG = 1.5F;
                 boolean flag1 = true;
@@ -1321,15 +1300,6 @@ public abstract class EntityLiving extends Entity {
             return f;
         } else {
             int i;
-
-            // CraftBukkit - Moved to damageEntity0(DamageSource, float)
-            if (false && this.hasEffect(MobEffects.RESISTANCE) && damagesource != DamageSource.OUT_OF_WORLD) {
-                i = (this.getEffect(MobEffects.RESISTANCE).getAmplifier() + 1) * 5;
-                int j = 25 - i;
-                float f1 = f * (float) j;
-
-                f = f1 / 25.0F;
-            }
 
             if (f <= 0.0F) {
                 return 0.0F;

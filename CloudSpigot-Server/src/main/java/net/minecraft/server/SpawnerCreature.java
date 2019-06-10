@@ -1,21 +1,19 @@
 package net.minecraft.server;
 
-import com.google.common.collect.Sets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
-// CraftBukkit start
-import com.destroystokyo.paper.exception.ServerInternalException;
 import org.bukkit.craftbukkit.util.LongHash;
 import org.bukkit.craftbukkit.util.LongHashSet;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 // CraftBukkit end
 
+// CraftBukkit start
+import com.destroystokyo.paper.exception.ServerInternalException;
+
 public final class SpawnerCreature {
 
-    private static final int a = (int) Math.pow(17.0D, 2.0D);
     private final LongHashSet b = new LongHashSet(); // CraftBukkit
 
     public SpawnerCreature() {}
@@ -23,28 +21,13 @@ public final class SpawnerCreature {
     // Spigot start - get entity count only from chunks being processed in b
     private int getEntityCount(WorldServer server, Class oClass)
     {
-        // Paper start - use entire world, not just active chunks. Spigot broke vanilla expectations.
-        if (true) {
+        {
             int sum = 0;
             for (Chunk c : server.getChunkProviderServer().chunks.values()) {
                 sum += c.entityCount.get(oClass);
             }
             return sum;
         }
-        // Paper end
-        int i = 0;
-        Iterator<Long> it = this.b.iterator();
-        while ( it.hasNext() )
-        {
-            Long coord = it.next();
-            int x = LongHash.msw( coord );
-            int z = LongHash.lsw( coord );
-            if ( !((ChunkProviderServer)server.chunkProvider).unloadQueue.contains( coord ) && server.isChunkLoaded( x, z, true ) )
-            {
-                i += server.getChunkAt( x, z ).entityCount.get( oClass );
-            }
-        }
-        return i;
     }
     // Spigot end
 
@@ -67,7 +50,6 @@ public final class SpawnerCreature {
                     int l = MathHelper.floor(entityhuman.locX / 16.0D);
 
                     j = MathHelper.floor(entityhuman.locZ / 16.0D);
-                    boolean flag3 = true;
                     // Spigot Start
                     byte b0 = worldserver.spigotConfig.mobSpawnRange;
                     b0 = ( b0 > worldserver.spigotConfig.viewDistance ) ? (byte) worldserver.spigotConfig.viewDistance : b0;
@@ -168,7 +150,6 @@ public final class SpawnerCreature {
                                     int j3 = i2;
                                     int k3 = j2;
                                     int l3 = k2;
-                                    boolean flag5 = true;
                                     BiomeBase.BiomeMeta biomebase_biomemeta = null;
                                     GroupDataEntity groupdataentity = null;
                                     int i4 = MathHelper.f(Math.random() * 4.0D);

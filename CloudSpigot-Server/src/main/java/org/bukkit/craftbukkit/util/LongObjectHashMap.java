@@ -310,7 +310,7 @@ public class LongObjectHashMap<V> implements Cloneable, Serializable {
 
             for (; index < keys.length; index++) {
                 if (keys[index] != null) {
-                    for (; innerIndex < keys[index].length; innerIndex++) {
+                    for (; innerIndex < keys[index].length;) {
                         long key = keys[index][innerIndex];
                         V value = values[index][innerIndex];
                         if (key == EMPTY_KEY) {

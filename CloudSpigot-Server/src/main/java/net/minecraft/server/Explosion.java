@@ -34,8 +34,7 @@ public class Explosion {
     private final List<BlockPosition> blocks = Lists.newArrayList();
     private final Map<EntityHuman, Vec3D> k = Maps.newHashMap();
     public boolean wasCanceled = false; // CraftBukkit - add field
-
-    public Explosion(World world, Entity entity, double d0, double d1, double d2, float f, boolean flag, boolean flag1) {
+	public Explosion(World world, Entity entity, double d0, double d1, double d2, float f, boolean flag, boolean flag1) {
         this.world = world;
         this.source = entity;
         this.size = (float) Math.max(f, 0.0); // CraftBukkit - clamp bad values
@@ -53,8 +52,6 @@ public class Explosion {
         }
         // CraftBukkit end
         HashSet hashset = Sets.newHashSet();
-        boolean flag = true;
-
         int i;
         int j;
 
@@ -75,7 +72,7 @@ public class Explosion {
                         double d5 = this.posY;
                         double d6 = this.posZ;
 
-                        for (float f1 = 0.3F; f > 0.0F; f -= 0.22500001F) {
+                        for (; f > 0.0F; f -= 0.22500001F) {
                             BlockPosition blockposition = new BlockPosition(d4, d5, d6);
                             IBlockData iblockdata = this.world.getType(blockposition);
 

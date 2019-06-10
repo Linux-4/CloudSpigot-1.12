@@ -51,8 +51,6 @@ public final class SimplePluginManager implements PluginManager {
     private final Map<Boolean, Set<Permission>> defaultPerms = new LinkedHashMap<Boolean, Set<Permission>>();
     private final Map<String, Map<Permissible, Boolean>> permSubs = new HashMap<String, Map<Permissible, Boolean>>();
     private final Map<Boolean, Map<Permissible, Boolean>> defSubs = new HashMap<Boolean, Map<Permissible, Boolean>>();
-    private boolean useTimings = false;
-
     public SimplePluginManager(Server instance, SimpleCommandMap commandMap) {
         server = instance;
         this.commandMap = commandMap;
@@ -490,6 +488,8 @@ public final class SimplePluginManager implements PluginManager {
             defaultPerms.get(false).clear();
         }
     }
+    
+    @SuppressWarnings("unused")
     private void fireEvent(Event event) { callEvent(event); } // Paper - support old method incase plugin uses reflection
 
     /**
@@ -574,11 +574,7 @@ public final class SimplePluginManager implements PluginManager {
         }
 
         executor = new co.aikar.timings.TimedEventExecutor(executor, plugin, null, event); // Spigot
-        if (false) { // Spigot - RL handles useTimings check now
-            getEventListeners(event).register(new TimedRegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
-        } else {
-            getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
-        }
+        getEventListeners(event).register(new RegisteredListener(listener, executor, priority, plugin, ignoreCancelled));
     }
 
     private HandlerList getEventListeners(Class<? extends Event> type) {

@@ -41,7 +41,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     public final Map<UUID, Entity> entitiesByUUID = Maps.newHashMap(); // Paper
     public boolean savingDisabled;
     private boolean Q;
-    private int emptyTime;
     private final PortalTravelAgent portalTravelAgent;
     private final SpawnerCreature spawnerCreature = new SpawnerCreature();
     protected final VillageSiege siegeManager = new VillageSiege(this);
@@ -669,13 +668,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public void tickEntities() {
-        if (false && this.players.isEmpty()) { // CraftBukkit - this prevents entity cleanup, other issues on servers with no players
-            if (this.emptyTime++ >= 300) {
-                return;
-            }
-        } else {
-            this.m();
-        }
+        this.m();
 
         this.worldProvider.s();
         super.tickEntities();
@@ -731,84 +724,78 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     public void m() {
-        this.emptyTime = 0;
     }
 
-    public boolean a(boolean flag) {
+    @SuppressWarnings("resource")
+	public boolean a(boolean flag) {
         if (this.worldData.getType() == WorldType.DEBUG_ALL_BLOCK_STATES) {
             return false;
         } else {
             int i = this.nextTickList.size();
 
-            if (false) { // CraftBukkit
-                throw new IllegalStateException("TickNextTick list out of synch");
-            } else {
-                if (i > 65536) {
-                    // CraftBukkit start - If the server has too much to process over time, try to alleviate that
-                    if (i > 20 * 65536) {
-                        i = i / 20;
-                    } else {
-                        i = 65536;
-                    }
-                    // CraftBukkit end
-                }
+            if (i > 65536) {
+			    // CraftBukkit start - If the server has too much to process over time, try to alleviate that
+			    if (i > 20 * 65536) {
+			        i = i / 20;
+			    } else {
+			        i = 65536;
+			    }
+			    // CraftBukkit end
+			}
 
-                //this.methodProfiler.a("cleaning");
+			//this.methodProfiler.a("cleaning");
 
-                timings.scheduledBlocksCleanup.startTiming(); // Paper
-                NextTickListEntry nextticklistentry;
+			timings.scheduledBlocksCleanup.startTiming(); // Paper
+			NextTickListEntry nextticklistentry;
 
-                for (int j = 0; j < i; ++j) {
-                    nextticklistentry = (NextTickListEntry) this.nextTickList.first();
-                    if (!flag && nextticklistentry.b > this.worldData.getTime()) {
-                        break;
-                    }
+			for (int j = 0; j < i; ++j) {
+			    nextticklistentry = (NextTickListEntry) this.nextTickList.first();
+			    if (!flag && nextticklistentry.b > this.worldData.getTime()) {
+			        break;
+			    }
 
-                    // CraftBukkit - use nextTickList
-                    this.nextTickList.remove(nextticklistentry);
-                    // this.nextTickListHash.remove(nextticklistentry);
-                    this.W.add(nextticklistentry);
-                }
-                timings.scheduledBlocksCleanup.stopTiming(); // Paper
+			    // CraftBukkit - use nextTickList
+			    this.nextTickList.remove(nextticklistentry);
+			    // this.nextTickListHash.remove(nextticklistentry);
+			    this.W.add(nextticklistentry);
+			}
+			timings.scheduledBlocksCleanup.stopTiming(); // Paper
 
-                //this.methodProfiler.b();
-                //this.methodProfiler.a("ticking");
-                Iterator iterator = this.W.iterator();
-                timings.scheduledBlocksTicking.startTiming(); // Paper
+			//this.methodProfiler.b();
+			//this.methodProfiler.a("ticking");
+			Iterator iterator = this.W.iterator();
+			timings.scheduledBlocksTicking.startTiming(); // Paper
 
-                while (iterator.hasNext()) {
-                    nextticklistentry = (NextTickListEntry) iterator.next();
-                    iterator.remove();
-                    boolean flag1 = false;
+			while (iterator.hasNext()) {
+			    nextticklistentry = (NextTickListEntry) iterator.next();
+			    iterator.remove();
+			    if (this.areChunksLoadedBetween(nextticklistentry.a.a(0, 0, 0), nextticklistentry.a.a(0, 0, 0))) {
+			        IBlockData iblockdata = this.getType(nextticklistentry.a);
+			        co.aikar.timings.Timing timing = iblockdata.getBlock().getTiming(); // Paper
+			        timing.startTiming(); // Paper
 
-                    if (this.areChunksLoadedBetween(nextticklistentry.a.a(0, 0, 0), nextticklistentry.a.a(0, 0, 0))) {
-                        IBlockData iblockdata = this.getType(nextticklistentry.a);
-                        co.aikar.timings.Timing timing = iblockdata.getBlock().getTiming(); // Paper
-                        timing.startTiming(); // Paper
+			        if (iblockdata.getMaterial() != Material.AIR && Block.a(iblockdata.getBlock(), nextticklistentry.a())) {
+			            try {
+			                stopPhysicsEvent = !paperConfig.firePhysicsEventForRedstone && (iblockdata.getBlock() instanceof BlockDiodeAbstract || iblockdata.getBlock() instanceof BlockRedstoneTorch); // Paper
+			                iblockdata.getBlock().b((World) this, nextticklistentry.a, iblockdata, this.random);
+			            } catch (Throwable throwable) {
+			                CrashReport crashreport = CrashReport.a(throwable, "Exception while ticking a block");
+			                CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Block being ticked");
 
-                        if (iblockdata.getMaterial() != Material.AIR && Block.a(iblockdata.getBlock(), nextticklistentry.a())) {
-                            try {
-                                stopPhysicsEvent = !paperConfig.firePhysicsEventForRedstone && (iblockdata.getBlock() instanceof BlockDiodeAbstract || iblockdata.getBlock() instanceof BlockRedstoneTorch); // Paper
-                                iblockdata.getBlock().b((World) this, nextticklistentry.a, iblockdata, this.random);
-                            } catch (Throwable throwable) {
-                                CrashReport crashreport = CrashReport.a(throwable, "Exception while ticking a block");
-                                CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Block being ticked");
+			                CrashReportSystemDetails.a(crashreportsystemdetails, nextticklistentry.a, iblockdata);
+			                throw new ReportedException(crashreport);
+			            } finally { stopPhysicsEvent = false; } // Paper
+			        }
+			        timing.stopTiming(); // Paper
+			    } else {
+			        this.a(nextticklistentry.a, nextticklistentry.a(), 0);
+			    }
+			}
+			timings.scheduledBlocksTicking.stopTiming(); // Paper
 
-                                CrashReportSystemDetails.a(crashreportsystemdetails, nextticklistentry.a, iblockdata);
-                                throw new ReportedException(crashreport);
-                            } finally { stopPhysicsEvent = false; } // Paper
-                        }
-                        timing.stopTiming(); // Paper
-                    } else {
-                        this.a(nextticklistentry.a, nextticklistentry.a(), 0);
-                    }
-                }
-                timings.scheduledBlocksTicking.stopTiming(); // Paper
-
-                //this.methodProfiler.b();
-                this.W.clear();
-                return !this.nextTickList.isEmpty();
-            }
+			//this.methodProfiler.b();
+			this.W.clear();
+			return !this.nextTickList.isEmpty();
         }
     }
 
@@ -955,7 +942,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 try {
                     this.a(crashreport);
                 } catch (Throwable throwable1) {
-                    ;
+                    
                 }
 
                 throw new ReportedException(crashreport);
@@ -1447,9 +1434,6 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             EntityPlayer entityplayer = (EntityPlayer) entityhuman; // Paper - Particle API Expansion
             if (sender != null && !entityplayer.getBukkitEntity().canSee(sender.getBukkitEntity())) continue; // CraftBukkit
             BlockPosition blockposition = entityplayer.getChunkCoordinates();
-            double d7 = blockposition.distanceSquared(d0, d1, d2);
-
-
             this.a(entityplayer, flag, d0, d1, d2, packetplayoutworldparticles);
         }
 

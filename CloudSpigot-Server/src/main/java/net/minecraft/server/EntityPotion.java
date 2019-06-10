@@ -93,7 +93,7 @@ public class EntityPotion extends EntityProjectile {
 
             if (flag) {
                 this.n();
-            } else if (true || !list.isEmpty()) { // CraftBukkit - Call event even if no effects to apply
+            } else { // CraftBukkit - Call event even if no effects to apply
                 if (this.isLingering()) {
                     this.a(itemstack, potionregistry);
                 } else {

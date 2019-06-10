@@ -33,7 +33,6 @@ public class CommandExecute extends CommandAbstract {
             double d1 = b(entity.locY, astring[2], false);
             double d2 = b(entity.locZ, astring[3], false);
 
-            new BlockPosition(d0, d1, d2);
             byte b0 = 4;
 
             if ("detect".equals(astring[4]) && astring.length > 10) {

@@ -336,88 +336,84 @@ public class PlayerInteractManager {
                 return false;
             }
         }
-        if (false && this.gamemode.isCreative() && !this.player.getItemInMainHand().isEmpty() && this.player.getItemInMainHand().getItem() instanceof ItemSword) { // CraftBukkit - false
-            return false;
-        } else {
-            IBlockData iblockdata = this.world.getType(blockposition);
-            if (iblockdata.getBlock() == Blocks.AIR) return false; // CraftBukkit - A plugin set block to air without cancelling
-            TileEntity tileentity = this.world.getTileEntity(blockposition);
-            Block block = iblockdata.getBlock();
+        IBlockData iblockdata = this.world.getType(blockposition);
+		if (iblockdata.getBlock() == Blocks.AIR) return false; // CraftBukkit - A plugin set block to air without cancelling
+		TileEntity tileentity = this.world.getTileEntity(blockposition);
+		Block block = iblockdata.getBlock();
 
-            // CraftBukkit start - Special case skulls, their item data comes from a tile entity (Also check if block should drop items)
-            if (iblockdata.getBlock() == Blocks.SKULL && !this.isCreative() && event.isDropItems()) {
-                iblockdata.getBlock().dropNaturally(world, blockposition, iblockdata, 1.0F, 0);
-                return this.c(blockposition);
-            }
+		// CraftBukkit start - Special case skulls, their item data comes from a tile entity (Also check if block should drop items)
+		if (iblockdata.getBlock() == Blocks.SKULL && !this.isCreative() && event.isDropItems()) {
+		    iblockdata.getBlock().dropNaturally(world, blockposition, iblockdata, 1.0F, 0);
+		    return this.c(blockposition);
+		}
 
-            // And shulker boxes too for duplication on cancel reasons (Also check if block should drop items)
-            if (iblockdata.getBlock() instanceof BlockShulkerBox && event.isDropItems()) {
-                iblockdata.getBlock().dropNaturally(world, blockposition, iblockdata, 1.0F, 0);
-                return this.c(blockposition);
-            }
-            // CraftBukkit end
+		// And shulker boxes too for duplication on cancel reasons (Also check if block should drop items)
+		if (iblockdata.getBlock() instanceof BlockShulkerBox && event.isDropItems()) {
+		    iblockdata.getBlock().dropNaturally(world, blockposition, iblockdata, 1.0F, 0);
+		    return this.c(blockposition);
+		}
+		// CraftBukkit end
 
-            if ((block instanceof BlockCommand || block instanceof BlockStructure) && !this.player.isCreativeAndOp()) {
-                this.world.notify(blockposition, iblockdata, iblockdata, 3);
-                return false;
-            } else {
-                if (this.gamemode.c()) {
-                    if (this.gamemode == EnumGamemode.SPECTATOR) {
-                        return false;
-                    }
+		if ((block instanceof BlockCommand || block instanceof BlockStructure) && !this.player.isCreativeAndOp()) {
+		    this.world.notify(blockposition, iblockdata, iblockdata, 3);
+		    return false;
+		} else {
+		    if (this.gamemode.c()) {
+		        if (this.gamemode == EnumGamemode.SPECTATOR) {
+		            return false;
+		        }
 
-                    if (!this.player.dk()) {
-                        ItemStack itemstack = this.player.getItemInMainHand();
+		        if (!this.player.dk()) {
+		            ItemStack itemstack = this.player.getItemInMainHand();
 
-                        if (itemstack.isEmpty()) {
-                            return false;
-                        }
+		            if (itemstack.isEmpty()) {
+		                return false;
+		            }
 
-                        if (!itemstack.a(block)) {
-                            return false;
-                        }
-                    }
-                }
+		            if (!itemstack.a(block)) {
+		                return false;
+		            }
+		        }
+		    }
 
-                this.world.a(this.player, 2001, blockposition, Block.getCombinedId(iblockdata));
-                // CraftBukkit start
-                world.captureDrops = new ArrayList<>();
-                boolean flag = this.c(blockposition);
-                if (event.isDropItems()) {
-                    for (EntityItem item : world.captureDrops) {
-                        world.addEntity(item);
-                    }
-                }
-                world.captureDrops = null;
-                // CraftBukkit end
+		    this.world.a(this.player, 2001, blockposition, Block.getCombinedId(iblockdata));
+		    // CraftBukkit start
+		    world.captureDrops = new ArrayList<>();
+		    boolean flag = this.c(blockposition);
+		    if (event.isDropItems()) {
+		        for (EntityItem item : world.captureDrops) {
+		            world.addEntity(item);
+		        }
+		    }
+		    world.captureDrops = null;
+		    // CraftBukkit end
 
-                if (this.isCreative()) {
-                    this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
-                } else {
-                    ItemStack itemstack1 = this.player.getItemInMainHand();
-                    ItemStack itemstack2 = itemstack1.isEmpty() ? ItemStack.a : itemstack1.cloneItemStack();
-                    boolean flag1 = this.player.hasBlock(iblockdata);
+		    if (this.isCreative()) {
+		        this.player.playerConnection.sendPacket(new PacketPlayOutBlockChange(this.world, blockposition));
+		    } else {
+		        ItemStack itemstack1 = this.player.getItemInMainHand();
+		        ItemStack itemstack2 = itemstack1.isEmpty() ? ItemStack.a : itemstack1.cloneItemStack();
+		        boolean flag1 = this.player.hasBlock(iblockdata);
 
-                    if (!itemstack1.isEmpty()) {
-                        itemstack1.a(this.world, iblockdata, blockposition, this.player);
-                    }
+		        if (!itemstack1.isEmpty()) {
+		            itemstack1.a(this.world, iblockdata, blockposition, this.player);
+		        }
 
-                    // CraftBukkit start - Check if block should drop items
-                    if (flag && flag1 && event.isDropItems()) {
-                        iblockdata.getBlock().a(this.world, this.player, blockposition, iblockdata, tileentity, itemstack2);
-                    }
-                    // CraftBukkit end
-                }
+		        // CraftBukkit start - Check if block should drop items
+		        if (flag && flag1 && event.isDropItems()) {
+		            iblockdata.getBlock().a(this.world, this.player, blockposition, iblockdata, tileentity, itemstack2);
+		        }
+		        // CraftBukkit end
+		    }
 
-                // CraftBukkit start - Drop event experience
-                if (flag && event != null) {
-                    iblockdata.getBlock().dropExperience(this.world, blockposition, event.getExpToDrop(), this.player); // Paper
-                }
-                // CraftBukkit end
+		    // CraftBukkit start - Drop event experience
+		    if (flag && event != null) {
+		        iblockdata.getBlock().dropExperience(this.world, blockposition, event.getExpToDrop(), this.player); // Paper
+		    }
+		    // CraftBukkit end
 
-                return flag;
-            }
-        }
+		    return flag;
+		}
     }
 
     public EnumInteractionResult a(EntityHuman entityhuman, World world, ItemStack itemstack, EnumHand enumhand) {

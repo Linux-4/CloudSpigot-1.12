@@ -218,10 +218,6 @@ public abstract class EntityHanging extends Entity {
     }
 
     public void f(double d0, double d1, double d2) {
-        if (false && !this.world.isClientSide && !this.dead && d0 * d0 + d1 * d1 + d2 * d2 > 0.0D) { // CraftBukkit - not needed
-            this.die();
-            this.a((Entity) null);
-        }
 
     }
 
