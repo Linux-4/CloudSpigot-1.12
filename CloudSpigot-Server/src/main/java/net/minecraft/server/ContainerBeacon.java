@@ -15,10 +15,7 @@ public class ContainerBeacon extends Container {
         player = (PlayerInventory) iinventory; // CraftBukkit - TODO: check this
         this.beacon = iinventory1;
         this.f = new ContainerBeacon.SlotBeacon(iinventory1, 0, 136, 110);
-        this.a((Slot) this.f);
-        boolean flag = true;
-        boolean flag1 = true;
-
+        this.a(this.f);
         int i;
 
         for (i = 0; i < 3; ++i) {
@@ -61,7 +58,7 @@ public class ContainerBeacon extends Container {
 
     public ItemStack shiftClick(EntityHuman entityhuman, int i) {
         ItemStack itemstack = ItemStack.a;
-        Slot slot = (Slot) this.slots.get(i);
+        Slot slot = this.slots.get(i);
 
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();

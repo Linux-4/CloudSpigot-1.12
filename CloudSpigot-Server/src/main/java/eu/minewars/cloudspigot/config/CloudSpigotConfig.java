@@ -2,9 +2,6 @@ package eu.minewars.cloudspigot.config;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;

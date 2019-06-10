@@ -138,8 +138,6 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
         public void e() {
             EntityLiving entityliving = this.ghast.getGoalTarget();
-            double d0 = 64.0D;
-
             if (entityliving.h(this.ghast) < 4096.0D && this.ghast.hasLineOfSight(entityliving)) {
                 World world = this.ghast.world;
 
@@ -149,10 +147,9 @@ public class EntityGhast extends EntityFlying implements IMonster {
                 }
 
                 if (this.a == 20) {
-                    double d1 = 4.0D;
                     Vec3D vec3d = this.ghast.e(1.0F);
                     double d2 = entityliving.locX - (this.ghast.locX + vec3d.x * 4.0D);
-                    double d3 = entityliving.getBoundingBox().b + (double) (entityliving.length / 2.0F) - (0.5D + this.ghast.locY + (double) (this.ghast.length / 2.0F));
+                    double d3 = entityliving.getBoundingBox().b + entityliving.length / 2.0F - (0.5D + this.ghast.locY + (double) (this.ghast.length / 2.0F));
                     double d4 = entityliving.locZ - (this.ghast.locZ + vec3d.z * 4.0D);
 
                     world.a((EntityHuman) null, 1016, new BlockPosition(this.ghast), 0);
@@ -161,7 +158,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
                     // CraftBukkit - set bukkitYield when setting explosionpower
                     entitylargefireball.bukkitYield = entitylargefireball.yield = this.ghast.getPower();
                     entitylargefireball.locX = this.ghast.locX + vec3d.x * 4.0D;
-                    entitylargefireball.locY = this.ghast.locY + (double) (this.ghast.length / 2.0F) + 0.5D;
+                    entitylargefireball.locY = this.ghast.locY + this.ghast.length / 2.0F + 0.5D;
                     entitylargefireball.locZ = this.ghast.locZ + vec3d.z * 4.0D;
                     world.addEntity(entitylargefireball);
                     this.a = -40;
@@ -193,8 +190,6 @@ public class EntityGhast extends EntityFlying implements IMonster {
                 this.a.aN = this.a.yaw;
             } else {
                 EntityLiving entityliving = this.a.getGoalTarget();
-                double d0 = 64.0D;
-
                 if (entityliving.h(this.a) < 4096.0D) {
                     double d1 = entityliving.locX - this.a.locX;
                     double d2 = entityliving.locZ - this.a.locZ;
@@ -237,9 +232,9 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
         public void c() {
             Random random = this.a.getRandom();
-            double d0 = this.a.locX + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            double d1 = this.a.locY + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            double d2 = this.a.locZ + (double) ((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
+            double d0 = this.a.locX + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            double d1 = this.a.locY + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
+            double d2 = this.a.locZ + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
 
             this.a.getControllerMove().a(d0, d1, d2, 1.0D);
         }
@@ -264,7 +259,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
                 if (this.j-- <= 0) {
                     this.j += this.i.getRandom().nextInt(5) + 2;
-                    d3 = (double) MathHelper.sqrt(d3);
+                    d3 = MathHelper.sqrt(d3);
                     if (this.b(this.b, this.c, this.d, d3)) {
                         this.i.motX += d0 / d3 * 0.1D;
                         this.i.motY += d1 / d3 * 0.1D;
@@ -283,7 +278,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
             double d6 = (d2 - this.i.locZ) / d3;
             AxisAlignedBB axisalignedbb = this.i.getBoundingBox();
 
-            for (int i = 1; (double) i < d3; ++i) {
+            for (int i = 1; i < d3; ++i) {
                 axisalignedbb = axisalignedbb.d(d4, d5, d6);
                 if (!this.i.world.getCubes(this.i, axisalignedbb).isEmpty()) {
                     return false;

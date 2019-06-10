@@ -1,13 +1,12 @@
 package net.minecraft.server;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
 import javax.annotation.Nullable;
+
 // CraftBukkit start
 import org.bukkit.craftbukkit.command.ProxiedNativeCommandSender;
-import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
-// CraftBukkit end
 
 public class CommandExecute extends CommandAbstract {
 
@@ -64,8 +63,6 @@ public class CommandExecute extends CommandAbstract {
 
             String s = a(astring, b0);
             CommandListenerWrapper commandlistenerwrapper = CommandListenerWrapper.a(icommandlistener).a(entity, new Vec3D(d0, d1, d2)).a(minecraftserver.worlds.get(0).getGameRules().getBoolean("commandBlockOutput")); // CraftBukkit
-            ICommandHandler icommandhandler = minecraftserver.getCommandHandler();
-
             try {
                 // CraftBukkit start
                 org.bukkit.command.CommandSender sender = CommandBlockListenerAbstract.unwrapSender(icommandlistener);
@@ -87,7 +84,7 @@ public class CommandExecute extends CommandAbstract {
     }
 
     public List<String> tabComplete(MinecraftServer minecraftserver, ICommandListener icommandlistener, String[] astring, @Nullable BlockPosition blockposition) {
-        return astring.length == 1 ? a(astring, minecraftserver.getPlayers()) : (astring.length > 1 && astring.length <= 4 ? a(astring, 1, blockposition) : (astring.length > 5 && astring.length <= 8 && "detect".equals(astring[4]) ? a(astring, 5, blockposition) : (astring.length == 9 && "detect".equals(astring[4]) ? a(astring, (Collection) Block.REGISTRY.keySet()) : Collections.<String>emptyList()))); // CraftBukkit - decompile error
+        return astring.length == 1 ? a(astring, minecraftserver.getPlayers()) : (astring.length > 1 && astring.length <= 4 ? a(astring, 1, blockposition) : (astring.length > 5 && astring.length <= 8 && "detect".equals(astring[4]) ? a(astring, 5, blockposition) : (astring.length == 9 && "detect".equals(astring[4]) ? a(astring, Block.REGISTRY.keySet()) : Collections.<String>emptyList()))); // CraftBukkit - decompile error
     }
 
     public boolean isListStart(String[] astring, int i) {
@@ -97,7 +94,7 @@ public class CommandExecute extends CommandAbstract {
     // CraftBukkit start - fix decompiler error
     @Override
     public int compareTo(ICommand o) {
-        return a((ICommand) o);
+        return a(o);
     }
     // CraftBukkit end
 }
