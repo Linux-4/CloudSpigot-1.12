@@ -47,10 +47,9 @@ public class SpigotConfig
     public static YamlConfiguration config;
     static int version;
     static Map<String, Command> commands;
-    /*========================================================================*/
-    private static Metrics metrics;
-
-    public static void init(File configFile)
+    
+    @SuppressWarnings("deprecation")
+	public static void init(File configFile)
     {
         CONFIG_FILE = configFile;
         config = new YamlConfiguration();

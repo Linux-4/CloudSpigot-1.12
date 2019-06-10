@@ -24,8 +24,6 @@ public class CraftTravelAgent extends PortalTravelAgent implements TravelAgent {
 
     @Override
     public Location findOrCreate(Location target) {
-        WorldServer worldServer = ((CraftWorld) target.getWorld()).getHandle();
-
         Location found = this.findPortal(target);
         if (found == null) {
             if (this.getCanCreatePortal() && this.createPortal(target)) {

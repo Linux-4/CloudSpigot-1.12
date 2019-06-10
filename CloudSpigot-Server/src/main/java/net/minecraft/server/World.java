@@ -46,7 +46,8 @@ public abstract class World implements IBlockAccess {
     protected boolean d;
     // Spigot start - guard entity list from removals
     public static final boolean DEBUG_ENTITIES = Boolean.getBoolean("debug.entities"); // Paper
-    public final List<Entity> entityList = new java.util.ArrayList<Entity>()
+    @SuppressWarnings("serial")
+	public final List<Entity> entityList = new java.util.ArrayList<Entity>()
     {
         @Override
         public Entity remove(int index)
@@ -78,8 +79,7 @@ public abstract class World implements IBlockAccess {
     private final Set<TileEntity> tileEntityListUnload = Sets.newHashSet(); // Paper
     public final List<EntityHuman> players = Lists.newArrayList();
     public final List<Entity> j = Lists.newArrayList();
-    protected final IntHashMap<Entity> entitiesById = new IntHashMap();
-    private final long K = 16777215L;
+    protected final IntHashMap<Entity> entitiesById = new IntHashMap<Entity>();
     private int L; private int getSkylightSubtracted() { return this.L; } // Paper - OBFHELPER
     protected int l = (new Random()).nextInt();
     protected final int m = 1013904223;
@@ -87,7 +87,6 @@ public abstract class World implements IBlockAccess {
     protected float o;
     protected float p;
     protected float q;
-    private int M;
     public final Random random = new Random();
     public WorldProvider worldProvider;
     protected NavigationListener t = new NavigationListener();
@@ -119,7 +118,8 @@ public abstract class World implements IBlockAccess {
 
     public boolean captureBlockStates = false;
     public boolean captureTreeGeneration = false;
-    public ArrayList<BlockState> capturedBlockStates= new ArrayList<BlockState>(){
+    @SuppressWarnings("serial")
+	public ArrayList<BlockState> capturedBlockStates= new ArrayList<BlockState>(){
         @Override
         public boolean add( BlockState blockState ) {
             Iterator<BlockState> blockStateIterator = this.iterator();
@@ -147,8 +147,6 @@ public abstract class World implements IBlockAccess {
     private boolean guardEntityList; // Spigot
     public static boolean haveWeSilencedAPhysicsCrash;
     public static String blockLocation;
-    private org.spigotmc.TickLimiter entityLimiter;
-    private org.spigotmc.TickLimiter tileLimiter;
     private int tileTickPosition;
     public final Map<Explosion.CacheKey, Float> explosionDensityCache = new HashMap<>(); // Paper - Optimize explosions
 
@@ -223,8 +221,8 @@ public abstract class World implements IBlockAccess {
         // CraftBukkit end
         timings = new co.aikar.timings.WorldTimingsHandler(this); // Paper - code below can generate new world and access timings
         this.keepSpawnInMemory = this.paperConfig.keepSpawnInMemory; // Paper
-                this.entityLimiter = new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
-        this.tileLimiter = new org.spigotmc.TickLimiter(spigotConfig.tileMaxTickTime);
+                new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
+        new org.spigotmc.TickLimiter(spigotConfig.tileMaxTickTime);
     }
 
     public World b() {
@@ -282,11 +280,13 @@ public abstract class World implements IBlockAccess {
         return this.getType(blockposition1);
     }
 
-    private static boolean isValidLocation(BlockPosition blockposition) { // Paper - unused but incase reflection / future uses
+    @SuppressWarnings("unused")
+	private static boolean isValidLocation(BlockPosition blockposition) { // Paper - unused but incase reflection / future uses
         return blockposition.isValidLocation(); // Paper
     }
 
-    private static boolean E(BlockPosition blockposition) { // Paper - unused but incase reflection / future uses
+    @SuppressWarnings("unused")
+	private static boolean E(BlockPosition blockposition) { // Paper - unused but incase reflection / future uses
         return blockposition.isInvalidYLocation(); // Paper
     }
 
@@ -411,9 +411,9 @@ public abstract class World implements IBlockAccess {
                 return false;
             } else {
                 if (iblockdata.c() != iblockdata1.c() || iblockdata.d() != iblockdata1.d()) {
-                    this.methodProfiler.a("checkLight");
+                    //this.methodProfiler.a("checkLight");
                     chunk.runOrQueueLightUpdate(() -> this.w(blockposition)); // Paper - Queue light update
-                    this.methodProfiler.b();
+                    //this.methodProfiler.b();
                 }
 
                 /*
@@ -1478,8 +1478,8 @@ public abstract class World implements IBlockAccess {
     public void b(BlockPosition blockposition, Block block, int i, int j) {}
 
     public void tickEntities() {
-        this.methodProfiler.a("entities");
-        this.methodProfiler.a("global");
+        //this.methodProfiler.a("entities");
+        //this.methodProfiler.a("global");
 
         int i;
         Entity entity;
@@ -1513,7 +1513,7 @@ public abstract class World implements IBlockAccess {
             }
         }
 
-        this.methodProfiler.c("remove");
+        //this.methodProfiler.c("remove");
         timings.entityRemoval.startTiming(); // Paper
         this.entityList.removeAll(this.f);
 
@@ -1539,7 +1539,7 @@ public abstract class World implements IBlockAccess {
         this.f.clear();
         this.l();
         timings.entityRemoval.stopTiming(); // Paper
-        this.methodProfiler.c("regular");
+        //this.methodProfiler.c("regular");
 
         CrashReportSystemDetails crashreportsystemdetails1;
         CrashReport crashreport1;
@@ -1567,7 +1567,7 @@ public abstract class World implements IBlockAccess {
                 entity.stopRiding();
             }
 
-            this.methodProfiler.a("tick");
+            //this.methodProfiler.a("tick");
             if (!entity.dead && !(entity instanceof EntityPlayer)) {
                 try {
                     entity.tickTimer.startTiming(); // Paper
@@ -1586,8 +1586,8 @@ public abstract class World implements IBlockAccess {
                 }
             }
 
-            this.methodProfiler.b();
-            this.methodProfiler.a("remove");
+            //this.methodProfiler.b();
+            //this.methodProfiler.a("remove");
             if (entity.dead) {
                 // Paper start
                 /*
@@ -1607,12 +1607,12 @@ public abstract class World implements IBlockAccess {
                 this.c(entity);
             }
 
-            this.methodProfiler.b();
+            //this.methodProfiler.b();
         }
         guardEntityList = false; // Spigot
 
         timings.entityTick.stopTiming(); // Spigot
-        this.methodProfiler.c("blockEntities");
+        //this.methodProfiler.c("blockEntities");
         timings.tileEntityTick.startTiming(); // Spigot
         if (!this.tileEntityListUnload.isEmpty()) {
             // Paper start - Use alternate implementation with faster contains
@@ -1651,12 +1651,12 @@ public abstract class World implements IBlockAccess {
                 if (shouldTick && this.P.a(blockposition)) {
                     // Paper end
                     try {
-                        this.methodProfiler.a(() -> {
+                        /*//this.methodProfiler.a(() -> {
                             return String.valueOf(TileEntity.a(tileentity.getClass()));
-                        });
+                        });*/
                         tileentity.tickTimer.startTiming(); // Spigot
                         ((ITickable) tileentity).e();
-                        this.methodProfiler.b();
+                        //this.methodProfiler.b();
                     } catch (Throwable throwable2) {
                         // Paper start - Prevent tile entity and entity crashes
                         String msg = "TileEntity threw exception at " + tileentity.world.getWorld().getName() + ":" + tileentity.position.getX() + "," + tileentity.position.getY() + "," + tileentity.position.getZ();
@@ -1692,7 +1692,7 @@ public abstract class World implements IBlockAccess {
         timings.tileEntityTick.stopTiming(); // Spigot
         timings.tileEntityPending.startTiming(); // Spigot
         this.O = false;
-        this.methodProfiler.c("pendingBlockEntities");
+        //this.methodProfiler.c("pendingBlockEntities");
         if (!this.b.isEmpty()) {
             for (int i1 = 0; i1 < this.b.size(); ++i1) {
                 TileEntity tileentity1 = (TileEntity) this.b.get(i1);
@@ -1725,8 +1725,8 @@ public abstract class World implements IBlockAccess {
 
         timings.tileEntityPending.stopTiming(); // Spigot
         co.aikar.timings.TimingHistory.tileEntityTicks += this.tileEntityListTick.size(); // Paper
-        this.methodProfiler.b();
-        this.methodProfiler.b();
+        //this.methodProfiler.b();
+        //this.methodProfiler.b();
     }
 
     protected void l() {}
@@ -1799,7 +1799,7 @@ public abstract class World implements IBlockAccess {
             }
         }
 
-        this.methodProfiler.a("chunkCheck");
+        //this.methodProfiler.a("chunkCheck");
         if (Double.isNaN(entity.locX) || Double.isInfinite(entity.locX)) {
             entity.locX = entity.M;
         }
@@ -1836,7 +1836,7 @@ public abstract class World implements IBlockAccess {
             }
         }
 
-        this.methodProfiler.b();
+        //this.methodProfiler.b();
         if (flag && entity.aa) {
             Iterator iterator = entity.bF().iterator();
 
@@ -2481,7 +2481,7 @@ public abstract class World implements IBlockAccess {
             int i = 0;
             int j = 0;
 
-            this.methodProfiler.a("getBrightness");
+            //this.methodProfiler.a("getBrightness");
             int k = this.getBrightness(enumskyblock, blockposition);
             int l = this.a(blockposition, enumskyblock);
             int i1 = blockposition.getX();
@@ -2545,8 +2545,8 @@ public abstract class World implements IBlockAccess {
                 i = 0;
             }
 
-            this.methodProfiler.b();
-            this.methodProfiler.a("checkedPosition < toCheckCount");
+            //this.methodProfiler.b();
+            //this.methodProfiler.a("checkedPosition < toCheckCount");
 
             while (i < j) {
                 l1 = this.J[i++];
@@ -2594,7 +2594,7 @@ public abstract class World implements IBlockAccess {
                 }
             }
 
-            this.methodProfiler.b();
+            //this.methodProfiler.b();
             return true;
         }
     }
@@ -3274,7 +3274,6 @@ public abstract class World implements IBlockAccess {
     }
 
     public void d(int i) {
-        this.M = i;
     }
 
     public PersistentVillage ak() {

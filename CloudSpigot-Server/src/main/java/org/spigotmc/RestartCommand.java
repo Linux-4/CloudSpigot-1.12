@@ -1,11 +1,12 @@
 package org.spigotmc;
 
 import java.io.File;
-import java.util.List;
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 
 public class RestartCommand extends Command
 {
@@ -18,7 +19,8 @@ public class RestartCommand extends Command
         this.setPermission( "bukkit.command.restart" );
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean execute(CommandSender sender, String currentAlias, String[] args)
     {
         if ( testPermission( sender ) )
@@ -65,7 +67,8 @@ public class RestartCommand extends Command
     }
 
     // Paper start - sync copied from above with minor changes, async added
-    private static void shutdownServer(boolean isRestarting)
+    @SuppressWarnings("deprecation")
+	private static void shutdownServer(boolean isRestarting)
     {
         if (MinecraftServer.getServer().isMainThread())
         {
@@ -121,7 +124,8 @@ public class RestartCommand extends Command
     }
 
     // Paper - Split from moved code
-    private static void closeSocket() {
+    @SuppressWarnings("deprecation")
+	private static void closeSocket() {
         // Close the socket so we can rebind with the new process
         MinecraftServer.getServer().getServerConnection().b();
 

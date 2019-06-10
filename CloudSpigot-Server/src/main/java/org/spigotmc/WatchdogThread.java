@@ -24,7 +24,7 @@ public class WatchdogThread extends Thread
 
     private WatchdogThread(long timeoutTime, boolean restart)
     {
-        super( "Paper Watchdog Thread" );
+        super( "CloudSpigot Watchdog Thread" );
         this.timeoutTime = timeoutTime;
         this.restart = restart;
         earlyWarningEvery = Math.min(PaperConfig.watchdogPrintEarlyWarningEvery, timeoutTime); // Paper
@@ -53,7 +53,8 @@ public class WatchdogThread extends Thread
         }
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void run()
     {
         while ( !stopping )
@@ -73,7 +74,7 @@ public class WatchdogThread extends Thread
                 if ( isLongTimeout )
                 {
                 log.log( Level.SEVERE, "The server has stopped responding!" );
-                log.log( Level.SEVERE, "Please report this to https://github.com/PaperMC/Paper/issues" );
+                log.log( Level.SEVERE, "Please report this to https://github.com/Server24-7/CloudSpigot-1.12/issues" );
                 log.log( Level.SEVERE, "Be sure to include ALL relevant console errors and Minecraft crash reports" );
                 log.log( Level.SEVERE, "Paper version: " + Bukkit.getServer().getVersion() );
                 //
@@ -98,12 +99,12 @@ public class WatchdogThread extends Thread
                 // Paper end
                 } else
                 {
-                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH ---");
+                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO CLOUDSPIGOT - THIS IS NOT A BUG OR A CRASH ---");
                     log.log(Level.SEVERE, "The server has not responded for " + (currentTime - lastTick) / 1000 + " seconds! Creating thread dump");
                 }
                 // Paper end - Different message for short timeout
                 log.log( Level.SEVERE, "------------------------------" );
-                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Paper!):" );
+                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to CloudSpigot!):" );
                 dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().primaryThread.getId(), Integer.MAX_VALUE ), log );
                 log.log( Level.SEVERE, "------------------------------" );
                 //
@@ -117,7 +118,7 @@ public class WatchdogThread extends Thread
                     dumpThread( thread, log );
                 }
                 } else {
-                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH ---");
+                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO CLOUDSPIGOT - THIS IS NOT A BUG OR A CRASH ---");
                 }
 
 

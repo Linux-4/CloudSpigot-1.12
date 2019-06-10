@@ -38,7 +38,6 @@ import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.metadata.BlockMetadataStore;
 import org.bukkit.craftbukkit.potion.CraftPotionUtil;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import org.bukkit.craftbukkit.util.LongHash;
 import org.bukkit.entity.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.minecart.CommandMinecart;
@@ -61,6 +60,7 @@ import org.bukkit.potion.PotionType;
 import org.bukkit.util.Consumer;
 import org.bukkit.util.Vector;
 
+@SuppressWarnings("deprecation")
 public class CraftWorld implements World {
     public static final int CUSTOM_DIMENSION_OFFSET = 10;
 
@@ -383,7 +383,8 @@ public class CraftWorld implements World {
         return spawnArrow(loc, velocity, speed, spread, Arrow.class);
     }
 
-    public <T extends Arrow> T spawnArrow(Location loc, Vector velocity, float speed, float spread, Class<T> clazz) {
+    @SuppressWarnings("unchecked")
+	public <T extends Arrow> T spawnArrow(Location loc, Vector velocity, float speed, float spread, Class<T> clazz) {
         Validate.notNull(loc, "Can not spawn arrow with a null location");
         Validate.notNull(velocity, "Can not spawn arrow with a null velocity");
         Validate.notNull(clazz, "Can not spawn an arrow with no class");
@@ -958,7 +959,6 @@ public class CraftWorld implements World {
         return spawnFallingBlock(location, org.bukkit.Material.getMaterial(blockId), blockData);
     }
 
-    @SuppressWarnings("unchecked")
     public net.minecraft.server.Entity createEntity(Location location, Class<? extends Entity> clazz) throws IllegalArgumentException {
         if (location == null || clazz == null) {
             throw new IllegalArgumentException("Location or entity class cannot be null");
@@ -1209,7 +1209,7 @@ public class CraftWorld implements World {
                 if (nmsBlock.getBlockData().getMaterial().isBuildable() || BlockDiodeAbstract.isDiode(nmsBlock.getBlockData())) {
                     boolean taken = false;
                     AxisAlignedBB bb = EntityHanging.calculateBoundingBox(null, pos, CraftBlock.blockFaceToNotch(dir).opposite(), width, height);
-                    List<net.minecraft.server.Entity> list = (List<net.minecraft.server.Entity>) world.getEntities(null, bb);
+                    List<net.minecraft.server.Entity> list = world.getEntities(null, bb);
                     for (Iterator<net.minecraft.server.Entity> it = list.iterator(); !taken && it.hasNext();) {
                         net.minecraft.server.Entity e = it.next();
                         if (e instanceof EntityHanging) {
@@ -1273,7 +1273,6 @@ public class CraftWorld implements World {
         throw new IllegalArgumentException("Cannot spawn an entity for " + clazz.getName());
     }
 
-    @SuppressWarnings("unchecked")
     public <T extends Entity> T addEntity(net.minecraft.server.Entity entity, SpawnReason reason) throws IllegalArgumentException {
         return addEntity(entity, reason, null);
     }
@@ -1653,7 +1652,7 @@ public class CraftWorld implements World {
             Validate.notNull( location, "Location cannot be null" );
             Validate.notNull( effect, "Effect cannot be null" );
             Validate.notNull( location.getWorld(), "World cannot be null" );
-            Packet packet;
+            Packet<?> packet;
             if ( effect.getType() != Effect.Type.PARTICLE )
             {
                 int packetData = effect.getId();

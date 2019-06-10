@@ -292,7 +292,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             this.f();
         }
 
-        this.methodProfiler.a("mobSpawner");
+        //this.methodProfiler.a("mobSpawner");
         // CraftBukkit start - Only call spawner if we have players online and the world allows for mobs or animals
         long time = this.worldData.getTime();
         if (this.getGameRules().getBoolean("doMobSpawning") && this.worldData.getType() != WorldType.DEBUG_ALL_BLOCK_STATES && (this.allowMonsters || this.allowAnimals) && (this.players.size() > 0)) {
@@ -303,7 +303,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         }
 
         timings.doChunkUnload.startTiming(); // Spigot
-        this.methodProfiler.c("chunkSource");
+        //this.methodProfiler.c("chunkSource");
         this.chunkProvider.unloadChunks();
         int j = this.a(1.0F);
 
@@ -317,28 +317,28 @@ public class WorldServer extends World implements IAsyncTaskHandler {
         }
 
         timings.doChunkUnload.stopTiming(); // Spigot
-        this.methodProfiler.c("tickPending");
+        //this.methodProfiler.c("tickPending");
         timings.scheduledBlocks.startTiming(); // Paper
         this.a(false);
         timings.scheduledBlocks.stopTiming(); // Paper
-        this.methodProfiler.c("tickBlocks");
+        //this.methodProfiler.c("tickBlocks");
         timings.chunkTicks.startTiming(); // Paper
         this.j();
         timings.chunkTicks.stopTiming(); // Paper
-        this.methodProfiler.c("chunkMap");
+        //this.methodProfiler.c("chunkMap");
         timings.doChunkMap.startTiming(); // Spigot
         this.manager.flush();
         timings.doChunkMap.stopTiming(); // Spigot
-        this.methodProfiler.c("village");
+        //this.methodProfiler.c("village");
         timings.doVillages.startTiming(); // Spigot
         this.villages.tick();
         if (paperConfig.villageSiegesEnabled) { this.siegeManager.a(); } // Paper - Allow disabling village sieges
         timings.doVillages.stopTiming(); // Spigot
-        this.methodProfiler.c("portalForcer");
+        //this.methodProfiler.c("portalForcer");
         timings.doPortalForcer.startTiming(); // Spigot
         this.portalTravelAgent.a(this.getTime());
         timings.doPortalForcer.stopTiming(); // Spigot
-        this.methodProfiler.b();
+        //this.methodProfiler.b();
         timings.doSounds.startTiming(); // Spigot
         this.aq();
         timings.doSounds.stopTiming(); // Spigot
@@ -453,7 +453,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
     }
 
     protected void i() {
-        this.methodProfiler.a("playerCheckLight");
+        //this.methodProfiler.a("playerCheckLight");
         if (spigotConfig.randomLightUpdates && !this.players.isEmpty()) { // Spigot
             int i = this.random.nextInt(this.players.size());
             EntityHuman entityhuman = this.players.get(i);
@@ -464,7 +464,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             this.w(new BlockPosition(j, k, l));
         }
 
-        this.methodProfiler.b();
+        //this.methodProfiler.b();
     }
 
     protected void j() {
@@ -481,20 +481,20 @@ public class WorldServer extends World implements IAsyncTaskHandler {
             boolean flag = this.isRaining();
             boolean flag1 = this.X();
 
-            this.methodProfiler.a("pollingChunks");
+            //this.methodProfiler.a("pollingChunks");
 
-            for (Iterator<Chunk> iterator1 = this.manager.b(); iterator1.hasNext(); this.methodProfiler.b()) {
-                this.methodProfiler.a("getChunk");
+            for (Iterator<Chunk> iterator1 = this.manager.b(); iterator1.hasNext(); /*this.methodProfiler.b()*/) {
+                //this.methodProfiler.a("getChunk");
                 Chunk chunk = iterator1.next();
                 int j = chunk.locX * 16;
                 int k = chunk.locZ * 16;
 
-                this.methodProfiler.c("checkNextLight");
+                //this.methodProfiler.c("checkNextLight");
                 chunk.n();
-                this.methodProfiler.c("tickChunk");
+                //this.methodProfiler.c("tickChunk");
                 chunk.b(false);
                 if ( !chunk.areNeighborsLoaded( 1 ) ) continue; // Spigot
-                this.methodProfiler.c("thunder");
+                //this.methodProfiler.c("thunder");
                 int l;
                 BlockPosition blockposition;
 
@@ -520,7 +520,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     }
                 }
 
-                this.methodProfiler.c("iceandsnow");
+                //this.methodProfiler.c("iceandsnow");
                 if (!this.paperConfig.disableIceAndSnow && this.random.nextInt(16) == 0) { // Paper - Disable ice and snow
                     this.l = this.l * 3 + 1013904223;
                     l = this.l >> 2;
@@ -558,12 +558,12 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                                 IBlockData iblockdata = chunksection.getType(i2, k2, j2);
                                 Block block = iblockdata.getBlock();
 
-                                this.methodProfiler.a("randomTick");
+                                //this.methodProfiler.a("randomTick");
                                 if (block.isTicking()) {
                                     block.a(this, new BlockPosition(i2 + j, k2 + chunksection.getYPosition(), j2 + k), iblockdata, this.random);
                                 }
 
-                                this.methodProfiler.b();
+                                //this.methodProfiler.b();
                             }
                         }
                     }
@@ -571,7 +571,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 timings.chunkTicksBlocks.stopTiming(); // Paper
             }
 
-            this.methodProfiler.b();
+            //this.methodProfiler.b();
         }
     }
 
@@ -684,7 +684,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
 
     protected void l() {
         super.l();
-        this.methodProfiler.c("players");
+        //this.methodProfiler.c("players");
 
         for (int i = 0; i < this.players.size(); ++i) {
             Entity entity = (Entity) this.players.get(i);
@@ -698,7 +698,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 entity.stopRiding();
             }
 
-            this.methodProfiler.a("tick");
+            //this.methodProfiler.a("tick");
             if (!entity.dead) {
                 try {
                     this.h(entity);
@@ -711,8 +711,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 }
             }
 
-            this.methodProfiler.b();
-            this.methodProfiler.a("remove");
+            //this.methodProfiler.b();
+            //this.methodProfiler.a("remove");
             if (entity.dead) {
                 int j = entity.ab;
                 int k = entity.ad;
@@ -725,7 +725,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 this.c(entity);
             }
 
-            this.methodProfiler.b();
+            //this.methodProfiler.b();
         }
 
     }
@@ -753,7 +753,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                     // CraftBukkit end
                 }
 
-                this.methodProfiler.a("cleaning");
+                //this.methodProfiler.a("cleaning");
 
                 timings.scheduledBlocksCleanup.startTiming(); // Paper
                 NextTickListEntry nextticklistentry;
@@ -771,8 +771,8 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 }
                 timings.scheduledBlocksCleanup.stopTiming(); // Paper
 
-                this.methodProfiler.b();
-                this.methodProfiler.a("ticking");
+                //this.methodProfiler.b();
+                //this.methodProfiler.a("ticking");
                 Iterator iterator = this.W.iterator();
                 timings.scheduledBlocksTicking.startTiming(); // Paper
 
@@ -805,7 +805,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
                 }
                 timings.scheduledBlocksTicking.stopTiming(); // Paper
 
-                this.methodProfiler.b();
+                //this.methodProfiler.b();
                 this.W.clear();
                 return !this.nextTickList.isEmpty();
             }

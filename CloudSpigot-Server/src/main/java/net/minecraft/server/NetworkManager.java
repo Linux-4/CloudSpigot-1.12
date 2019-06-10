@@ -7,7 +7,6 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.local.LocalChannel;
 import io.netty.channel.local.LocalEventLoopGroup;
 import io.netty.channel.local.LocalServerChannel;
@@ -28,40 +27,40 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
+@SuppressWarnings("deprecation")
 public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
 
     private static final Logger g = LogManager.getLogger();
     public static final Marker a = MarkerManager.getMarker("NETWORK");
     public static final Marker b = MarkerManager.getMarker("NETWORK_PACKETS", NetworkManager.a);
     public static final AttributeKey<EnumProtocol> c = AttributeKey.valueOf("protocol");
-    public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar() {
+    public static final LazyInitVar<NioEventLoopGroup> d = new LazyInitVar<NioEventLoopGroup>() {
         protected NioEventLoopGroup a() {
-            return new NioEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Client IO #%d").setDaemon(true).build());
+            return new NioEventLoopGroup();
         }
 
-        protected Object init() {
+        protected NioEventLoopGroup init() {
             return this.a();
         }
     };
-    public static final LazyInitVar<EpollEventLoopGroup> e = new LazyInitVar() {
-        protected EpollEventLoopGroup a() {
-            return new EpollEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Epoll Client IO #%d").setDaemon(true).build());
+    public static final LazyInitVar<NioEventLoopGroup> e = new LazyInitVar<NioEventLoopGroup>() {
+        protected NioEventLoopGroup a() {
+            return new NioEventLoopGroup();
         }
 
-        protected Object init() {
+        protected NioEventLoopGroup init() {
             return this.a();
         }
     };
-    public static final LazyInitVar<LocalEventLoopGroup> f = new LazyInitVar() {
+    public static final LazyInitVar<LocalEventLoopGroup> f = new LazyInitVar<LocalEventLoopGroup>() {
         protected LocalEventLoopGroup a() {
             return new LocalEventLoopGroup(0, (new ThreadFactoryBuilder()).setNameFormat("Netty Local Client IO #%d").setDaemon(true).build());
         }
 
-        protected Object init() {
+        protected LocalEventLoopGroup init() {
             return this.a();
         }
     };
-    private final EnumProtocolDirection h;
     private final Queue<NetworkManager.QueuedPacket> i = Queues.newConcurrentLinkedQueue(); private final Queue<NetworkManager.QueuedPacket> getPacketQueue() { return this.i; } // Paper - Anti-Xray - OBFHELPER
     private final ReentrantReadWriteLock j = new ReentrantReadWriteLock();
     public Channel channel;
@@ -73,7 +72,6 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     // Spigot End
     private PacketListener m;
     private IChatBaseComponent n;
-    private boolean o;
     private boolean p;
     // Paper start - NetworkClient implementation
     public int protocolVersion;
@@ -82,7 +80,6 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     // Paper end
 
     public NetworkManager(EnumProtocolDirection enumprotocoldirection) {
-        this.h = enumprotocoldirection;
     }
 
     public void channelActive(ChannelHandlerContext channelhandlercontext) throws Exception {
@@ -134,7 +131,8 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
         if (MinecraftServer.getServer().isDebugging()) throwable.printStackTrace(); // Spigot
     }
 
-    protected void a(ChannelHandlerContext channelhandlercontext, Packet<?> packet) throws Exception {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void a(ChannelHandlerContext channelhandlercontext, Packet<?> packet) throws Exception {
         if (this.channel.isOpen()) {
             try {
                 ((Packet) packet).a(this.m); // CraftBukkit - decompile error
@@ -151,7 +149,8 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
         this.m = packetlistener;
     }
 
-    public void sendPacket(Packet<?> packet) {
+    @SuppressWarnings("unchecked")
+	public void sendPacket(Packet<?> packet) {
         if (this.isConnected() && this.trySendQueue() && !(packet instanceof PacketPlayOutMapChunk && !((PacketPlayOutMapChunk) packet).isReady())) { // Paper - Async-Anti-Xray - Add chunk packets which are not ready or all packets if the queue contains chunk packets which are not ready to the queue and send the packets later in the right order
             //this.m(); // Paper - Async-Anti-Xray - Move to if statement (this.trySendQueue())
             this.a(packet, (GenericFutureListener[]) null);
@@ -299,7 +298,6 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
     }
 
     public void a(SecretKey secretkey) {
-        this.o = true;
         this.channel.pipeline().addBefore("splitter", "decrypt", new PacketDecrypter(MinecraftEncryption.a(2, secretkey)));
         this.channel.pipeline().addBefore("prepender", "encrypt", new PacketEncrypter(MinecraftEncryption.a(1, secretkey)));
     }
@@ -366,7 +364,8 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
         }
     }
 
-    protected void channelRead0(ChannelHandlerContext channelhandlercontext, Packet object) throws Exception { // CraftBukkit - fix decompile error
+    @Override
+    protected void messageReceived(ChannelHandlerContext channelhandlercontext, Packet<?> object) throws Exception { // CraftBukkit - fix decompile error
         this.a(channelhandlercontext, (Packet) object);
     }
 
@@ -387,4 +386,5 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
         return this.channel.remoteAddress();
     }
     // Spigot End
+
 }

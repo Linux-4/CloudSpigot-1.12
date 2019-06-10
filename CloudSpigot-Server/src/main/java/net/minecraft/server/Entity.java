@@ -47,7 +47,8 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
     // CraftBukkit start
     private static final int CURRENT_LEVEL = 2;
     // Paper start
-    public static Random SHARED_RANDOM = new Random() {
+    @SuppressWarnings("serial")
+	public static Random SHARED_RANDOM = new Random() {
         private boolean locked = false;
         @Override
         public synchronized void setSeed(long seed) {
@@ -77,10 +78,8 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
     Throwable addedToWorldStack; // Paper - entity debug
     // CraftBukikt end
 
-    private static final Logger a = LogManager.getLogger();
     private static final List<ItemStack> b = Collections.emptyList();
     private static final AxisAlignedBB c = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-    private static double f = 1.0D;
     private static int entityCount = 1; // Paper - MC-111480 - ID 0 is treated as special for DataWatchers, start 1
     private int id;
     public boolean i; public boolean blocksEntitySpawning() { return i; } // Paper - OBFHELPER
@@ -289,7 +288,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
             this.width = f;
             this.length = f1;
             if (this.width < f2) {
-                double d0 = (double) f / 2.0D;
+                double d0 = f / 2.0D;
 
                 this.a(new AxisAlignedBB(this.locX - d0, this.locY, this.locZ - d0, this.locX + d0, this.locY + (double) this.length, this.locZ + d0));
                 return;

@@ -3,16 +3,20 @@ package org.bukkit.craftbukkit;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 
-import java.util.Random;
-import net.minecraft.server.*;
-
 import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.entity.Entity;
-import org.bukkit.ChunkSnapshot;
+
+import net.minecraft.server.BiomeBase;
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.ChunkSection;
+import net.minecraft.server.NibbleArray;
+import net.minecraft.server.WorldChunkManager;
+import net.minecraft.server.WorldServer;
 
 public class CraftChunk implements Chunk {
     private WeakReference<net.minecraft.server.Chunk> weakChunk;
@@ -140,7 +144,8 @@ public class CraftChunk implements Chunk {
         return getWorld().unloadChunk(getX(), getZ(), save);
     }
 
-    public boolean unload(boolean save, boolean safe) {
+    @SuppressWarnings("deprecation")
+	public boolean unload(boolean save, boolean safe) {
         return getWorld().unloadChunk(getX(), getZ(), save, safe);
     }
 
@@ -171,8 +176,6 @@ public class CraftChunk implements Chunk {
                 byte[] rawIds = new byte[4096];
                 NibbleArray data = new NibbleArray();
                 cs[i].getBlocks().exportData(rawIds, data);
-
-                byte[] dataValues = sectionBlockData[i] = data.asBytes();
 
                 // Copy base IDs
                 for (int j = 0; j < 4096; j++) {

@@ -19,17 +19,19 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull; // Paper
+import javax.annotation.Nullable; // Paper
 import javax.imageio.ImageIO;
 
-import net.minecraft.server.*;
-
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.UnsafeValues;
@@ -73,6 +75,7 @@ import org.bukkit.craftbukkit.scheduler.CraftScheduler;
 import org.bukkit.craftbukkit.scoreboard.CraftScoreboardManager;
 import org.bukkit.craftbukkit.util.CraftIconCache;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.craftbukkit.util.DatFileFilter;
 import org.bukkit.craftbukkit.util.Versioning;
 import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
@@ -82,16 +85,17 @@ import org.bukkit.event.command.UnknownCommandEvent; // Paper
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerChatTabCompleteEvent;
 import org.bukkit.event.server.BroadcastMessageEvent;
+import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.WorldInitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.event.world.WorldUnloadEvent;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.FurnaceRecipe;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
@@ -105,16 +109,15 @@ import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitWorker;
 import org.bukkit.util.StringUtil;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.error.MarkedYAMLException;
-import org.apache.commons.lang.Validate;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
@@ -130,16 +133,56 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.base64.Base64;
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.util.CraftNamespacedKey;
-import org.bukkit.event.server.TabCompleteEvent;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.minecraft.server.Advancement;
+import net.minecraft.server.AdvancementRewards;
+import net.minecraft.server.BlockPosition;
+import net.minecraft.server.CommandAbstract;
+import net.minecraft.server.CommandDispatcher;
+import net.minecraft.server.CommandListenerWrapper;
+import net.minecraft.server.Convertable;
+import net.minecraft.server.CraftingManager;
+import net.minecraft.server.DedicatedPlayerList;
+import net.minecraft.server.DedicatedServer;
+import net.minecraft.server.Enchantments;
+import net.minecraft.server.EntityPlayer;
+import net.minecraft.server.EntityTracker;
+import net.minecraft.server.EnumDifficulty;
+import net.minecraft.server.EnumGamemode;
+import net.minecraft.server.ExceptionWorldConflict;
+import net.minecraft.server.ICommand;
+import net.minecraft.server.ICommandListener;
+import net.minecraft.server.IDataManager;
+import net.minecraft.server.IProgressUpdate;
+import net.minecraft.server.IRecipe;
+import net.minecraft.server.Items;
+import net.minecraft.server.JsonListEntry;
+import net.minecraft.server.LocaleI18n;
+import net.minecraft.server.MCUtil;
+import net.minecraft.server.MinecraftKey;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.MobEffects;
+import net.minecraft.server.PersistentCollection;
+import net.minecraft.server.PlayerList;
+import net.minecraft.server.PropertyManager;
+import net.minecraft.server.RecipesFurnace;
+import net.minecraft.server.RegionFile;
+import net.minecraft.server.RegionFileCache;
+import net.minecraft.server.RegistryMaterials;
+import net.minecraft.server.ServerCommand;
+import net.minecraft.server.ServerNBTManager;
+import net.minecraft.server.TileEntitySign;
+import net.minecraft.server.WorldData;
+import net.minecraft.server.WorldLoaderServer;
+import net.minecraft.server.WorldManager;
+import net.minecraft.server.WorldMap;
+import net.minecraft.server.WorldNBTStorage;
+import net.minecraft.server.WorldServer;
+import net.minecraft.server.WorldSettings;
+import net.minecraft.server.WorldType;
 
-import javax.annotation.Nullable; // Paper
-import javax.annotation.Nonnull; // Paper
 
-
+@SuppressWarnings("deprecation")
 public final class CraftServer implements Server {
     private final String serverName = "CloudSpigot"; // CloudSpigot
     private final String serverVersion;
@@ -1185,7 +1228,7 @@ public final class CraftServer implements Server {
 
     @Override
     public void clearRecipes() {
-        CraftingManager.recipes = new RegistryMaterials();
+        CraftingManager.recipes = new RegistryMaterials<MinecraftKey, IRecipe>();
         RecipesFurnace.getInstance().recipes.clear();
         RecipesFurnace.getInstance().customRecipes.clear();
         RecipesFurnace.getInstance().customExperience.clear();
@@ -1193,7 +1236,7 @@ public final class CraftServer implements Server {
 
     @Override
     public void resetRecipes() {
-        CraftingManager.recipes = new RegistryMaterials();
+        CraftingManager.recipes = new RegistryMaterials<MinecraftKey, IRecipe>();
         CraftingManager.init();
         RecipesFurnace.getInstance().recipes = new RecipesFurnace().recipes;
         RecipesFurnace.getInstance().customRecipes.clear();
@@ -1424,7 +1467,6 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Set<String> getIPBans() {
         return new HashSet<String>(Arrays.asList(playerList.getIPBans().getEntries()));
     }
@@ -1447,7 +1489,7 @@ public final class CraftServer implements Server {
     public Set<OfflinePlayer> getBannedPlayers() {
         Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
 
-        for (JsonListEntry entry : playerList.getProfileBans().getValues()) {
+        for (JsonListEntry<?> entry : playerList.getProfileBans().getValues()) {
             result.add(getOfflinePlayer((GameProfile) entry.getKey()));
         }        
 
@@ -1477,7 +1519,7 @@ public final class CraftServer implements Server {
     public Set<OfflinePlayer> getWhitelistedPlayers() {
         Set<OfflinePlayer> result = new LinkedHashSet<OfflinePlayer>();
 
-        for (JsonListEntry entry : playerList.getWhitelist().getValues()) {
+        for (JsonListEntry<?> entry : playerList.getWhitelist().getValues()) {
             result.add(getOfflinePlayer((GameProfile) entry.getKey()));
         }
 
@@ -1488,7 +1530,7 @@ public final class CraftServer implements Server {
     public Set<OfflinePlayer> getOperators() {
         Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
 
-        for (JsonListEntry entry : playerList.getOPs().getValues()) {
+        for (JsonListEntry<?> entry : playerList.getOPs().getValues()) {
             result.add(getOfflinePlayer((GameProfile) entry.getKey()));
         }
 
@@ -1677,7 +1719,7 @@ public final class CraftServer implements Server {
         TabCompleteEvent tabEvent = new TabCompleteEvent(player, message, offers, message.startsWith("/") || forceCommand, pos != null ? MCUtil.toLocation(((CraftWorld) player.getWorld()).getHandle(), pos) : null); // Paper
         getPluginManager().callEvent(tabEvent);
 
-        return tabEvent.isCancelled() ? Collections.EMPTY_LIST : tabEvent.getCompletions();
+        return tabEvent.isCancelled() ? Collections.emptyList() : tabEvent.getCompletions();
     }
 
     public List<String> tabCompleteCommand(Player player, String message, BlockPosition pos) {

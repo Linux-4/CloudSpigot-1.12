@@ -16,7 +16,8 @@ public class SpigotCommand extends Command {
         this.setPermission("bukkit.command.spigot");
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         if (!testPermission(sender)) return true;
 
