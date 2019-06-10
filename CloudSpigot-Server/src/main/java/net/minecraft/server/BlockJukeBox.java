@@ -10,14 +10,14 @@ public class BlockJukeBox extends BlockTileEntity {
 
     protected BlockJukeBox() {
         super(Material.WOOD, MaterialMapColor.m);
-        this.w(this.blockStateList.getBlockData().set(BlockJukeBox.HAS_RECORD, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockJukeBox.HAS_RECORD, false));
         this.a(CreativeModeTab.c);
     }
 
     public boolean interact(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman, EnumHand enumhand, EnumDirection enumdirection, float f, float f1, float f2) {
         if (((Boolean) iblockdata.get(BlockJukeBox.HAS_RECORD)).booleanValue()) {
             this.dropRecord(world, blockposition, iblockdata);
-            iblockdata = iblockdata.set(BlockJukeBox.HAS_RECORD, Boolean.valueOf(false));
+            iblockdata = iblockdata.set(BlockJukeBox.HAS_RECORD, false);
             world.setTypeAndData(blockposition, iblockdata, 2);
             return true;
         } else {
@@ -30,7 +30,7 @@ public class BlockJukeBox extends BlockTileEntity {
 
         if (tileentity instanceof BlockJukeBox.TileEntityRecordPlayer) {
             ((BlockJukeBox.TileEntityRecordPlayer) tileentity).setRecord(itemstack.cloneItemStack());
-            world.setTypeAndData(blockposition, iblockdata.set(BlockJukeBox.HAS_RECORD, Boolean.valueOf(true)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockJukeBox.HAS_RECORD, true), 2);
         }
     }
 

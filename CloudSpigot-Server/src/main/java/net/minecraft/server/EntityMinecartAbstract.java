@@ -84,7 +84,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
         this.datawatcher.register(EntityMinecartAbstract.c, Float.valueOf(0.0F));
         this.datawatcher.register(EntityMinecartAbstract.d, Integer.valueOf(0));
         this.datawatcher.register(EntityMinecartAbstract.e, Integer.valueOf(6));
-        this.datawatcher.register(EntityMinecartAbstract.f, Boolean.valueOf(false));
+        this.datawatcher.register(EntityMinecartAbstract.f, false);
     }
 
     @Nullable

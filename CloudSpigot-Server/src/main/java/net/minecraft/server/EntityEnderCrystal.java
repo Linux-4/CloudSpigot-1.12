@@ -32,7 +32,7 @@ public class EntityEnderCrystal extends Entity {
 
     protected void i() {
         this.getDataWatcher().register(EntityEnderCrystal.b, Optional.absent());
-        this.getDataWatcher().register(EntityEnderCrystal.c, Boolean.valueOf(true));
+        this.getDataWatcher().register(EntityEnderCrystal.c, true);
     }
 
     public void B_() {

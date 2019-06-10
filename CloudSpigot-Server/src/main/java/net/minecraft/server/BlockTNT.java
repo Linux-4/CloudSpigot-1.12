@@ -6,14 +6,14 @@ public class BlockTNT extends Block {
 
     public BlockTNT() {
         super(Material.TNT);
-        this.w(this.blockStateList.getBlockData().set(BlockTNT.EXPLODE, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockTNT.EXPLODE, false));
         this.a(CreativeModeTab.d);
     }
 
     public void onPlace(World world, BlockPosition blockposition, IBlockData iblockdata) {
         super.onPlace(world, blockposition, iblockdata);
         if (world.isBlockIndirectlyPowered(blockposition)) {
-            this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+            this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, true));
             world.setAir(blockposition);
         }
 
@@ -21,7 +21,7 @@ public class BlockTNT extends Block {
 
     public void a(IBlockData iblockdata, World world, BlockPosition blockposition, Block block, BlockPosition blockposition1) {
         if (world.isBlockIndirectlyPowered(blockposition)) {
-            this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+            this.postBreak(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, true));
             world.setAir(blockposition);
         }
 
@@ -56,7 +56,7 @@ public class BlockTNT extends Block {
         ItemStack itemstack = entityhuman.b(enumhand);
 
         if (!itemstack.isEmpty() && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
-            this.a(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, Boolean.valueOf(true)), (EntityLiving) entityhuman);
+            this.a(world, blockposition, iblockdata.set(BlockTNT.EXPLODE, true), (EntityLiving) entityhuman);
             world.setTypeAndData(blockposition, Blocks.AIR.getBlockData(), 11);
             if (itemstack.getItem() == Items.FLINT_AND_STEEL) {
                 itemstack.damage(1, entityhuman);
@@ -80,7 +80,7 @@ public class BlockTNT extends Block {
                     return;
                 }
                 // CraftBukkit end
-                this.a(world, blockposition, world.getType(blockposition).set(BlockTNT.EXPLODE, Boolean.valueOf(true)), entityarrow.shooter instanceof EntityLiving ? (EntityLiving) entityarrow.shooter : null);
+                this.a(world, blockposition, world.getType(blockposition).set(BlockTNT.EXPLODE, true), entityarrow.shooter instanceof EntityLiving ? (EntityLiving) entityarrow.shooter : null);
                 world.setAir(blockposition);
             }
         }

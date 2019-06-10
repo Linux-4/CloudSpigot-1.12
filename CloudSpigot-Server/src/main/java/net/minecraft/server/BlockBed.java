@@ -12,7 +12,7 @@ public class BlockBed extends BlockFacingHorizontal implements ITileEntity {
 
     public BlockBed() {
         super(Material.CLOTH);
-        this.w(this.blockStateList.getBlockData().set(BlockBed.PART, BlockBed.EnumBedPart.FOOT).set(BlockBed.OCCUPIED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockBed.PART, BlockBed.EnumBedPart.FOOT).set(BlockBed.OCCUPIED, false));
         this.isTileEntity = true;
     }
 
@@ -51,14 +51,14 @@ public class BlockBed extends BlockFacingHorizontal implements ITileEntity {
                         return true;
                     }
 
-                    iblockdata = iblockdata.set(BlockBed.OCCUPIED, Boolean.valueOf(false));
+                    iblockdata = iblockdata.set(BlockBed.OCCUPIED, false);
                     world.setTypeAndData(blockposition, iblockdata, 4);
                 }
 
                 EntityHuman.EnumBedResult entityhuman_enumbedresult = entityhuman.a(blockposition);
 
                 if (entityhuman_enumbedresult == EntityHuman.EnumBedResult.OK) {
-                    iblockdata = iblockdata.set(BlockBed.OCCUPIED, Boolean.valueOf(true));
+                    iblockdata = iblockdata.set(BlockBed.OCCUPIED, true);
                     world.setTypeAndData(blockposition, iblockdata, 4);
                     return true;
                 } else {

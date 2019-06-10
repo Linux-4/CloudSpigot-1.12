@@ -17,7 +17,7 @@ public class EntityZombieVillager extends EntityZombie {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityZombieVillager.b, Boolean.valueOf(false));
+        this.datawatcher.register(EntityZombieVillager.b, false);
         this.datawatcher.register(EntityZombieVillager.c, Integer.valueOf(0));
     }
 
@@ -105,7 +105,7 @@ public class EntityZombieVillager extends EntityZombie {
     protected void a(@Nullable UUID uuid, int i) {
         this.by = uuid;
         this.conversionTime = i;
-        this.getDataWatcher().set(EntityZombieVillager.b, Boolean.valueOf(true));
+        this.getDataWatcher().set(EntityZombieVillager.b, true);
         this.removeEffect(MobEffects.WEAKNESS);
         this.addEffect(new MobEffect(MobEffects.INCREASE_DAMAGE, i, Math.min(this.world.getDifficulty().a() - 1, 0)));
         this.world.broadcastEntityEffect(this, (byte) 16);

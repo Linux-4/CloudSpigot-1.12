@@ -100,7 +100,7 @@ public class EntityWolf extends EntityTameableAnimal {
     protected void i() {
         super.i();
         this.datawatcher.register(EntityWolf.DATA_HEALTH, Float.valueOf(this.getHealth()));
-        this.datawatcher.register(EntityWolf.bC, Boolean.valueOf(false));
+        this.datawatcher.register(EntityWolf.bC, false);
         this.datawatcher.register(EntityWolf.bD, Integer.valueOf(EnumColor.RED.getInvColorIndex()));
     }
 

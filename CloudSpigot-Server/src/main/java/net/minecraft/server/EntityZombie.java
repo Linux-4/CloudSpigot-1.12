@@ -59,9 +59,9 @@ public class EntityZombie extends EntityMonster {
 
     protected void i() {
         super.i();
-        this.getDataWatcher().register(EntityZombie.bx, Boolean.valueOf(false));
+        this.getDataWatcher().register(EntityZombie.bx, false);
         this.getDataWatcher().register(EntityZombie.by, Integer.valueOf(0));
-        this.getDataWatcher().register(EntityZombie.bz, Boolean.valueOf(false));
+        this.getDataWatcher().register(EntityZombie.bz, false);
     }
 
     public void a(boolean flag) {

@@ -11,7 +11,7 @@ public abstract class EntityHorseChestedAbstract extends EntityHorseAbstract {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityHorseChestedAbstract.bH, Boolean.valueOf(false));
+        this.datawatcher.register(EntityHorseChestedAbstract.bH, false);
     }
 
     protected void initAttributes() {

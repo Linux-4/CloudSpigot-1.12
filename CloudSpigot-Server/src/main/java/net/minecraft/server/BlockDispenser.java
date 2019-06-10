@@ -12,7 +12,7 @@ public class BlockDispenser extends BlockTileEntity {
 
     protected BlockDispenser() {
         super(Material.STONE);
-        this.w(this.blockStateList.getBlockData().set(BlockDispenser.FACING, EnumDirection.NORTH).set(BlockDispenser.TRIGGERED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockDispenser.FACING, EnumDirection.NORTH).set(BlockDispenser.TRIGGERED, false));
         this.a(CreativeModeTab.d);
     }
 
@@ -49,7 +49,7 @@ public class BlockDispenser extends BlockTileEntity {
                 }
             }
 
-            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.FACING, enumdirection).set(BlockDispenser.TRIGGERED, Boolean.valueOf(false)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.FACING, enumdirection).set(BlockDispenser.TRIGGERED, false), 2);
         }
     }
     */
@@ -106,9 +106,9 @@ public class BlockDispenser extends BlockTileEntity {
 
         if (flag && !flag1) {
             world.a(blockposition, (Block) this, this.a(world));
-            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, Boolean.valueOf(true)), 4);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, true), 4);
         } else if (!flag && flag1) {
-            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, Boolean.valueOf(false)), 4);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockDispenser.TRIGGERED, false), 4);
         }
 
     }
@@ -125,7 +125,7 @@ public class BlockDispenser extends BlockTileEntity {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.getBlockData().set(BlockDispenser.FACING, EnumDirection.a(blockposition, entityliving)).set(BlockDispenser.TRIGGERED, Boolean.valueOf(false));
+        return this.getBlockData().set(BlockDispenser.FACING, EnumDirection.a(blockposition, entityliving)).set(BlockDispenser.TRIGGERED, false);
     }
 
     public void postPlace(World world, BlockPosition blockposition, IBlockData iblockdata, EntityLiving entityliving, ItemStack itemstack) {

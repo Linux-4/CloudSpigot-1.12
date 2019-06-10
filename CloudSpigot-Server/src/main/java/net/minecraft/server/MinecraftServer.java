@@ -1337,7 +1337,7 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
 
 	public void a(MojangStatisticsGenerator mojangstatisticsgenerator) {
 		/*
-		 * mojangstatisticsgenerator.a("whitelist_enabled", Boolean.valueOf(false));
+		 * mojangstatisticsgenerator.a("whitelist_enabled", false);
 		 * mojangstatisticsgenerator.a("whitelist_count", Integer.valueOf(0)); if
 		 * (this.v != null) { mojangstatisticsgenerator.a("players_current",
 		 * Integer.valueOf(this.H())); mojangstatisticsgenerator.a("players_max",

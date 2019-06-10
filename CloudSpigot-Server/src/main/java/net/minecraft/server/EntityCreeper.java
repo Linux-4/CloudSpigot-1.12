@@ -57,8 +57,8 @@ public class EntityCreeper extends EntityMonster {
     protected void i() {
         super.i();
         this.datawatcher.register(EntityCreeper.a, Integer.valueOf(-1));
-        this.datawatcher.register(EntityCreeper.b, Boolean.valueOf(false));
-        this.datawatcher.register(EntityCreeper.c, Boolean.valueOf(false));
+        this.datawatcher.register(EntityCreeper.b, false);
+        this.datawatcher.register(EntityCreeper.c, false);
     }
 
     public static void a(DataConverterManager dataconvertermanager) {
@@ -213,7 +213,7 @@ public class EntityCreeper extends EntityMonster {
                 this.ds();
             } else {
                 fuseTicks = 0;
-                this.datawatcher.set(isIgnitedDW, Boolean.valueOf(false)); // Paper
+                this.datawatcher.set(isIgnitedDW, false); // Paper
             }
             // CraftBukkit end
         }
@@ -250,7 +250,7 @@ public class EntityCreeper extends EntityMonster {
     }
 
     public void do_() {
-        this.datawatcher.set(EntityCreeper.c, Boolean.valueOf(true));
+        this.datawatcher.set(EntityCreeper.c, true);
     }
 
     public boolean canCauseHeadDrop() {

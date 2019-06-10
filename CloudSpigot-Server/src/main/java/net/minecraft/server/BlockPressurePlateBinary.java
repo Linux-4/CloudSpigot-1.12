@@ -12,7 +12,7 @@ public class BlockPressurePlateBinary extends BlockPressurePlateAbstract {
 
     protected BlockPressurePlateBinary(Material material, BlockPressurePlateBinary.EnumMobType blockpressureplatebinary_enummobtype) {
         super(material);
-        this.w(this.blockStateList.getBlockData().set(BlockPressurePlateBinary.POWERED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockPressurePlateBinary.POWERED, false));
         this.e = blockpressureplatebinary_enummobtype;
     }
 

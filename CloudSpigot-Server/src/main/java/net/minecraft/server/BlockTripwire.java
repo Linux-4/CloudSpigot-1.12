@@ -21,7 +21,7 @@ public class BlockTripwire extends Block {
 
     public BlockTripwire() {
         super(Material.ORIENTABLE);
-        this.w(this.blockStateList.getBlockData().set(BlockTripwire.POWERED, Boolean.valueOf(false)).set(BlockTripwire.ATTACHED, Boolean.valueOf(false)).set(BlockTripwire.DISARMED, Boolean.valueOf(false)).set(BlockTripwire.NORTH, Boolean.valueOf(false)).set(BlockTripwire.EAST, Boolean.valueOf(false)).set(BlockTripwire.SOUTH, Boolean.valueOf(false)).set(BlockTripwire.WEST, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockTripwire.POWERED, false).set(BlockTripwire.ATTACHED, false).set(BlockTripwire.DISARMED, false).set(BlockTripwire.NORTH, false).set(BlockTripwire.EAST, false).set(BlockTripwire.SOUTH, false).set(BlockTripwire.WEST, false));
         this.a(true);
     }
 
@@ -60,13 +60,13 @@ public class BlockTripwire extends Block {
     }
 
     public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
-        this.e(world, blockposition, iblockdata.set(BlockTripwire.POWERED, Boolean.valueOf(true)));
+        this.e(world, blockposition, iblockdata.set(BlockTripwire.POWERED, true));
     }
 
     public void a(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman) {
         if (!world.isClientSide) {
             if (!entityhuman.getItemInMainHand().isEmpty() && entityhuman.getItemInMainHand().getItem() == Items.SHEARS) {
-                world.setTypeAndData(blockposition, iblockdata.set(BlockTripwire.DISARMED, Boolean.valueOf(true)), 4);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockTripwire.DISARMED, true), 4);
             }
 
         }

@@ -33,7 +33,7 @@ public class EntityWitch extends EntityMonster implements IRangedEntity {
 
     protected void i() {
         super.i();
-        this.getDataWatcher().register(EntityWitch.c, Boolean.valueOf(false));
+        this.getDataWatcher().register(EntityWitch.c, false);
     }
 
     protected SoundEffect F() {

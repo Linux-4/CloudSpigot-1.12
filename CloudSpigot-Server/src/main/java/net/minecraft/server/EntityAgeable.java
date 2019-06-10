@@ -87,7 +87,7 @@ public abstract class EntityAgeable extends EntityCreature {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityAgeable.bx, Boolean.valueOf(false));
+        this.datawatcher.register(EntityAgeable.bx, false);
     }
 
     public int getAge() {

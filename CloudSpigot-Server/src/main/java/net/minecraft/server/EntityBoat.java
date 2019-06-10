@@ -82,7 +82,7 @@ public class EntityBoat extends Entity {
         for (int j = 0; j < i; ++j) {
             DataWatcherObject datawatcherobject = adatawatcherobject[j];
 
-            this.datawatcher.register(datawatcherobject, Boolean.valueOf(false));
+            this.datawatcher.register(datawatcherobject, false);
         }
 
     }

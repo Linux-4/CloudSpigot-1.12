@@ -96,7 +96,7 @@ public class EntityWitherSkull extends EntityFireball {
     }
 
     protected void i() {
-        this.datawatcher.register(EntityWitherSkull.e, Boolean.valueOf(false));
+        this.datawatcher.register(EntityWitherSkull.e, false);
     }
 
     public boolean isCharged() {

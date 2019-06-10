@@ -80,11 +80,11 @@ public class EntityEnderman extends EntityMonster {
 
         if (entityliving == null) {
             this.bA = 0;
-            this.datawatcher.set(EntityEnderman.by, Boolean.valueOf(false));
+            this.datawatcher.set(EntityEnderman.by, false);
             attributeinstance.c(EntityEnderman.b);
         } else {
             this.bA = this.ticksLived;
-            this.datawatcher.set(EntityEnderman.by, Boolean.valueOf(true));
+            this.datawatcher.set(EntityEnderman.by, true);
             if (!attributeinstance.a(EntityEnderman.b)) {
                 attributeinstance.b(EntityEnderman.b);
             }
@@ -96,7 +96,7 @@ public class EntityEnderman extends EntityMonster {
     protected void i() {
         super.i();
         this.datawatcher.register(EntityEnderman.bx, Optional.absent());
-        this.datawatcher.register(EntityEnderman.by, Boolean.valueOf(false));
+        this.datawatcher.register(EntityEnderman.by, false);
     }
 
     public void p() {

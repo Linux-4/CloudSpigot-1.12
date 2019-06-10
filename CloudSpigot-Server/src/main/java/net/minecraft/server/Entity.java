@@ -269,10 +269,10 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 		this.datawatcher = new DataWatcher(this);
 		this.datawatcher.register(Entity.Z, Byte.valueOf((byte) 0));
 		this.datawatcher.register(Entity.aA, Integer.valueOf(300));
-		this.datawatcher.register(Entity.aC, Boolean.valueOf(false));
+		this.datawatcher.register(Entity.aC, false);
 		this.datawatcher.register(Entity.aB, "");
-		this.datawatcher.register(Entity.aD, Boolean.valueOf(false));
-		this.datawatcher.register(Entity.aE, Boolean.valueOf(false));
+		this.datawatcher.register(Entity.aD, false);
+		this.datawatcher.register(Entity.aE, false);
 		this.i();
 	}
 

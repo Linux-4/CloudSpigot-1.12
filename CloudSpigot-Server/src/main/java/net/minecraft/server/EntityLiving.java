@@ -159,7 +159,7 @@ public abstract class EntityLiving extends Entity {
     protected void i() {
         this.datawatcher.register(EntityLiving.at, Byte.valueOf((byte) 0));
         this.datawatcher.register(EntityLiving.g, Integer.valueOf(0));
-        this.datawatcher.register(EntityLiving.h, Boolean.valueOf(false));
+        this.datawatcher.register(EntityLiving.h, false);
         this.datawatcher.register(EntityLiving.br, Integer.valueOf(0));
         this.datawatcher.register(EntityLiving.HEALTH, Float.valueOf(1.0F));
     }
@@ -653,7 +653,7 @@ public abstract class EntityLiving extends Entity {
     }
 
     protected void bY() {
-        this.datawatcher.set(EntityLiving.h, Boolean.valueOf(false));
+        this.datawatcher.set(EntityLiving.h, false);
         this.datawatcher.set(EntityLiving.g, Integer.valueOf(0));
     }
 

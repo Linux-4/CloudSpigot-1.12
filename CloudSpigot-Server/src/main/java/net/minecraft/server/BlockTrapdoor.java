@@ -17,7 +17,7 @@ public class BlockTrapdoor extends Block {
 
     protected BlockTrapdoor(Material material) {
         super(material);
-        this.w(this.blockStateList.getBlockData().set(BlockTrapdoor.FACING, EnumDirection.NORTH).set(BlockTrapdoor.OPEN, Boolean.valueOf(false)).set(BlockTrapdoor.HALF, BlockTrapdoor.EnumTrapdoorHalf.BOTTOM));
+        this.w(this.blockStateList.getBlockData().set(BlockTrapdoor.FACING, EnumDirection.NORTH).set(BlockTrapdoor.OPEN, false).set(BlockTrapdoor.HALF, BlockTrapdoor.EnumTrapdoorHalf.BOTTOM));
         this.a(CreativeModeTab.d);
     }
 
@@ -120,15 +120,15 @@ public class BlockTrapdoor extends Block {
         IBlockData iblockdata = this.getBlockData();
 
         if (enumdirection.k().c()) {
-            iblockdata = iblockdata.set(BlockTrapdoor.FACING, enumdirection).set(BlockTrapdoor.OPEN, Boolean.valueOf(false));
+            iblockdata = iblockdata.set(BlockTrapdoor.FACING, enumdirection).set(BlockTrapdoor.OPEN, false);
             iblockdata = iblockdata.set(BlockTrapdoor.HALF, f1 > 0.5F ? BlockTrapdoor.EnumTrapdoorHalf.TOP : BlockTrapdoor.EnumTrapdoorHalf.BOTTOM);
         } else {
-            iblockdata = iblockdata.set(BlockTrapdoor.FACING, entityliving.getDirection().opposite()).set(BlockTrapdoor.OPEN, Boolean.valueOf(false));
+            iblockdata = iblockdata.set(BlockTrapdoor.FACING, entityliving.getDirection().opposite()).set(BlockTrapdoor.OPEN, false);
             iblockdata = iblockdata.set(BlockTrapdoor.HALF, enumdirection == EnumDirection.UP ? BlockTrapdoor.EnumTrapdoorHalf.BOTTOM : BlockTrapdoor.EnumTrapdoorHalf.TOP);
         }
 
         if (world.isBlockIndirectlyPowered(blockposition)) {
-            iblockdata = iblockdata.set(BlockTrapdoor.OPEN, Boolean.valueOf(true));
+            iblockdata = iblockdata.set(BlockTrapdoor.OPEN, true);
         }
 
         return iblockdata;

@@ -30,7 +30,7 @@ public class BlockPiston extends BlockDirectional {
 
     public BlockPiston(boolean flag) {
         super(Material.PISTON);
-        this.w(this.blockStateList.getBlockData().set(BlockPiston.FACING, EnumDirection.NORTH).set(BlockPiston.EXTENDED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockPiston.FACING, EnumDirection.NORTH).set(BlockPiston.EXTENDED, false));
         this.sticky = flag;
         this.a(SoundEffectType.d);
         this.c(0.5F);
@@ -103,7 +103,7 @@ public class BlockPiston extends BlockDirectional {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.getBlockData().set(BlockPiston.FACING, EnumDirection.a(blockposition, entityliving)).set(BlockPiston.EXTENDED, Boolean.valueOf(false));
+        return this.getBlockData().set(BlockPiston.FACING, EnumDirection.a(blockposition, entityliving)).set(BlockPiston.EXTENDED, false);
     }
 
     private void e(World world, BlockPosition blockposition, IBlockData iblockdata) {
@@ -173,7 +173,7 @@ public class BlockPiston extends BlockDirectional {
             boolean flag = this.a(world, blockposition, enumdirection);
 
             if (flag && i == 1) {
-                world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.valueOf(true)), 2);
+                world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, true), 2);
                 return false;
             }
 
@@ -187,7 +187,7 @@ public class BlockPiston extends BlockDirectional {
                 return false;
             }
 
-            world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, Boolean.valueOf(true)), 3);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockPiston.EXTENDED, true), 3);
             world.a((EntityHuman) null, blockposition, SoundEffects.fu, SoundCategory.BLOCKS, 0.5F, world.random.nextFloat() * 0.25F + 0.6F);
         } else if (i == 1) {
             TileEntity tileentity = world.getTileEntity(blockposition.shift(enumdirection));

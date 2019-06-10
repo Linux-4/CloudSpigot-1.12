@@ -52,7 +52,7 @@ public class EntityGhast extends EntityFlying implements IMonster {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityGhast.a, Boolean.valueOf(false));
+        this.datawatcher.register(EntityGhast.a, false);
     }
 
     protected void initAttributes() {

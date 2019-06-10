@@ -46,7 +46,7 @@ public abstract class EntitySkeletonAbstract extends EntityMonster implements IR
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntitySkeletonAbstract.a, Boolean.valueOf(false));
+        this.datawatcher.register(EntitySkeletonAbstract.a, false);
     }
 
     protected void a(BlockPosition blockposition, Block block) {

@@ -1292,7 +1292,7 @@ public abstract class EntityHuman extends EntityLiving {
         IBlockData iblockdata = this.world.getType(this.bedPosition);
 
         if (this.bedPosition != null && iblockdata.getBlock() == Blocks.BED) {
-            this.world.setTypeAndData(this.bedPosition, iblockdata.set(BlockBed.OCCUPIED, Boolean.valueOf(false)), 4);
+            this.world.setTypeAndData(this.bedPosition, iblockdata.set(BlockBed.OCCUPIED, false), 4);
             BlockPosition blockposition = BlockBed.a(this.world, this.bedPosition, 0);
 
             if (blockposition == null) {

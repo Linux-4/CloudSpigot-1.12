@@ -9,7 +9,7 @@ public class BlockObserver extends BlockDirectional {
 
     public BlockObserver() {
         super(Material.STONE);
-        this.w(this.blockStateList.getBlockData().set(BlockObserver.FACING, EnumDirection.SOUTH).set(BlockObserver.a, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockObserver.FACING, EnumDirection.SOUTH).set(BlockObserver.a, false));
         this.a(CreativeModeTab.d);
     }
 
@@ -32,14 +32,14 @@ public class BlockObserver extends BlockDirectional {
                 return;
             }
             // Paper end
-            world.setTypeAndData(blockposition, iblockdata.set(BlockObserver.a, Boolean.valueOf(false)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockObserver.a, false), 2);
         } else {
             // Paper start
             if (CraftEventFactory.callRedstoneChange(world, blockposition.getX(), blockposition.getY(), blockposition.getZ(), 0, 15).getNewCurrent() != 15) {
                 return;
             }
             // Paper end
-            world.setTypeAndData(blockposition, iblockdata.set(BlockObserver.a, Boolean.valueOf(true)), 2);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockObserver.a, true), 2);
             world.a(blockposition, (Block) this, 2);
         }
 
@@ -97,7 +97,7 @@ public class BlockObserver extends BlockDirectional {
 
     public void remove(World world, BlockPosition blockposition, IBlockData iblockdata) {
         if (((Boolean) iblockdata.get(BlockObserver.a)).booleanValue() && world.b(blockposition, (Block) this)) {
-            this.e(world, blockposition, iblockdata.set(BlockObserver.a, Boolean.valueOf(false)));
+            this.e(world, blockposition, iblockdata.set(BlockObserver.a, false));
         }
 
     }

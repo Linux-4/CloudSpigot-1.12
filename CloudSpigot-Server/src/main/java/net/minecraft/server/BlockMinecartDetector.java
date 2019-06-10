@@ -23,7 +23,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
 
     public BlockMinecartDetector() {
         super(true);
-        this.w(this.blockStateList.getBlockData().set(BlockMinecartDetector.POWERED, Boolean.valueOf(false)).set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_SOUTH));
+        this.w(this.blockStateList.getBlockData().set(BlockMinecartDetector.POWERED, false).set(BlockMinecartDetector.SHAPE, BlockMinecartTrackAbstract.EnumTrackPosition.NORTH_SOUTH));
         this.a(true);
     }
 
@@ -80,7 +80,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         // CraftBukkit end
 
         if (flag1 && !flag) {
-            world.setTypeAndData(blockposition, iblockdata.set(BlockMinecartDetector.POWERED, Boolean.valueOf(true)), 3);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockMinecartDetector.POWERED, true), 3);
             this.b(world, blockposition, iblockdata, true);
             world.applyPhysics(blockposition, this, false);
             world.applyPhysics(blockposition.down(), this, false);
@@ -88,7 +88,7 @@ public class BlockMinecartDetector extends BlockMinecartTrackAbstract {
         }
 
         if (!flag1 && flag) {
-            world.setTypeAndData(blockposition, iblockdata.set(BlockMinecartDetector.POWERED, Boolean.valueOf(false)), 3);
+            world.setTypeAndData(blockposition, iblockdata.set(BlockMinecartDetector.POWERED, false), 3);
             this.b(world, blockposition, iblockdata, false);
             world.applyPhysics(blockposition, this, false);
             world.applyPhysics(blockposition.down(), this, false);

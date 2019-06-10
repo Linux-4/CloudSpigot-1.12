@@ -57,7 +57,7 @@ public class EntityAreaEffectCloud extends Entity {
     protected void i() {
         this.getDataWatcher().register(EntityAreaEffectCloud.b, Integer.valueOf(0));
         this.getDataWatcher().register(EntityAreaEffectCloud.a, Float.valueOf(0.5F));
-        this.getDataWatcher().register(EntityAreaEffectCloud.c, Boolean.valueOf(false));
+        this.getDataWatcher().register(EntityAreaEffectCloud.c, false);
         this.getDataWatcher().register(EntityAreaEffectCloud.d, Integer.valueOf(EnumParticle.SPELL_MOB.c()));
         this.getDataWatcher().register(EntityAreaEffectCloud.e, Integer.valueOf(0));
         this.getDataWatcher().register(EntityAreaEffectCloud.f, Integer.valueOf(0));

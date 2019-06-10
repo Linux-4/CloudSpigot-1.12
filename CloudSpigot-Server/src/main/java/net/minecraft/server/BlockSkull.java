@@ -14,6 +14,7 @@ public class BlockSkull extends BlockTileEntity {
 
 	public static final BlockStateDirection FACING = BlockDirectional.FACING;
 	public static final BlockStateBoolean NODROP = BlockStateBoolean.of("nodrop");
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static final Predicate<ShapeDetectorBlock> B = new Predicate() {
 		public boolean a(@Nullable ShapeDetectorBlock shapedetectorblock) {
 			return shapedetectorblock.a() != null && shapedetectorblock.a().getBlock() == Blocks.SKULL
@@ -36,7 +37,7 @@ public class BlockSkull extends BlockTileEntity {
 	protected BlockSkull() {
 		super(Material.ORIENTABLE);
 		this.w(this.blockStateList.getBlockData().set(BlockSkull.FACING, EnumDirection.NORTH).set(BlockSkull.NODROP,
-				Boolean.valueOf(false)));
+				false));
 	}
 
 	public String getName() {
@@ -74,7 +75,7 @@ public class BlockSkull extends BlockTileEntity {
 	public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f,
 			float f1, float f2, int i, EntityLiving entityliving) {
 		return this.getBlockData().set(BlockSkull.FACING, entityliving.getDirection()).set(BlockSkull.NODROP,
-				Boolean.valueOf(false));
+				false);
 	}
 
 	public TileEntity a(World world, int i) {
@@ -118,7 +119,7 @@ public class BlockSkull extends BlockTileEntity {
 	// CraftBukkit end
 	public void a(World world, BlockPosition blockposition, IBlockData iblockdata, EntityHuman entityhuman) {
 		if (entityhuman.abilities.canInstantlyBuild) {
-			iblockdata = iblockdata.set(BlockSkull.NODROP, Boolean.valueOf(true));
+			iblockdata = iblockdata.set(BlockSkull.NODROP, true);
 			world.setTypeAndData(blockposition, iblockdata, 4);
 		}
 
@@ -157,9 +158,9 @@ public class BlockSkull extends BlockTileEntity {
 
 					// CraftBukkit start
 					// world.setTypeAndData(shapedetectorblock.getPosition(),
-					// shapedetectorblock.a().set(BlockSkull.NODROP, Boolean.valueOf(true)), 2);
+					// shapedetectorblock.a().set(BlockSkull.NODROP, true), 2);
 					BlockPosition pos = shapedetectorblock.getPosition();
-					IBlockData data = shapedetectorblock.a().set(BlockSkull.NODROP, Boolean.valueOf(true));
+					IBlockData data = shapedetectorblock.a().set(BlockSkull.NODROP, true);
 					blockList.setTypeAndData(pos.getX(), pos.getY(), pos.getZ(), data.getBlock(),
 							data.getBlock().toLegacyData(data), 2);
 					// CraftBukkit end

@@ -14,7 +14,7 @@ public class BlockCommand extends BlockTileEntity {
 
     public BlockCommand(MaterialMapColor materialmapcolor) {
         super(Material.ORE, materialmapcolor);
-        this.w(this.blockStateList.getBlockData().set(BlockCommand.a, EnumDirection.NORTH).set(BlockCommand.b, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockCommand.a, EnumDirection.NORTH).set(BlockCommand.b, false));
     }
 
     public TileEntity a(World world, int i) {
@@ -183,7 +183,7 @@ public class BlockCommand extends BlockTileEntity {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        return this.getBlockData().set(BlockCommand.a, EnumDirection.a(blockposition, entityliving)).set(BlockCommand.b, Boolean.valueOf(false));
+        return this.getBlockData().set(BlockCommand.a, EnumDirection.a(blockposition, entityliving)).set(BlockCommand.b, false);
     }
 
     private static void c(World world, BlockPosition blockposition, EnumDirection enumdirection) {

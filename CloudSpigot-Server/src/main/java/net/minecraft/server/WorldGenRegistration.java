@@ -306,10 +306,10 @@ public class WorldGenRegistration {
                 this.a(world, structureboundingbox, 7, -2, 1, 9, -2, 1, false, random, WorldGenRegistration.WorldGenJungleTemple.i);
                 this.a(world, structureboundingbox, 6, -3, 1, 6, -3, 1, false, random, WorldGenRegistration.WorldGenJungleTemple.i);
                 this.a(world, structureboundingbox, 6, -1, 1, 6, -1, 1, false, random, WorldGenRegistration.WorldGenJungleTemple.i);
-                this.a(world, Blocks.TRIPWIRE_HOOK.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.EAST).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(true)), 1, -3, 8, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE_HOOK.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.WEST).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(true)), 4, -3, 8, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 2, -3, 8, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 3, -3, 8, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE_HOOK.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.EAST).set(BlockTripwireHook.ATTACHED, true), 1, -3, 8, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE_HOOK.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.WEST).set(BlockTripwireHook.ATTACHED, true), 4, -3, 8, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 2, -3, 8, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 3, -3, 8, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 5, -3, 7, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 5, -3, 6, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 5, -3, 5, structureboundingbox);
@@ -323,12 +323,12 @@ public class WorldGenRegistration {
                     this.g = this.a(world, structureboundingbox, random, 3, -2, 1, EnumDirection.NORTH, LootTables.m);
                 }
 
-                this.a(world, Blocks.VINE.getBlockData().set(BlockVine.SOUTH, Boolean.valueOf(true)), 3, -2, 2, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE_HOOK.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.NORTH).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(true)), 7, -3, 1, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE_HOOK.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.SOUTH).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(true)), 7, -3, 5, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 7, -3, 2, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 7, -3, 3, structureboundingbox);
-                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, Boolean.valueOf(true)), 7, -3, 4, structureboundingbox);
+                this.a(world, Blocks.VINE.getBlockData().set(BlockVine.SOUTH, true), 3, -2, 2, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE_HOOK.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.NORTH).set(BlockTripwireHook.ATTACHED, true), 7, -3, 1, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE_HOOK.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.SOUTH).set(BlockTripwireHook.ATTACHED, true), 7, -3, 5, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 7, -3, 2, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 7, -3, 3, structureboundingbox);
+                this.a(world, Blocks.TRIPWIRE.getBlockData().set(BlockTripwire.ATTACHED, true), 7, -3, 4, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 8, -3, 6, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 9, -3, 6, structureboundingbox);
                 this.a(world, Blocks.REDSTONE_WIRE.getBlockData(), 9, -3, 5, structureboundingbox);
@@ -338,8 +338,8 @@ public class WorldGenRegistration {
                     this.h = this.a(world, structureboundingbox, random, 9, -2, 3, EnumDirection.WEST, LootTables.m);
                 }
 
-                this.a(world, Blocks.VINE.getBlockData().set(BlockVine.EAST, Boolean.valueOf(true)), 8, -1, 3, structureboundingbox);
-                this.a(world, Blocks.VINE.getBlockData().set(BlockVine.EAST, Boolean.valueOf(true)), 8, -2, 3, structureboundingbox);
+                this.a(world, Blocks.VINE.getBlockData().set(BlockVine.EAST, true), 8, -1, 3, structureboundingbox);
+                this.a(world, Blocks.VINE.getBlockData().set(BlockVine.EAST, true), 8, -2, 3, structureboundingbox);
                 if (!this.e) {
                     this.e = this.a(world, structureboundingbox, random, 8, -3, 3, LootTables.l);
                 }

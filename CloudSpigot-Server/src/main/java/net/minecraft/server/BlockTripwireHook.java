@@ -19,7 +19,7 @@ public class BlockTripwireHook extends Block {
 
     public BlockTripwireHook() {
         super(Material.ORIENTABLE);
-        this.w(this.blockStateList.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.NORTH).set(BlockTripwireHook.POWERED, Boolean.valueOf(false)).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(false)));
+        this.w(this.blockStateList.getBlockData().set(BlockTripwireHook.FACING, EnumDirection.NORTH).set(BlockTripwireHook.POWERED, false).set(BlockTripwireHook.ATTACHED, false));
         this.a(CreativeModeTab.d);
         this.a(true);
     }
@@ -80,7 +80,7 @@ public class BlockTripwireHook extends Block {
     }
 
     public IBlockData getPlacedState(World world, BlockPosition blockposition, EnumDirection enumdirection, float f, float f1, float f2, int i, EntityLiving entityliving) {
-        IBlockData iblockdata = this.getBlockData().set(BlockTripwireHook.POWERED, Boolean.valueOf(false)).set(BlockTripwireHook.ATTACHED, Boolean.valueOf(false));
+        IBlockData iblockdata = this.getBlockData().set(BlockTripwireHook.POWERED, false).set(BlockTripwireHook.ATTACHED, false);
 
         if (enumdirection.k().c()) {
             iblockdata = iblockdata.set(BlockTripwireHook.FACING, enumdirection);

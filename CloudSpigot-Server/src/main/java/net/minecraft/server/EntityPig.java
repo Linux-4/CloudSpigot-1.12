@@ -67,7 +67,7 @@ public class EntityPig extends EntityAnimal {
 
     protected void i() {
         super.i();
-        this.datawatcher.register(EntityPig.bx, Boolean.valueOf(false));
+        this.datawatcher.register(EntityPig.bx, false);
         this.datawatcher.register(EntityPig.by, Integer.valueOf(0));
     }
 
@@ -147,9 +147,9 @@ public class EntityPig extends EntityAnimal {
 
     public void setSaddle(boolean flag) {
         if (flag) {
-            this.datawatcher.set(EntityPig.bx, Boolean.valueOf(true));
+            this.datawatcher.set(EntityPig.bx, true);
         } else {
-            this.datawatcher.set(EntityPig.bx, Boolean.valueOf(false));
+            this.datawatcher.set(EntityPig.bx, false);
         }
 
     }
