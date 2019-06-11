@@ -1144,6 +1144,10 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
 		return this.getPropertyManager().getBoolean("debug", false); // CraftBukkit - don't hardcode
 	}
 
+	public boolean getAnnouncePlayerAchievements() { // CloudSpigot
+		return this.getPropertyManager().getBoolean("announce-player-achievements", false);
+	}
+
 	public void g(String s) {
 		MinecraftServer.LOGGER.error(s);
 	}
