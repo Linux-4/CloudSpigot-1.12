@@ -424,7 +424,7 @@ public class StandardMessenger implements Messenger {
 		validateChannel(channel);
 
 		// CloudSpigot start - kick players with worlddownloader
-		if ("WDL|INIT".equalsIgnoreCase(channel) || "WDL::INIT".equalsIgnoreCase(channel)) {
+		if ("WDL|INIT".equalsIgnoreCase(channel) || "WDL:INIT".equalsIgnoreCase(channel)) {
 			source.kickPlayer("WorldDownloader is not allowed!");
 		}
 		// CloudSpigot end
