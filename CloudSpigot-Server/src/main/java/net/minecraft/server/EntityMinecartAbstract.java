@@ -219,7 +219,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
         // CraftBukkit - handled in postTick
         /*
         if (!this.world.isClientSide && this.world instanceof WorldServer) {
-            this.world.methodProfiler.a("portal");
+            //this.world.methodProfiler.a("portal");
             MinecraftServer minecraftserver = this.world.getMinecraftServer();
 
             i = this.Z();
@@ -255,7 +255,7 @@ public abstract class EntityMinecartAbstract extends Entity implements INamableT
                 --this.portalCooldown;
             }
 
-            this.world.methodProfiler.b();
+            //this.world.methodProfiler.b();
         }
         */
 

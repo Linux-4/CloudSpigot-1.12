@@ -415,7 +415,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 		// No clean way to break out of ticking once the entity has been copied to a new
 		// world, so instead we move the portalling later in the tick cycle
 		if (!this.world.isClientSide && this.world instanceof WorldServer) {
-			this.world.methodProfiler.a("portal");
+			//this.world.methodProfiler.a("portal");
 			if (this.ak) { // CraftBukkit
 				if (!this.isPassenger()) {
 					int i = this.Z();
@@ -447,13 +447,13 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 			}
 
 			this.I();
-			this.world.methodProfiler.b();
+			//this.world.methodProfiler.b();
 		}
 	}
 	// CraftBukkit end
 
 	public void Y() {
-		this.world.methodProfiler.a("entityBaseTick");
+		//this.world.methodProfiler.a("entityBaseTick");
 		if (this.isPassenger() && this.bJ().dead) {
 			this.stopRiding();
 		}
@@ -471,7 +471,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 		// Moved up to postTick
 		/*
 		 * if (!this.world.isClientSide && this.world instanceof WorldServer) {
-		 * this.world.methodProfiler.a("portal"); if (this.ak) { MinecraftServer
+		 * //this.world.methodProfiler.a("portal"); if (this.ak) { MinecraftServer
 		 * minecraftserver = this.world.getMinecraftServer();
 		 * 
 		 * if (minecraftserver.getAllowNether()) { if (!this.isPassenger()) { int i =
@@ -488,7 +488,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 		 * 
 		 * if (this.al < 0) { this.al = 0; } }
 		 * 
-		 * this.I(); this.world.methodProfiler.b(); }
+		 * this.I(); //this.world.methodProfiler.b(); }
 		 */
 
 		this.as();
@@ -528,7 +528,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 		}
 
 		this.justCreated = false;
-		this.world.methodProfiler.b();
+		//this.world.methodProfiler.b();
 	}
 
 	// Paper start - Configurable top of nether void damage
@@ -685,7 +685,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 				}
 			}
 
-			this.world.methodProfiler.a("move");
+			//this.world.methodProfiler.a("move");
 			double d4 = this.locX;
 			double d5 = this.locY;
 			double d6 = this.locZ;
@@ -882,8 +882,8 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 				}
 			}
 
-			this.world.methodProfiler.b();
-			this.world.methodProfiler.a("rest");
+			//this.world.methodProfiler.b();
+			//this.world.methodProfiler.a("rest");
 			this.recalcPosition();
 			this.positionChanged = d7 != d0 || d9 != d2;
 			this.B = d1 != d8; // CraftBukkit - decompile error
@@ -1022,7 +1022,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 				this.fireTicks = -this.getMaxFireTicks();
 			}
 
-			this.world.methodProfiler.b();
+			//this.world.methodProfiler.b();
 		}
 	}
 
@@ -2530,7 +2530,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 	@Nullable
 	public Entity b(int i) {
 		if (!this.world.isClientSide && !this.dead) {
-			this.world.methodProfiler.a("changeDimension");
+			//this.world.methodProfiler.a("changeDimension");
 			MinecraftServer minecraftserver = this.C_();
 			// CraftBukkit start - Move logic into new function
 			// "teleportTo(Location,boolean)"
@@ -2585,7 +2585,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 			// Need to make sure the profiler state is reset afterwards (but we still want
 			// to time the call)
 			Entity entity = this.teleportTo(exit, true);
-			this.world.methodProfiler.b();
+			//this.world.methodProfiler.b();
 			return entity;
 		}
 		return null;
@@ -2607,7 +2607,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 
 			this.world.removeEntity(this); // Paper - Fully remove entity, can't have dupes in the UUID map
 			this.dead = false;
-			this.world.methodProfiler.a("reposition");
+			//this.world.methodProfiler.a("reposition");
 			/*
 			 * CraftBukkit start - Handled in calculateTarget BlockPosition blockposition;
 			 * 
@@ -2640,7 +2640,7 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 			worldserver1.getMinecraftServer().getPlayerList().repositionEntity(this, exit, portal);
 			// worldserver.entityJoinedWorld(this, false); // Handled in repositionEntity
 			// CraftBukkit end
-			this.world.methodProfiler.c("reloading");
+			//this.world.methodProfiler.c("reloading");
 			Entity entity = EntityTypes.a(this.getClass(), (World) worldserver1);
 
 			if (entity != null) {
@@ -2671,10 +2671,10 @@ public abstract class Entity implements ICommandListener, KeyedObject { // Paper
 			}
 
 			this.dead = true;
-			this.world.methodProfiler.b();
+			//this.world.methodProfiler.b();
 			worldserver.m();
 			worldserver1.m();
-			// this.world.methodProfiler.b(); // CraftBukkit: Moved up to keep balanced
+			// //this.world.methodProfiler.b(); // CraftBukkit: Moved up to keep balanced
 			return entity;
 		} else {
 			return null;

@@ -185,13 +185,13 @@ public abstract class EntityInsentient extends EntityLiving {
 
     public void Y() {
         super.Y();
-        this.world.methodProfiler.a("mobBaseTick");
+        //this.world.methodProfiler.a("mobBaseTick");
         if (this.isAlive() && this.random.nextInt(1000) < this.a_++) {
             this.p();
             this.D();
         }
 
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
     }
 
     protected void c(DamageSource damagesource) {
@@ -504,7 +504,7 @@ public abstract class EntityInsentient extends EntityLiving {
 
     public void n() {
         super.n();
-        this.world.methodProfiler.a("looting");
+        //this.world.methodProfiler.a("looting");
         if (!this.world.isClientSide && this.cX() && !this.aU && this.world.getGameRules().getBoolean("mobGriefing")) {
             List list = this.world.a(EntityItem.class, this.getBoundingBox().grow(1.0D, 0.0D, 1.0D));
             Iterator iterator = list.iterator();
@@ -524,7 +524,7 @@ public abstract class EntityInsentient extends EntityLiving {
             }
         }
 
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
     }
 
     protected void a(EntityItem entityitem) {
@@ -652,9 +652,9 @@ public abstract class EntityInsentient extends EntityLiving {
 
     protected final void doTick() {
         ++this.ticksFarFromPlayer;
-        this.world.methodProfiler.a("checkDespawn");
+        //this.world.methodProfiler.a("checkDespawn");
         this.L();
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
         // Spigot Start
         if ( this.fromMobSpawner )
         {
@@ -667,21 +667,21 @@ public abstract class EntityInsentient extends EntityLiving {
             return;
         }
         // Spigot End
-        this.world.methodProfiler.a("sensing");
+        //this.world.methodProfiler.a("sensing");
         this.bw.a();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("targetSelector");
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.a("targetSelector");
         this.targetSelector.a();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("goalSelector");
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.a("goalSelector");
         this.goalSelector.a();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("navigation");
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.a("navigation");
         this.navigation.d();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("mob tick");
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.a("mob tick");
         this.M();
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
         if (this.isPassenger() && this.bJ() instanceof EntityInsentient) {
             EntityInsentient entityinsentient = (EntityInsentient) this.bJ();
 
@@ -689,15 +689,15 @@ public abstract class EntityInsentient extends EntityLiving {
             entityinsentient.getControllerMove().a(this.getControllerMove());
         }
 
-        this.world.methodProfiler.a("controls");
-        this.world.methodProfiler.a("move");
+        //this.world.methodProfiler.a("controls");
+        //this.world.methodProfiler.a("move");
         this.moveController.a();
-        this.world.methodProfiler.c("look");
+        //this.world.methodProfiler.c("look");
         this.lookController.a();
-        this.world.methodProfiler.c("jump");
+        //this.world.methodProfiler.c("jump");
         this.g.b();
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
     }
 
     protected void M() {}

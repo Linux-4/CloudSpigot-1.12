@@ -885,7 +885,7 @@ public abstract class PlayerList {
         float f = entity.yaw;
         */
 
-        worldserver.methodProfiler.a("moving");
+        //worldserver.methodProfiler.a("moving");
         if (worldserver1.dimension == -1) {
             d0 = MathHelper.a(d0 / d2, worldserver1.getWorldBorder().b()+ 16.0D, worldserver1.getWorldBorder().d() - 16.0D);
             d1 = MathHelper.a(d1 / d2, worldserver1.getWorldBorder().c() + 16.0D, worldserver1.getWorldBorder().e() - 16.0D);
@@ -926,9 +926,9 @@ public abstract class PlayerList {
             */
         }
 
-        worldserver.methodProfiler.b();
+        //worldserver.methodProfiler.b();
         if (i != 1) {
-            worldserver.methodProfiler.a("placing");
+            //worldserver.methodProfiler.a("placing");
             d0 = (double) MathHelper.clamp((int) d0, -29999872, 29999872);
             d1 = (double) MathHelper.clamp((int) d1, -29999872, 29999872);
             /*
@@ -940,7 +940,7 @@ public abstract class PlayerList {
             }
             */
 
-            worldserver.methodProfiler.b();
+            //worldserver.methodProfiler.b();
         }
 
         // entity.spawnIn(worldserver1);
@@ -960,7 +960,7 @@ public abstract class PlayerList {
         float f = entity.yaw;
         */
 
-        worldserver.methodProfiler.a("moving");
+        //worldserver.methodProfiler.a("moving");
         entity.setPositionRotation(exit.getX(), exit.getY(), exit.getZ(), exit.getYaw(), exit.getPitch());
         if (entity.isAlive()) {
             worldserver.entityJoinedWorld(entity, false);
@@ -1001,9 +1001,9 @@ public abstract class PlayerList {
         }
         */
 
-        worldserver.methodProfiler.b();
+        //worldserver.methodProfiler.b();
         if (i != 1) {
-            worldserver.methodProfiler.a("placing");
+            //worldserver.methodProfiler.a("placing");
             /*
             d0 = (double) MathHelper.clamp((int) d0, -29999872, 29999872);
             d1 = (double) MathHelper.clamp((int) d1, -29999872, 29999872);
@@ -1023,7 +1023,7 @@ public abstract class PlayerList {
                 worldserver1.entityJoinedWorld(entity, false);
             }
 
-            worldserver.methodProfiler.b();
+            //worldserver.methodProfiler.b();
         }
 
         entity.spawnIn(worldserver1);

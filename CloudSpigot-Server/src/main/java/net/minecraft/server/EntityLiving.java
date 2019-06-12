@@ -205,7 +205,7 @@ public abstract class EntityLiving extends Entity {
     public void Y() {
         this.aC = this.aD;
         super.Y();
-        this.world.methodProfiler.a("livingEntityBaseTick");
+        //this.world.methodProfiler.a("livingEntityBaseTick");
         boolean flag = this instanceof EntityHuman;
 
         if (this.isAlive()) {
@@ -311,7 +311,7 @@ public abstract class EntityLiving extends Entity {
         this.aQ = this.aP;
         this.lastYaw = this.yaw;
         this.lastPitch = this.pitch;
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
     }
 
     // CraftBukkit start
@@ -2023,10 +2023,10 @@ public abstract class EntityLiving extends Entity {
         }
 
         this.aX += (f3 - this.aX) * 0.3F;
-        this.world.methodProfiler.a("headTurn");
+        //this.world.methodProfiler.a("headTurn");
         f2 = this.g(f1, f2);
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("rangeChecks");
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.a("rangeChecks");
 
         while (this.yaw - this.lastYaw < -180.0F) {
             this.lastYaw -= 360.0F;
@@ -2060,7 +2060,7 @@ public abstract class EntityLiving extends Entity {
             this.aQ += 360.0F;
         }
 
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
         this.aY += f2;
         if (this.cP()) {
             ++this.bq;
@@ -2130,20 +2130,20 @@ public abstract class EntityLiving extends Entity {
             this.motZ = 0.0D;
         }
 
-        this.world.methodProfiler.a("ai");
+        //this.world.methodProfiler.a("ai");
         if (this.isFrozen()) {
             this.bd = false;
             this.be = 0.0F;
             this.bg = 0.0F;
             this.bh = 0.0F;
         } else if (this.cC()) {
-            this.world.methodProfiler.a("newAi");
+            //this.world.methodProfiler.a("newAi");
             this.doTick();
-            this.world.methodProfiler.b();
+            //this.world.methodProfiler.b();
         }
 
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("jump");
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.a("jump");
         if (this.bd) {
             if (this.isInWater()) {
                 this.cv();
@@ -2157,17 +2157,17 @@ public abstract class EntityLiving extends Entity {
             this.bD = 0;
         }
 
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("travel");
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.a("travel");
         this.be *= 0.98F;
         this.bg *= 0.98F;
         this.bh *= 0.9F;
         this.r();
         this.a(this.be, this.bf, this.bg);
-        this.world.methodProfiler.b();
-        this.world.methodProfiler.a("push");
+        //this.world.methodProfiler.b();
+        //this.world.methodProfiler.a("push");
         this.cB();
-        this.world.methodProfiler.b();
+        //this.world.methodProfiler.b();
     }
 
     private void r() {
