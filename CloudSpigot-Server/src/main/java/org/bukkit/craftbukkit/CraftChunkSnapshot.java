@@ -53,8 +53,7 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
         return worldname;
     }
 
-    @SuppressWarnings("deprecation")
-	@Override
+    @Override
     public Material getBlockType(int x, int y, int z) {
         return Material.getMaterial(getBlockTypeId(x, y, z));
     }
