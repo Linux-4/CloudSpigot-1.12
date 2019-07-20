@@ -40,8 +40,8 @@
             <url>https://destroystokyo.com/repo/repository/maven-public/</url>
         </repository>
         <repository>
-        	<id>server24-7.eu</id>
-        	<url>https://mvn.server24-7.eu/</url>
+        	<id>linux4.de</id>
+        	<url>https://mvn.linux4.de/</url>
         </repository>
     </repositories>
 
